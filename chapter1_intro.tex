@@ -1,0 +1,88 @@
+\chapter{Introduction}
+\label{introchap}
+
+Large scale systems that consist of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. The objectives for these systems are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large scale multi-agent systems are often controlled in a distributed fashion. Here, individual agents must make decisions based on local, often incomplete information, potentially exacerbating the tradeoffs between performance and speed. Furthermore, the distributed nature of such systems may create vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.%Furthermore, the distributed nature of these systems could create vulnerability to adversarial manipulation: if an adversary can influence a small subset of agents, the resulting effects may cascade throughout the system, ultimately degrading overall performance.
+
+\section{Informal statement of contributions}
+
+The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information available to agents in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. %Additionally, I aim to further explore the applicability of game theoretic control laws in physical systems.
+In order to address these goals, this dissertation focuses specifically on the following questions:
+%I continue to investigate in order to address these research goals are:
+
+\begin{description}
+\item[Chapter~\ref{ch2}:] \textbf{When is fast convergence to near optimal collective behavior possible?}
+Small summary of the result here.
+\item[Chapter~\ref{ch3}:] \textbf{Can agents learn near optimal correlated behavior despite severely limited information about one another's behavior?}
+Small summary of the result here.
+\item[Chapter~\ref{ch4}:] \textbf{How does the structure of agent interaction impact the system's vulnerability to adversarial manipulation?} 
+Small summary of the result here.
+\end{description}
+
+\todo[inline]{Add contributions in reference to these questions. Maybe right under each question. Not completely sure how to do this here...Maybe just state the question here}
+
+%In my PhD research, I have addressed these questions with respect to game theoretic control laws. In the future, I would like to continue this line of research, while also investigating similar questions for alternate methods of distributed control and optimization. Additionally, I aim to further explore these questions in physical systems such as robotic sensor networks or smart grids. 
+
+In the game theoretic control laws studied in this work, each agent is assigned (1) a \emph{utility function}, which maps an agent's information about collective behavior to a payoff, and (2) a \emph{learning rule}, which dictates how the agent makes decisions. Here, ``utility" or ``payoff" will refer to individual agents' local utility functions, and ``objective" will refer to the overall system objective function.
+
+
+%In a game theoretic control law, each agent is assigned a \emph{utility function}, and a \emph{learning rule}. An agent's utility function assigns value to its action, given others' behavior and the state of the surrounding environment. A learning rule then dictates how and when agents should revise their behavior based on their utilities. The combination of utility functions and a learning rule dictates agent dynamics, and hence determines system performance, speed, and vulnerability to manipulation.
+
+\noindent\textbf{\emph{When is fast convergence to near optimal collective behavior possible? }}
+\todo[inline]{Here: Contribution: then a one sentence summary of the contribution. Ok also have that above, I think it's good to have it twice.}
+One well-studied method of optimizing behavior in a multi-agent system is to assign agent utilities to be their \emph{marginal contribution} to the overall system objective \cite{Wolpert1999}, and have agents make decisions according to the \emph{log-linear learning} rule \cite{Blume1993}. In log-linear learning, agents primarily choose utility maximizing actions, but choose suboptimally with a small probability that decreases exponentially with respect to the associated payoff loss. In the long run, marginal contribution + log-linear learning dynamics spends the majority of time at the global objective function maximizer. Unfortunately, worst-case convergence times for log-linear learning are known to be exponential in the number of agents, \cite{Shah2010} often rendering this game theoretic control method impractical for large-scale distributed systems. 
+
+However, when system heterogeneity is limited, i.e., agents can be grouped into a small number of populations according to their action sets and impact on the objective function, a variant of log-linear learning achieves improved worst-case convergence times. In Chapter~\ref{ch2}, I build on the work of \cite{Shah2010} to derive this variant, which converges in near-linear time with respect to the number of agents. 
+
+%In ongoing work, I aim to develop and characterize similar distributed algorithms with desirable short and medium term performance guarantees, since long run steady state behavior often cannot be achieved in a reasonable amount of time. Ultimately I would like to improve the practicality of these algorithms for use in real systems; thus, I am also interested in studying their implementation in distributed systems.
+
+
+\noindent\textbf{\emph{Can agents learn near optimal correlated behavior despite severely limited information about one another's behavior? }}
+To investigate this question this dissertation focuses on the scenario where the system objective is to maximize the sum of agents' payoffs. This type of objective can be useful when we wish to balance multiple local objectives. 
+
+Here, agents' average utilities can often be improved when they act according to a distribution over multiple joint actions, instead of staying fixed at a single joint action.  In many cases, the desired collective behavior constitutes a \emph{coarse correlated equilibrium}. A coarse correlated equilibrium is a probability distribution over the joint action space such that no agent can improve its payoff by deviating to a fixed action \cite{Aumann1987}.  Previously, algorithms existed which converged to the \emph{set} of coarse correlated equilibrium, e.g., \cite{Hart2000}, without selecting any particular equilibrium; these algorithms provided no performance guarantees. An algorithm which achieves a payoff maximizing coarse correlated equilibrium through deterministic, cyclic behavior is presented in \cite{Marden2013c}. However, predictable cyclic behavior may be undesirable in many settings, e.g., in the presence of an adversary.
+
+In Chapter~\ref{ch3} I design and analyze an algorithm that converges to a payoff maximizing coarse correlated equilibrium when agents have no knowledge of others' behavior. Here, agents' utilities depend on collective behavior, but they have no way of evaluating the utility of alternative actions. My algorithm uses a common random signal as a coordinating entity to eventually drive agents toward the desired collective behavior. In the long run, day to day behavior is selected probabilistically according to the payoff maximizing coarse correlated equilibrium.
+ 
+%Slow convergence rates are a major drawback to this algorithm: in practice it can take a prohibitively long time to reach the desired behavior. Hence, in my future work I seek to improve upon this algorithm's convergence rates and derive a variant which is more practical in distributed system applications.
+
+
+\noindent\textbf{\emph{How does the structure of agent interaction impact a distributed system's vulnerability to adversarial manipulation?}}
+Agents in a distributed system often interact and share information according to a network. The structure of this network not only has an impact on a distributed control algorithm's performance and speed, but also on its resilience to adversarial manipulation. A loosely connected network may be easier to influence, because an adversary may be able to more easily manipulate the information available to subsets of agents, thereby creating impacts that cascade throughout the system. On the other hand, a well-connected network may be more difficult to influence in this way. In Chapter~\ref{ch4}, I investigate such vulnerabilities for  \emph{graphical coordination games} \cite{Ullmann1977,Cooper1999} with agents revising their actions according to log-linear learning. In this work, I provided a condition based on network structure which guarantees resilience in a graphical coordination game. 
+
+%I am currently working to fully characterize resilient systems for various models of adversarial behavior. I also aim to extend this analysis beyond simple coordination games, to systems with significantly more complex objective functions. Additionally, I am interested in investigating vulnerabilities in real distributed systems, in order to develop mathematical models that more accurately reflect the ways an adversary may seek to impact behavior. \\
+
+%\smallskip
+
+%Overall, I believe that these three main research questions I have pursued throughout my Ph.D. have broad relevance in many types of distributed systems. Although the underlying control algorithms, mathematical models, and analytical tools may differ, I aim to extend my study of questions like these to broader classes of distributed systems. I would like to continue grounding my work in theory, but also wish to extend my research toward practical applications in distributed engineering systems.
+
+
+\section{Technical Preliminaries}
+
+\begin{enumerate}
+    \item the setting: a distributed control system. agents, actions, objective function
+    \item Our approach: game theoretic control
+    \begin{enumerate}
+        \item Utility function that maps local information to a utility/payoff
+        \item Learning rule that dictates agents' decisions. Our focus is on probabilistic learning rules. Reference Markov chains section in the appendix. Discrete time, so this yields a sequence of joint actions $a(0),a(1),\ldots.$ Small discussion that these are random variables, perhaps. Include an example (LLL) and state that the majority of the dissertation will focus on LLL, with the exception of the CCE work.
+    \end{enumerate}
+    \item Goal (in general): design utilities and learning rules with desired performance
+    \begin{enumerate}
+        \item Desired long run performance. Given parameter $\varepsilon>0$, should be able to tune learning algorithm parameters to achieve:
+        $$\lim_{t\to\infty}\mathbb{E}[ W(a(t)]\geq \max_{a\in\mathcal{A}}W(a) - \varepsilon$$
+        \item Fast convergence rates. Given $\delta > \varepsilon$, desired
+        $$\mathbb{E}[W(a(t))]\geq \max_{a\in\mathcal{A}}W(a) - \delta$$
+        for all $t\geq T$, for some ``reasonable" convergence time $T$. Discussion here that $T$ typically depends on the number of agents, action sets, etc., and can often be exponential in these parameters. Goal here is to design a learning rule that's linear. Reference an example and log-linear learning.
+        \item Resilience to adversaries. Suppose an adversary is able to manipulate information available to small subsets of agents. Is it possible for limited info manipulation to cascade and create catastrophic performance failures? Goal is for it not to be.
+    \end{enumerate}
+\end{enumerate}
+
+
+\section{Formal statement of contributions}
+
+Relate to the goals above. State each main theorem as a contribution here. First a reminder of the three main questions.
+
+\subsection{Fast convergence contributions}
+
+\subsection{Adversarial vulnerability contributions}
+
+\todo[inline]{Add large ``future work" section. There's a lot left to do!}

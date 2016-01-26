@@ -1,0 +1,427 @@
+\chapter{Technical Preliminaries and Proofs Corresponding to Chapter~\ref{ch2}}
+
+\todo[inline]{decide whether to collect standalone technical preliminaries into a single appendix}
+\todo[inline]{come up with better appendix titles}
+
+\subsection{Markov chain preliminaries}\label{a:MchainPrelims}
+
+A continuous time Markov chain, $\{Z_t\}_{t\geq 0}$, over a finite state space $\Omega$ may be written in terms of a corresponding discrete time chain with transition matrix $M$ \cite{Montenegro2006}, where the distribution $\mu(t)$ over $\Omega$ evolves as:\begin{equation}\label{e:contin time chain}
+\mu(t) = \mu(0)e^{t(M-I)} = \mu(0)e^{-t}\sum_{k=0}^\infty {t^kM^k\over k!},\quad t\geq 0
+\end{equation}
+\normalsize
+%
+where we refer to $M$ as the kernel of the process $Z_t$ and $\mu(0) \in \Delta(\Omega)$ is the initial distribution.  
+%
+%
+The following definitions and theorems are taken from \cite{Shah2010, Montenegro2006}.  Let $\mu,\nu$ be measures on the finite state space $\Omega.$  Total variation distance is defined as 
+\begin{equation}\|\mu - \nu\|_{TV} := \frac{1}{2}\sum_{x\in \Omega}|\mu_x - \nu_x|.\end{equation}
+and 
+\begin{equation}D(\mu:\nu) := \sum_{x\in\Omega}\mu_x\log\frac{\mu_x}{\nu_x}\end{equation}
+is defined to be the relative entropy between $\mu$ and $\nu$. The total variation distance between two distributions can be bounded using the relative entropy: 
+\begin{equation}\label{measure ineq}\|\mu - \nu\|_{TV}\leq \sqrt{\frac{D(\mu:\nu)}{2}}\end{equation}
+For a continuous time Markov chain with kernel $M$ and stationary distribution $\pi$, the distribution $\mu(t)$ obeys
+\begin{equation}\label{e:entropy decay}
+D(\mu(t):\pi)\leq e^{-4t\rho(M)}D(\mu(0):\pi),\quad t\geq 0
+\end{equation}
+where $\rho(M)$ is the Sobolev constant of $M$, defined by 
+\begin{equation}\label{e:Sobolev const}
+\rho(M) := \inf_{\substack{f: \Omega\to \R \st \\ \mathcal{L}(f)\neq 0}}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}
+\end{equation}
+with 
+\begin{align}
+\mathcal{E}(f,f) &:= \half \sum_{x,y\in\Omega} (f(x) - f(y))^2 M(x,y)\pi_x\label{e:Eff}\displaybreak[3]\\
+\mathcal{L}(f) &:= \E_{\pi}\log {f^2\over \E_{\pi}f^2}.\label{e:Lf}
+\end{align}
+Here $\E_{\pi}$ denotes the expectation with respect to stationary distribution $\pi$.  For a Markov chain with initial distribution $\mu(0)$ and stationary distribution $\pi$,   the total variation and relative entropy mixing times are 
+\begin{align}
+T_{TV}(\eps) &:= \min_t\{\|\mu(t) - \pi\|\leq \eps\}\label{e:tv mix time}\\
+T_{D}(\eps) &:=\min_t\{D(\mu(t):\pi)\leq\eps\}
+\end{align}  
+respectively. From \cite{Montenegro2006}, Corollary 2.6 and Remark 2.11, 
+\begin{equation*}T_D(\eps)\leq \frac{1}{4\rho(M)}\left(\log\log\frac{1}{\pi_{\min}}+\log\frac{1}{\eps}\right),\end{equation*}
+where $\pi_{\min}:= \min_{x\in\Omega} \pi_x.$  Applying \eqref{measure ineq}, 
+\small
+\begin{align}
+T_{TV}(\varepsilon)&\leq T_D(2\eps^2)\displaybreak[3]\nonumber\\
+&\leq \frac{1}{4\rho(M)}\left(\log\log\frac{1}{\pi_{\min}}+2\log\frac{1}{\eps}\right).\label{e:mix time bounds}
+\end{align}
+\normalsize
+Hence, a lower bound on the Sobolev constant %$\rho(M)$ 
+yields an upper bound on the mixing time for the Markov chain.  
+
+
+
+
+
+
+%-------------------------------Notation & Problem Formulation: Stationary-------------------------------%
+\subsection{Notation and Problem Formulation: Semi-Anonymous Potential Games}\label{a:M defn}
+The following Markov chain, $M$, over state space $\sX$ is the kernel of the continuous time modified log-linear learning process for stationary semi anonymous potential games.  Define $n_j := |N_j|$ to be the size of population $j$, define $s_j:= |\bar{\mathcal{A}}_j|$, and let $\sigma := \sum_{j = 1}^m s_j.$ Let $e_j^k \in \R^{s_j}$ be the $k$th standard basis vector of length $s_j$ for $k\in \{1,\ldots,s_j\}$.      Finally, let $$x = (\bx_j,\x_-j) = (\bx_1,\bx_2,\ldots,\bx_m)\in \sX,$$
+where $\bx_j = (\bx_j^1,\bx_j^2,\ldots,\bx_j^{s_j})$ represents the proportion of players choosing each action within population $j$'s action set.  The state transitions according to:
+\begin{itemize}
+\item Choose a population $N_j\in \{N_1,N_2,\ldots,N_m\}$ with probability $s_j/\sigma.$
+\item Choose an action $\a_j^k\in \{\a_j^1,\a_j^2,\ldots,\a_j^{s_j}\} =  \bar{\mathcal{A}}_{j}$ with probability $1/s_j.$ 
+\item If $\bx_j^k>0$, i.e., at least one player from population $j$ is playing action $\bar{a}_j^k,$ choose $p\in \{p^\prime\in N_j \st \a_{p^\prime} = \a_{j}^k\}$ uniformly at random to update according to \eqref{e:logit response}. That is, transition to $ \left(\bx_j + \frac{1}{n}(e_j^{\ell} - e_j^k),\bx_{-j}\right)$ with probability 
+\begin{equation*}\label{e:logit response 2}
+\frac{e^{\beta \P\left(\bx_{j} + \frac{1}{n}(e_j^{\ell} - e_j^k),\bx_{-j}\right)}}{\sum_{t =1}^{s_j} e^{\beta\P(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k), \bx_{-j})}}
+\end{equation*}
+for each $\ell\in \{1,2,\ldots,s_j\}.$
+\footnote{Agents' update rates are the only difference between our algorithm, standard log-linear learning, and the log-linear learning variant of \cite{Shah2010}. In standard log-linear learning, players have uniform, constant clock rates. In our variant and the variant of \cite{Shah2010}, agents' update rates vary with the state. For the algorithm in \cite{Shah2010}, agent $i$'s update rate is $\alpha n\mathop{/}\tilde{z}_i(t),$ where $\tilde{z}_i(t)$ is the \emph{total} number of players selecting the same action as agent $i$. The discrete time kernel of this process is as follows \cite{Shah2010}:
+(1) Select an action $a_i\in \cup_{i\in N} A_i$ uniformly at random.
+(2) Select a player who is currently playing action $a_i$ uniformly at random. This player updates its action according to \eqref{e:logit response}.
+The two algorithms differ when at least two populations have overlapping action sets. }
+\end{itemize}
+
+This defines transition probabilities in $M$ for transitions from state $x = (\bx_{j},\bx_{-j})\in \sX$ to a state of the form $y = \left(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k),\bx_{-j}\right)\in \sX$ in which a player from population $N_j$ updates his action, so that
+%\small
+\begin{align}
+M(x,y) =\frac{e^{\beta \P\left(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k),\bx_{-j}\right)}}{\sigma\sum_{t =1}^{s_j} e^{\beta\P(\bx_{j} + \frac{1}{n}(e^{t}_j - e_j^k), \bx_{-j})}}\label{e:Markov transition probs}
+\end{align}
+\normalsize
+For a transition of any other form, 
+$M(x,y) = 0.$
+Applying \eqref{e:contin time chain} to the chain with kernel $M$ and global clock rate $\alpha\sigma n$, modified log-linear learning evolves as
+\begin{equation}
+\mu(t) = \mu(0)e^{\alpha\sigma n t (M-I)}.
+\end{equation}
+
+\noindent\emph{Notation summary for stationary semi-anonymous potential games:}
+Let $G = \{N,\{A_i\},\{U_i\}\}$ be a stationary semi-anonymous potential game. The following summarizes the notation corresponding to game $G.$
+\begin{itemize}
+\item $\sX$ - aggregate state space corresponding to the game $G$
+\item $\phi: \sX\to \R$ - the potential function corresponding to game $G$
+\item $M$ - probability transition kernel for the modified log-linear learning process
+\item $\alpha$ - design parameter for modified log-linear learning which may be used to adjust the global update rate 
+\item $\mu(t) = \mu(0)e^{\alpha nt(M-I)}$ - distribution over state space $\sX$ at time $t$ when beginning with distribution $\mu(0)$ and following the modified log-linear learning process
+\item $N_j$ - the $j$th population
+\item $n_j:= |N_j|$ - the size of the $j$th population
+\item $\bar{\mathcal{A}}_j$ - action set for agents belonging to population $N_j$
+\item $\a_j^k$ - the $k$th action in population $N_j$'s action set
+\item $s:= |\cup_{j= 1}^m \overline{\mathcal{A}}_j|$  - size of the union of all populations' action sets
+\item $s_j: = |\bar{\mathcal{A}}_j|$ - size of population $N_j$'s action set
+\item $e_j^k\in \R^{s_j}$ - $k$th standard basis vector of length $s_j$
+\item $\sigma:= \sum_{j = 1}^m s_j$ - sum of sizes of each population's action set
+\item $\pi$ - stationary distribution corresponding to the modified log-linear learning process for game $G$.
+\item $(\bx_{j},\bx_{-j}) = (\bx_{1},\bx_{2},\ldots,\bx_{m})\in X$, a state in the aggregate state space, where $\bx_{j} = (\bx_{j}^1,\bx_{j}^2,\ldots,\bx_{j}^{s_j}).$
+\end{itemize}
+
+
+
+%-------------------------------Theorem 1 Proof-------------------------------%
+\subsection{Proof of Theorem~\ref{t:main theorem 1}}\label{a:theorem 1 proof}
+
+
+We require two supporting lemmas to prove Theorem \ref{t:main theorem 1}.  The first  
+establishes the stationary distribution for modified log-linear learning as a function of $\beta$ and characterizes how large $\beta$ must be so the expected value of the potential function is within $\eps/2$ of maximum.  The second upper bounds the mixing time to within $\eps/2$ of the stationary distribution for the modified log-linear learning process.  
+
+
+%-------------------------------Lemma: Stationary distribution-------------------------------%
+\begin{lemma}\label{l:stationary distribution}\label{l:beta bound}
+For the stationary semi-anonymous potential game $G = (N,\mathcal{A}_i,U_i)$  %described in Section \ref{s:preliminaries} 
+with state space $\sX$ and potential function $\P: \sX \to [0,1],$
+the stationary distribution for modified log-linear learning is
+\begin{equation}\label{e:stationary distribution}
+\pi_{x}\propto e^{\beta\P(x)}, \quad x\in  \sX
+\end{equation}
+Moreover, if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb}, then \begin{equation}\label{e:expPot}
+\E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.
+\end{equation}
+\end{lemma}
+
+\noindent\emph{Proof:}
+The form of the stationary distribution follows from standard reversibility arguments, using \eqref{e:Markov transition probs} and \eqref{e:stationary distribution}.
+
+For the second part of the proof,  define the following:
+\small
+\begin{align*}
+C_\beta & := \sum_{x\in \sX}e^{\beta\P(x)},\displaybreak[3]\\
+x^\star &:= \argmax_{x\in \sX}\P(x) \displaybreak[3]\\
+ B(x^\star,\delta) &:= \{x\in \sX\st \|x - x^\star\|_1\leq\delta\}
+\end{align*}
+\normalsize
+where $\delta\in[0,1]$ is a constant which we will specify later.  Because $\pi$ is of exponential form with normalization factor $C_\beta$, the derivative of $\log C_\beta$ with respect to $\beta$ is $\E_\pi[\P(x)]$.  Moreover, it follows from \eqref{e:stationary distribution} that $\E_\pi[\P(x)]$ is monotonically increasing in $\beta$, so we may proceed as follows:
+\begin{align*}
+\E_\pi[\P(x)]	&\geq {1\over\beta}(\log C_\beta - \log C_0)\displaybreak[3]\\
+		&=\P(x^\star) +{1\over\beta}\log{\sum_{x\in \sX}e^{\beta(\P(x) - \P(x^\star))}\over| \sX|}\displaybreak[3]\\
+		&\stackrel{(a)}{\geq}\P(x^\star)+{1\over\beta}\log{\sum_{x\in B(x^\star,\delta)}e^{-\beta\delta\lambda}\over | \sX|}\displaybreak[3]\\
+		&=\P(x^\star)+{1\over\beta}\log{|B(x^\star,\delta)|e^{-\beta\delta\lambda}\over | \sX|}\displaybreak[3]\\
+		&=\P(x^\star)-\delta\lambda+{1\over\beta}\log\left({|B(x^\star,\delta)|\over | \sX|}\right)\displaybreak[3]
+\end{align*}
+where (a) is from the fact that $\P$ is $\lambda$-Lipschitz and the definition of $B(x^\star,\delta)$.  Using intermediate results in the proof of Lemma 6 of \cite{Shah2010}, $|B(x^\star,\delta)|$
+ and $| \sX|$ are bounded as:
+ \begin{align}
+|B(x^\star,\delta)|&\geq \prod_{i=1}^m\left({\delta(n_i+1)\over 2ms_i} \right)^{s_i-1}
+,\text{ and}\label{e:Bstar}\displaybreak[3]\\
+| \sX|&\leq\prod_{i=1}^m(n_i+1)^{s_i-1}.%\nonumber
+\end{align}
+
+
+Now,
+\begin{align*}
+\E_\pi[\P(x)]	&\geq \P(x^\star) -\delta\lambda+ {1\over\beta}\log\left({|B(x^\star,\delta)|\over| \sX|}\right)\displaybreak[3]\\
+		&\geq \P(x^\star) -\delta\lambda+ {1\over\beta}\log\left({\prod_{i=1}^m\left({\delta(n_i+1)\over 2ms_i} \right)^{s_i-1}   \over \prod_{i=1}^m(n_i+1)^{s_i-1}}\right)\displaybreak[3]\\
+		&=\P(x^\star) -\delta\lambda+{1\over\beta} \log\prod_{i=1}^m \left({\delta\over 2ms_i}\right)^{s_i-1}\displaybreak[3]\\
+		&\geq\P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)
+\end{align*}
+\normalsize
+Consider two cases: (i) $\lambda\leq\eps/4,$ and (ii) $\lambda>\eps/4$.  For case (i), choose $\delta=1$ and let $\beta\geq {4m(s-1)\over\eps}\log 2 ms$.   Then,
+\begin{align*}
+\E_\pi[\P(x)] &\geq \P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)\displaybreak[3]\\
+&\geq \P(x^\star) -\eps/4 - {m(s-1)\over\beta} \log 2ms\displaybreak[3]\\
+&\geq \P(x^\star) -\eps/4 - {\eps m(s-1)\over 4m(s-1)\log 2ms}\log 2ms\displaybreak[3]\\
+&=\P(x^\star) - \eps/2
+\end{align*}
+\normalsize
+
+For case (ii),  note that $\lambda>\eps/4 \implies\delta=\eps/4\lambda<1$ so we may choose $\delta = \eps/4\lambda.$  Let $\beta\geq {4m(s-1)\over \eps}\log\left({8\lambda ms\over \eps} \right).$  Then
+\small
+\begin{align*}
+\E_\pi[\P(x)] &\geq \P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)\displaybreak[3]\\
+&=\P(x^\star) -\eps/4+{m(s-1)\over\beta} \log \left({\eps\over 8\lambda ms}\right)\displaybreak[3]\\
+&=\P(x^\star) -\eps/4-{m(s-1)\over\beta} \log \left({8\lambda ms\over\eps}\right)\displaybreak[3]\\
+&\geq\P(x^\star) -\eps/4-{\eps m(s-1)\over  4m(s-1) \log\left({8\lambda ms\over \eps} \right) } \log\left({8\lambda ms\over\eps}\right)\displaybreak[3]\\ 
+&=\P(x^\star) -\eps/2
+\end{align*}
+\normalsize
+as desired.\hfill\qed
+
+
+\begin{lemma}\label{l:mixing time} 
+For the Markov chain defined by modified log-linear learning with kernel $M$ and stationary distribution $\pi$, if the number of players within each population satisfies condition (ii) of Theorem~\ref{t:main theorem 1}, and $t$ is sufficiently large as in \eqref{e:time requirement}, then
+\begin{equation}\label{e:distToS}\| \mu(t) - \pi\|_{TV}\leq \eps/2.\end{equation}
+\end{lemma}
+
+
+\noindent\emph{Proof:}
+We begin by establishing a lower bound on the Sobolev constant for the Markov chain, $M$. We claim that, for the Markov chain $M$ defined in Appendix~\ref{a:M defn}, if $\P:  \sX\rightarrow [0,1]$ and
+$m+\sum_{i=1}^m n_i^2 \geq \sigma$, then
+\begin{equation}\label{e:rho bound}
+\rho(M)\geq {e^{-3\beta}\over c_1m(m(s-1))!^2 n^2}
+\end{equation}
+for some constant $c_1$ which depends only on $s$.  Then,  from \eqref{e:mix time bounds}, a lower bound on the Sobolev constant yields an upper bound on the mixing time for the chain $M$. 
+
+
+Using the technique of \cite{Shah2010}, we compare the Sobolev constants for the chain $M$ and a similar random walk on a convex set. The primary difference is that our proof accounts for dependencies on the number of populations, $m$, whereas theirs considers only the $m=1$ case. As a result, our state space is necessarily larger. 
+We accomplish this proof in four steps. In step 1, we define $M^\star$ to be the Markov chain $M$ with $\beta = 0,$ and establish the bound $\rho(M)\geq e^{-3\beta}\rho(M^\star).$ In step 2, we define a third Markov chain, $M^\dag$, and establish the bound $\rho(M^\star)\geq{1\over s}\rho(M^\dag).$ Then, in step 3, we establish a lower bound on the Sobolev constant of $M^\dag.$ Finally, in step 4, we combine the results of the first three steps to establish \eqref{e:rho bound}. 
+We now prove each step in detail.
+
+%-------------------------------- M to M star --------------------------------%
+\noindent\tb{Step 1, $M$ to $M^\star$:}
+Let $M^\star$  be the Markov chain $M$ with $\beta = 0,$ and let $\pi^\star$ be its stationary distribution. In $M^\star$ an updating agent chooses his next action uniformly at random. Per Equation \eqref{e:stationary distribution} with $\beta=0$, the stationary distribution $\pi^\star$ of $M^\star$ is the uniform distribution.
+  Let $x,y\in  \sX.$  We bound $\pi_x/\pi_x^\star$ and $M(x,y)/M^\star(x,y)$ in order to use Corollary 3.15 in \cite{Montenegro2006}:
+\begin{align*}
+\frac{\pi_{x}}{\pi_{x}^\star} &= \frac{e^{\beta\P(x)}}{\sum_{y\in  \sX} e^{\beta\P(y)}}\cdot\frac{\sum_{y\in  \sX} e^0}{e^0}=\frac{| \sX|e^{\beta\P(x)}}{\sum_{y\in  \sX} e^{\beta\P(y)}}
+\end{align*}
+Since $\P(x)\in [0,1]$ for all $ x\in  \sX,$ this implies
+\begin{equation}\label{e:ratio bound 1}
+e^{-\beta}\leq\frac{\pi_{x}}{\pi_{x}^\star}\leq e^\beta
+\end{equation}
+Similarly, for $y = (\bx_{j}+\frac{1}{n}(e_j^k - e_j^{\ell}),\bx_{-j})$,
+\begin{align*}
+\frac{M(x,y)}{M^\star(x,y)} &= 
+ \frac{s_je^{\beta\P(y)}}{\sum_{r = 1}^{s_j}e^{\beta\P(\bx_{j} + \frac{1}{n}(e^k _i- e^r_i),\bx_{-j})}}
+\end{align*}
+Since $\P(x)\in [0,1]$ for all $ x\in \sX,$
+  for any $x,y\in \sX$ of the above form,
+\begin{equation}\label{e:ratio bound 2}
+e^{-\beta}\leq \frac{M(x,y)}{M^\star(x,y)}\leq e^\beta.
+\end{equation}
+For a transition to any $y$ not of the form above, $M(x,y) = M^\star(x,y) = 0.$  Using this fact and Equations \eqref{e:ratio bound 1} and \eqref{e:ratio bound 2}, we apply Corollary 3.15 in \cite{Montenegro2006}: %to lower bound $\rho(M):$
+\begin{equation}\label{Sob const ineq 1}\rho(M)\geq e^{-3\beta}\rho(M^\star).\end{equation}
+
+
+%-------------------------------- M star to M dag --------------------------------%
+\noindent\tb{Step 2, $M^\star$ to $M^\dag$:}
+Consider the Markov chain $M^\dag$ on $ \sX $, where transitions from state $x$ to $y$ occur as follows:
+
+\begin{itemize}
+\item Choose a population $N_j$ with probability $s_j/\sigma$
+\item Choose  $k\in \{1,\ldots,s_j-1\}$ and choose $\kappa\in \{-1,1\}$, each uniformly at random.
+\begin{itemize}
+\item If $\kappa = -1$ and $\bx_{j}^k>0$, then $y = (\bx_{j} + \frac{1}{n}(e_{j}^{s_j} - e_j^k),\bx_{{-k}}).$ 
+\item If $\kappa = 1$ and $\bx_{j}^{s_j}>0$, then $y = (\bx_{j} + \frac{1}{n}(e_j^k - e_{j}^{s_j}),\bx_{{-j}}).$ 
+\end{itemize}
+\end{itemize}
+Since $M^\dag(x,y) = M^\dag(y,x)$ for any $x,y\in  \sX$, $M^\dag$ is reversible with the uniform distribution over $ \sX$.  Hence the stationary distribution is uniform, and $\pi^\dag = \pi^\star$.
+
+For a transition $x$ to $y$ in which an agent from population $N_j$ changes his action, $M^\star (x,y)\geq \frac{1}{s_j}M^\dag(x,y),$ implying 
+\begin{equation}\label{e:ratio 3}
+M^\star(x,y)\geq \frac{1}{s}M^\dag(x,y),\quad \forall x,y \in  \sX
+\end{equation}
+since $s\geq s_j,\;\forall i\in \{1,\ldots,m\}$.  Using \eqref{e:ratio 3} and the fact that $\pi^\star = \pi^\dag$, we apply Corollary 3.15 from \cite{Montenegro2006}:% to bound $\rho(M^\star)$:
+\begin{equation}\label{Sob const ineq 2}\rho(M^\star)\geq \frac{1}{s}\rho(M^\dag)\end{equation}
+
+
+%-------------------------------- M dag to random walk --------------------------------%
+\noindent\tb{Step 3, $M^\dag$ to a random walk:}\label{s:random walk}
+The following random walk on 
+\small
+$$C = \left\{(z_1,\ldots,z_m)\in \Z_+^{\sigma-m}\st z_j\in \Z_+^{s_j-1},\;\sum_{k=1}^{s_j-1} z_{j}^k \leq n_j,\, \forall j\right\}$$
+\normalsize
+is equivalent to $M^\dag$.  
+Transition from $x\to y$ in $C$ as follows:
+\begin{itemize}
+\item Choose $j\in [\sigma-m]$ and $\kappa\in\{-1,1\}$, each uniformly at random
+\item $y = \left\{\begin{array}{ll}x + \kappa e_j & \text{if } x+\kappa e_j \in C\\
+							x&\text{otherwise}\end{array}\right.$.
+\end{itemize}
+
+The stationary distribution of this random walk is uniform.  %, i.e., $\pi_{x} = 1/|C|,\;\forall x\in C$.  
+We lower bound the Sobolev constant, $\rho(M^\dag),$ which, using the above steps, lower bounds $\rho(M)$ and hence upper bounds the mixing time of our algorithm.
+
+Let $g:C\to \R$ be an arbitrary function.  To lower bound $\rho(M^\dag)$, we will lower bound $\mathcal{E}(g,g)$ and upper bound $\mathcal{L}(g)$.  The ratio of these two bounds in turn lower bounds the ratio $\mathcal{E}(g,g)/\mathcal{L}(g)$; since $g$ was chosen arbitrarily this also lower bounds the Sobolev constant. 
+We will use a theorem due to \cite{Frieze1998} which applies to an extension of a function $g:C\to \R$ to a function defined over the convex hull of $C$; here we define this extension. 
+
+Let $K$ be the convex hull of $C$.  Given $g: C\rightarrow \R$, we follow the procedure of \cite{Frieze1998, Shah2010} to extend $g$ to a function $g_\varepsilon: K\rightarrow \R$.  For $x\in C$, let $C(x)$ and $C(x,\eps)$ be the $\sigma-m$ dimensional cubes of center $x$ and sides 1 and $1-2\eps$ respectively.  For sufficiently small $\varepsilon>0$ and $z\in C(x)$, define $g_\eps : K\rightarrow \R$ by:
+\begin{equation*}\label{e:feps defn}
+g_\eps(z) := \left\{\begin{array}{ll}g(x) & \text{if } z\in C(x,\varepsilon)\\
+\frac{(1+\eta(z))g(x) + (1-\eta(z))g(y)}{2} & \text{otherwise } \end{array}\right.
+\end{equation*}
+\normalsize
+where $y\in C$ is a point such that $D := C(x)\cap C(y)$ is the closest face of $C(x)$ to $z$ (if more than one $y$ satisfy this condition, one such point may be chosen arbitrarily), and $\eta := \frac{\dist(z,D)}{\varepsilon}\in[0,1).$  The $\dist$ function represents standard Euclidean distance in $\R^{\sigma-m}.$   
+
+Define
+\small
+\begin{align}
+I_{\eps} &:= \int_K \bigl|\nabla g_\eps(z)\bigr|^2dz\\
+J_{\eps} &:= \int_K g_\eps(z)^2\log\frac{g_\eps(z)^2\vol(K)}{\int_K g_\eps(y)^2dy}dz. \label{e:Jeps}
+\end{align}
+\normalsize
+Applying Theorem 2 of \cite{Frieze1998} for $K\in \R^{\sigma-m}$ with diameter $\sqrt{\sum_{i=1}^m n_i^2}$, if $m+\sum_{i=1}^mn_i^2\geq\sigma,$
+\begin{equation}\label{IJ inequality}\frac{\eps I_\eps}{J_\eps}\geq \frac{1}{A\sum_{i=1}^m n_i^2}.\end{equation}
+We lower bound $\mathcal{E}(g,g)$ in terms of $\eps I_\eps$ and then upper bound $\mathcal{L}(g)$ in terms of $J_\eps$ to obtain a lower bound on their ratio with Equation \eqref{IJ inequality}.  
+The desired lower bound on the Sobolev constant follows. 
+
+Using similar techniques to \cite{Shah2010}, we lower bound $\mathcal{E}(g,g)$ in terms of $\eps I_\eps$ as
+\small
+\begin{align}
+I_\eps 	%&=\int_K\left|\nabla g_\eps(z)\right|^2dz\displaybreak[3]\nonumber\\
+		%&\leq\sum_{x\in C}\int_{C(x)}|\nabla g_\eps(z)|^2dz\displaybreak[3]\nonumber\\
+		%&=\sum_{x\in C}\Biggl(\int_{C(x,\eps)}|\nabla g(x)|^2 dz \nonumber\\
+		%&\quad+\int_{\substack{C(x)\setminus\\ C(x,\eps)}}\left|\nabla\left(\frac{(1+\eta(z))g(x) + (1-\eta(z))g(y) }{2}\right)\right|^2dz\Biggr)\displaybreak[3]\nonumber\\
+		%&\leq\sum_{x\in C}\sum_{\substack{y\in C :\\ \|x - y\|_1 = 1}}\int_{\substack{C(x)\setminus\\ C(x,\eps)}}\Biggl|\half\nabla\Bigl((1+\eta(z))g(x)\nonumber\\&\hspace{1.4in}
+		%	 + (1-\eta(z))g(y)\Bigr)\Biggr|^2dz\displaybreak[3]\nonumber\\
+		%&\substack{\leq\\ \eps\to 0}\, \eps^{-1}\sum_{x\in C}\sum_{\substack{y\in C :\\ \|x - y\|_1 = 1}}\left(\frac{g(x) - g(y)}{2}\right)^2 + O(1) \displaybreak[3]\nonumber\\
+		%&\stackrel{(a)}{=}\frac{2}{4\eps}(\sigma - m)|C|\sum_{x,y\in C}(g(x) - g(y))^2\pi_{x}^\dag M^\dag(x,y) + O(1) \displaybreak[3]\nonumber\\
+		 %&=
+		 &\leq\frac{|C|(\sigma - m)}{\eps}\mathcal{E}(g,g) + O(1)\displaybreak[3].\nonumber
+\end{align}
+\normalsize
+%where (a) uses the facts that $\pi_x^\dag = \frac{1}{|C|}$ and 
+%$$M^\dag(x,y) = \left\{\begin{array}{ll}\frac{1}{2(\sigma-m)}&\text{if } \|x-y\|_1 = 1,\; y\in C\\
+%0 &\text{otherwise}\end{array}\right.$$
+Then,
+$\eps I_\eps \;\mathop{\leq}_{\eps\rightarrow 0} \;|C|(\sigma - m)\mathcal{E}(g,g)$, and hence 
+\begin{equation}\label{I inequality}\mathcal{E}(g,g)\;\mathop{\geq}_{\eps\rightarrow 0}\;\frac{\eps I_\eps}{|C|(\sigma-m)}.\end{equation}
+%\begin{align*}
+%J_\eps  	&= \int_K g_\varepsilon(z)^2\log \frac{g_\eps(z)^2\vol(K)}{\int_Kg_\eps(y)^2dy}dz\displaybreak[3]\\
+%		&{\mathop{=}_{\eps\rightarrow 0} }\sum_{x\in C}\phixsq\vol(C(x)\cap K)\\
+%		&\hspace{1in}\times\log\frac{\phixsq\vol(K)}{\sum_{y\in C}\phiysq\vol(C(y)\cap K)}\displaybreak[3]\\
+		%&\hspace{1in}\times\log\frac{\phixsq\vol(K)}{\sum_{y\in C}\phiysq\vol(C(y)\cap K)}\displaybreak[3]\\
+%		&=\vol(K)\sum_{x\in C}g(x)^2\nu_{x}\log\frac{g(x)^2}{\sum_{y\in C}g(y)^2\nu_{y}}.
+%\end{align*}
+%\normalsize
+Again, using similar techniques as \cite{Shah2010}, we bound $J_\eps$ as
+%sand
+%\begin{equation}
+%\frac{J_\eps}{\vol(K)}\;{\mathop{\geq}_{\eps\to 0}}\; \frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\mathcal{L}(f).
+%eee \end{equation}
+\small
+\begin{align}
+\frac{J_\eps}{\vol(K)}	%&\stackrel{(a)}{\mathop{=}_{\eps\rightarrow 0}} \sum_{x\in C} g(x)^2\nu_{x}\log\frac{ g(x)^2}{\sum_{y\in C} g(y)^2\nu_{y}}\displaybreak[3]\nonumber\\
+					%&=\sumxC\nux\left( g(x)^2\log\frac{\phixsq}{\sumyC  g(y)^2\nuy} -  g(x)^2 \right)\nonumber\\ 
+					%&\hspace{1in}
+					%+  \sumxC\phixsq\nux\displaybreak[3]\nonumber\\
+					%&\stackrel{(b)}{=}\inf_{c>0}\left[\sumxC\nux\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right)+c\right]\displaybreak[3]\nonumber\\
+					%&\geq \min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\max_{x\in C}\frac{\pi_{x}}{\nu_{x}}\Biggr]\displaybreak[3]\nonumber\\
+					%&=\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\frac{\vol(K)}{|C|\min_{x\in C}\vol(C(x)\cap K)}\Biggr]\displaybreak[3]\nonumber\\
+					%&\stackrel{(c)}{\geq}\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \displaybreak[3]\nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\frac{1}{2^{\sigma-m}(\sigma-m)!}\Biggr]\displaybreak[3]\nonumber\\
+					%&\geq \frac{1}{2^{\sigma-m}(\sigma-m)!}\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}   \nonumber\\
+					%&\hspace{0.5in}
+					%\Biggl[\sumxC\pix\Biggl(\phixsq\log\frac{\phixsq}{c}-\phixsq\Biggr)+c\Biggr]\nonumber\displaybreak[3]\\
+					%&\stackrel{(d)}{=}\frac{1}{2^{\sigma-m}(\sigma-m)!}\min_{x\in C}\frac{\nux}{\pix} \nonumber\\
+					%&\hspace{0.5in}
+					%\Biggl[\sumxC\pix\Biggl(\phixsq\log\frac{\phixsq}{\sumyC\phiysq\piy}- \phixsq\Biggr)\nonumber\\
+					%&\hspace{1in}
+					%+\sumxC\phixsq\pix\Biggr]\displaybreak[3]\nonumber\\
+					%&\stackrel{(e)}{\geq}\frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\nonumber\\
+					%&\hspace{1in}\times
+					%\sumxC\pix\phixsq\log\frac{\phixsq}{\sumyC\phiysq\piy}\displaybreak[3]\nonumber\\
+					%&=
+					&\geq\frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\mathcal{L}(f).\nonumber
+\end{align}
+%\normalsize
+%where (a) - (e) are due to the following:\\
+%{\raggedright{}
+%(a)  The cubes $C(x)$ cover $K$ and as $\eps\rightarrow 0$, $C(x,\eps)\rightarrow C(x)$, so that $g_\eps(z)\rightarrow g(x)$ for $z\in C(x)$\\
+%(b)  By taking the derivative of this expression with respect to $c$ we see that the minimum occurs at $c = \sumxC\phixsq\nux$\\
+%(b) The minimum occurs at $c = \sumxC\phixsq\nux$\\
+%(c) Apply \eqref{e:claim} and $\min_{x\in C}\vol(C(x)\cap K)\leq 1$.\\
+%(d) The infimum occurs at $c=\sumxC\phixsq\pix$ \\%as opposed to $\sumxC\phixsq\nux$ which minimized (b)\\
+%(e) The smallest possible value of the intersection} $C(x)\cap K$ occurs at a corner, so $\min_{x\in C}\vol(C(x)\cap K)\geq\frac{1}{2^{\sigma-m}(\sigma-m)!},$ and hence $\min_{x\in C}\frac{\nux}{\pix}\geq \frac{|C|}{2^{\sigma-m}\vol(K)(\sigma-m)!}.$
+Then %\begin{equation*}J_\eps\geq\frac{|C|}{(\sigma-m)!^2}\mathcal{L}(f)\end{equation*} and hence
+\small
+\begin{equation}\label{J inequality}\mathcal{L}(g)\mathop{\leq}_{\eps\to 0} \frac{2^{2(\sigma-m)}(\sigma-m)!^2}{|C|}J_\eps.\end{equation}
+\normalsize
+
+\noindent\tb{Step 4, Combining inequalities:}
+Using inequalities \eqref{IJ inequality}, \eqref{I inequality}, and \eqref{J inequality}, 
+\small
+\begin{equation}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}\geq \frac{1}{2^{2(\sigma-m)}A(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2},\end{equation}
+\normalsize
+$\forall f: C\rightarrow\R.$  Therefore,
+\small
+\begin{align}
+\rho(M^\dag) &= \min_{f: C\rightarrow \R}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}\displaybreak[3]\nonumber\\
+&\geq \frac{1}{2^{2(\sigma-m)}A(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2}\label{Sob const ineq 3}
+\end{align}
+\normalsize
+
+Combining equations \eqref{Sob const ineq 1}, \eqref{Sob const ineq 2}, and \eqref{Sob const ineq 3}
+\small
+$$\rho(M)\geq {e^{-3\beta}\over 2^{2ms} c_1m^2(m(s-1))!^2 n^2}$$
+%\normalsize
+%\small
+%\begin{align*}\label{Sobolev bound}
+%\rho(M)&\geq e^{-3\beta}\rho(M^\star)\\
+%&\geq \frac{e^{-3\beta}}{s}\rho(M^\dag)\\
+%&\geq\frac{e^{-3\beta}}{2^{2(\sigma-m)}As(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2} \\
+%&\stackrel{(a)}{\geq}\frac{e^{-3\beta}}{2^{2ms}Asm(ms-m)(ms - m)!^2n^2} \\
+%&\geq {e^{-3\beta}\over 2^{2ms} c_1m^2(m(s-1))!^2 n^2}.
+%\end{align*}
+\normalsize
+ where $c_1$ is a constant depending only on $s$.  %Inequality (a) uses the facts that $ms\geq \sigma$ and $mn^2\geq \sum_{i=1}^m n_i^2.$
+ 
+From here, Lemma~\ref{l:mixing time} follows by applying Equation \eqref{e:mix time bounds} in a similar manner as the proof of Equation (23) in \cite{Shah2010}. The main difference is that the size of the state space is bounded as $|\sX|\leq\prod_{i=1}^m(n_i+1)^{s_i+1}$ due to the potential for multiple populations.
+ \hfill\qed
+ 
+
+
+Combining Lemmas~\ref{l:stationary distribution} and \ref{l:mixing time} results in a bound on the time it takes for the expected potential to be within $\eps$ of the maximum, provided $\beta$ is sufficiently large.
+The lemmas and method of proof for Theorem \ref{t:main theorem 1} follow the structure of the supporting lemmas and proof for Theorem 3 in \cite{Shah2010}. The main differences have arisen due to the facts that i) our analysis considers the multi-population case, so the size of our state space cannot be reduced as significantly as in the single population case of \cite{Shah2010}, and ii) update rates in our algorithm depend on behavior within each agent's own population, instead of on global behavior.
+
+\smallskip
+
+\noindent\emph{Proof of Theorem~\ref{t:main theorem 1}}:\\
+From Lemma \ref{l:stationary distribution},
+if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb},
+then 
+$\E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.$ 
+From Lemma \ref{l:mixing time}, if condition (ii) of Theorem~\ref{t:main theorem 1} is satisfied, and $t$ is sufficiently large as in \eqref{e:time requirement},
+then 
+$\|\mu(t) - \pi\|_{TV}\leq \eps/2.$
+Then
+\begin{align*}
+\E[\P(a(t)|_{\sX})] 	&=\E_{\mu(t)}[\P(x)] \nonumber\displaybreak[3]\\
+			&\geq \E_{\pi}[\P(x)] - \|\mu(t) - \pi\|_{TV}\cdot \max_{x\in  \sX}\P(x)\nonumber\displaybreak[3]\\
+&\stackrel{(a)}{\geq} \max_{x\in  \sX}\P(x) - \eps \nonumber\displaybreak[3]
+\end{align*}\
+where (a) follows from \eqref{e:expPot}, \eqref{e:distToS}, and the fact that $\P(x)\in[0,1].$
+\qed
+

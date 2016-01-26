@@ -1,0 +1,106 @@
+\documentclass[defaultstyle,11pt]{thesis}
+
+\usepackage{amssymb}		% to get all AMS symbols
+\usepackage{graphicx}		% to insert figures
+\usepackage{hyperref}		% PDF hyperreferences??
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{fancyhdr,amssymb,amsmath, graphicx, placeins, listings,float,enumerate,epstopdf,color,cite,amsthm,wrapfig, cite, dsfont}
+\usepackage[font={small}]{caption}
+\usepackage[colorinlistoftodos]{todonotes} %can add option to disable
+%%%%%%%%%%%%   All the preamble material:   %%%%%%%%%%%%
+
+\title{Performance Tradeoffs in Distributed Control Systems}
+
+\author{Holly}{Borowski}
+
+\otherdegrees{B.S., U.S. Air Force Academy, 2004}
+
+\degree{Doctor of Philosophy}		%  #1 {long descr.}
+	{Ph.D., Aerospace Engineering Sciences}		%  #2 {short descr.}
+
+\dept{Aerospace Engineering Sciences}			%  #1 {designation}
+	{}		%  #2 {name}
+
+\advisor{Prof.}				%  #1 {title}
+	{Jason Marden}			%  #2 {name}
+
+\reader{Prof.~Eric Frew}		%  2nd person to sign thesis
+\readerThree{\textcolor{red}{add other readers}}		%  3rd person to sign thesis
+
+\abstract{  \OnePageChapter	% because it is very short
+
+	\textcolor{red}{Often the abstract will be long enough to require
+	more than one page, in which case the macro
+	``$\backslash$OnePageChapter'' should {\it not}
+	be used.}
+
+	\textcolor{red}{But this one isn't, so it should.}
+	}
+
+\dedication[Dedication]{	% NEVER use \OnePageChapter here.
+	\textcolor{red}{To all of the fluffy kitties.}
+	}
+
+\acknowledgements{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
+	\textcolor{red}{Here's where you acknowledge folks who helped.
+	But keep it short, i.e., no more than one page,
+	as required by the Grad School Specifications.}
+	}
+	
+	
+
+
+
+% \IRBprotocol{E927F29.001X}	% optional!
+
+\ToCisShort	% use this only for 1-page Table of Contents
+
+%\LoFisShort	% use this only for 1-page Table of Figures
+ \emptyLoF	% use this if there is no List of Figures
+
+%\LoTisShort	% use this only for 1-page Table of Tables
+\emptyLoT	% use this if there is no List of Tables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%       BEGIN DOCUMENT...         %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input macros.tex
+
+\begin{document}
+
+\listoftodos
+
+
+\graphicspath{{figs/}}
+
+
+\todo[inline]{Scan for phrases like "this paper" and reword}
+
+\input chapter1_intro.tex
+\input chapter2_semiAnon.tex
+\input chapter3_CCE.tex
+\input chapter4_adversaries.tex
+\input chapter5_conclusion.tex
+
+\todo[inline]{fix bibliography formatting}
+\todo[inline]{fix appendix titles for adversarial work to include theorem names}
+\todo[inline]{Add short introductions to each chapter, and combine longer intros to make the dissertation introduction}
+
+%%%%%%%%%   then the Bibliography, if any   %%%%%%%%%
+\bibliographystyle{plain}	% or "siam", or "alpha", etc.
+%\nocite{*}		% list all refs in database, cited or not
+\bibliography{ThesisReferences}		% Bib database in "refs.bib"
+
+%%%%%%%%%   then the Appendices, if any   %%%%%%%%%
+\appendix
+\input appendix_technicalPrelims
+\input appendix_proofs
+%\input appendix_semiAnon.tex
+%\input appendix_CCE.tex
+%\input appendix_adversaries.tex
+%\input appendixB.tex
+
+
+\end{document}
+

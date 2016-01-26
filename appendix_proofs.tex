@@ -1,0 +1,1474 @@
+\chapter{Proofs}
+
+\section{Fast Convergence in Semi-Anonymous Potential Games: Background and Proofs}
+
+We begin with a problem formulation and notation summary for semi-anonymous potential games, and then proceed with a proof of Theorem~\ref{t:main theorem 1}. Next, we provide a problem formulation and summary for time-varying semi-anonymous potential games, followed by a proof of Theorem~\ref{t:main theorem 2}.
+
+\subsection{Semi-Anonymous Potential Games}\label{a:M defn}
+The following Markov chain, $M$, over state space $\sX$ is the kernel of the continuous time modified log-linear learning process for stationary semi anonymous potential games.  Define $n_j := |N_j|$ to be the size of population $j$, define $s_j:= |\bar{\mathcal{A}}_j|$, and let $\sigma := \sum_{j = 1}^m s_j.$ Let $e_j^k \in \R^{s_j}$ be the $k$th standard basis vector of length $s_j$ for $k\in \{1,\ldots,s_j\}$.      Finally, let $$x = (\bx_j,\x_-j) = (\bx_1,\bx_2,\ldots,\bx_m)\in \sX,$$
+where $\bx_j = (\bx_j^1,\bx_j^2,\ldots,\bx_j^{s_j})$ represents the proportion of players choosing each action within population $j$'s action set.  The state transitions according to:
+\begin{itemize}
+\item Choose a population $N_j\in \{N_1,N_2,\ldots,N_m\}$ with probability $s_j/\sigma.$
+\item Choose an action $\a_j^k\in \{\a_j^1,\a_j^2,\ldots,\a_j^{s_j}\} =  \bar{\mathcal{A}}_{j}$ with probability $1/s_j.$ 
+\item If $\bx_j^k>0$, i.e., at least one player from population $j$ is playing action $\bar{a}_j^k,$ choose $p\in \{p^\prime\in N_j \st \a_{p^\prime} = \a_{j}^k\}$ uniformly at random to update according to \eqref{e:logit response}. That is, transition to $ \left(\bx_j + \frac{1}{n}(e_j^{\ell} - e_j^k),\bx_{-j}\right)$ with probability 
+\begin{equation*}\label{e:logit response 2}
+\frac{e^{\beta \P\left(\bx_{j} + \frac{1}{n}(e_j^{\ell} - e_j^k),\bx_{-j}\right)}}{\sum_{t =1}^{s_j} e^{\beta\P(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k), \bx_{-j})}}
+\end{equation*}
+for each $\ell\in \{1,2,\ldots,s_j\}.$
+\footnote{Agents' update rates are the only difference between our algorithm, standard log-linear learning, and the log-linear learning variant of \cite{Shah2010}. In standard log-linear learning, players have uniform, constant clock rates. In our variant and the variant of \cite{Shah2010}, agents' update rates vary with the state. For the algorithm in \cite{Shah2010}, agent $i$'s update rate is $\alpha n\mathop{/}\tilde{z}_i(t),$ where $\tilde{z}_i(t)$ is the \emph{total} number of players selecting the same action as agent $i$. The discrete time kernel of this process is as follows \cite{Shah2010}:
+(1) Select an action $a_i\in \cup_{i\in N} A_i$ uniformly at random.
+(2) Select a player who is currently playing action $a_i$ uniformly at random. This player updates its action according to \eqref{e:logit response}.
+The two algorithms differ when at least two populations have overlapping action sets. }
+\end{itemize}
+
+This defines transition probabilities in $M$ for transitions from state $x = (\bx_{j},\bx_{-j})\in \sX$ to a state of the form $y = \left(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k),\bx_{-j}\right)\in \sX$ in which a player from population $N_j$ updates his action, so that
+%\small
+\begin{align}
+M(x,y) =\frac{e^{\beta \P\left(\bx_{j} + \frac{1}{n}(e^{\ell}_j - e_j^k),\bx_{-j}\right)}}{\sigma\sum_{t =1}^{s_j} e^{\beta\P(\bx_{j} + \frac{1}{n}(e^{t}_j - e_j^k), \bx_{-j})}}\label{e:Markov transition probs}
+\end{align}
+\normalsize
+For a transition of any other form, 
+$M(x,y) = 0.$
+Applying \eqref{e:contin time chain} to the chain with kernel $M$ and global clock rate $\alpha\sigma n$, modified log-linear learning evolves as
+\begin{equation}
+\mu(t) = \mu(0)e^{\alpha\sigma n t (M-I)}.
+\end{equation}
+
+\noindent\emph{Notation summary for stationary semi-anonymous potential games:}
+Let $G = \{N,\{A_i\},\{U_i\}\}$ be a stationary semi-anonymous potential game. The following summarizes the notation corresponding to game $G.$
+\begin{itemize}
+\item $\sX$ - aggregate state space corresponding to the game $G$
+\item $\phi: \sX\to \R$ - the potential function corresponding to game $G$
+\item $M$ - probability transition kernel for the modified log-linear learning process
+\item $\alpha$ - design parameter for modified log-linear learning which may be used to adjust the global update rate 
+\item $\mu(t) = \mu(0)e^{\alpha nt(M-I)}$ - distribution over state space $\sX$ at time $t$ when beginning with distribution $\mu(0)$ and following the modified log-linear learning process
+\item $N_j$ - the $j$th population
+\item $n_j:= |N_j|$ - the size of the $j$th population
+\item $\bar{\mathcal{A}}_j$ - action set for agents belonging to population $N_j$
+\item $\a_j^k$ - the $k$th action in population $N_j$'s action set
+\item $s:= |\cup_{j= 1}^m \overline{\mathcal{A}}_j|$  - size of the union of all populations' action sets
+\item $s_j: = |\bar{\mathcal{A}}_j|$ - size of population $N_j$'s action set
+\item $e_j^k\in \R^{s_j}$ - $k$th standard basis vector of length $s_j$
+\item $\sigma:= \sum_{j = 1}^m s_j$ - sum of sizes of each population's action set
+\item $\pi$ - stationary distribution corresponding to the modified log-linear learning process for game $G$.
+\item $(\bx_{j},\bx_{-j}) = (\bx_{1},\bx_{2},\ldots,\bx_{m})\in X$, a state in the aggregate state space, where $\bx_{j} = (\bx_{j}^1,\bx_{j}^2,\ldots,\bx_{j}^{s_j}).$
+\end{itemize}
+
+
+
+%-------------------------------Theorem 1 Proof-------------------------------%
+\subsection{Proof of Theorem~\ref{t:main theorem 1}}\label{a:theorem 1 proof}
+
+
+We require two supporting lemmas to prove Theorem \ref{t:main theorem 1}.  The first  
+establishes the stationary distribution for modified log-linear learning as a function of $\beta$ and characterizes how large $\beta$ must be so the expected value of the potential function is within $\eps/2$ of maximum.  The second upper bounds the mixing time to within $\eps/2$ of the stationary distribution for the modified log-linear learning process.  
+
+
+%-------------------------------Lemma: Stationary distribution-------------------------------%
+\begin{lemma}\label{l:stationary distribution}\label{l:beta bound}
+For the stationary semi-anonymous potential game $G = (N,\mathcal{A}_i,U_i)$  %described in Section \ref{s:preliminaries} 
+with state space $\sX$ and potential function $\P: \sX \to [0,1],$
+the stationary distribution for modified log-linear learning is
+\begin{equation}\label{e:stationary distribution}
+\pi_{x}\propto e^{\beta\P(x)}, \quad x\in  \sX
+\end{equation}
+Moreover, if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb}, then \begin{equation}\label{e:expPot}
+\E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.
+\end{equation}
+\end{lemma}
+
+\noindent\emph{Proof:}
+The form of the stationary distribution follows from standard reversibility arguments, using \eqref{e:Markov transition probs} and \eqref{e:stationary distribution}.
+
+For the second part of the proof,  define the following:
+\small
+\begin{align*}
+C_\beta & := \sum_{x\in \sX}e^{\beta\P(x)},\displaybreak[3]\\
+x^\star &:= \argmax_{x\in \sX}\P(x) \displaybreak[3]\\
+ B(x^\star,\delta) &:= \{x\in \sX\st \|x - x^\star\|_1\leq\delta\}
+\end{align*}
+\normalsize
+where $\delta\in[0,1]$ is a constant which we will specify later.  Because $\pi$ is of exponential form with normalization factor $C_\beta$, the derivative of $\log C_\beta$ with respect to $\beta$ is $\E_\pi[\P(x)]$.  Moreover, it follows from \eqref{e:stationary distribution} that $\E_\pi[\P(x)]$ is monotonically increasing in $\beta$, so we may proceed as follows:
+\begin{align*}
+\E_\pi[\P(x)]	&\geq {1\over\beta}(\log C_\beta - \log C_0)\displaybreak[3]\\
+		&=\P(x^\star) +{1\over\beta}\log{\sum_{x\in \sX}e^{\beta(\P(x) - \P(x^\star))}\over| \sX|}\displaybreak[3]\\
+		&\stackrel{(a)}{\geq}\P(x^\star)+{1\over\beta}\log{\sum_{x\in B(x^\star,\delta)}e^{-\beta\delta\lambda}\over | \sX|}\displaybreak[3]\\
+		&=\P(x^\star)+{1\over\beta}\log{|B(x^\star,\delta)|e^{-\beta\delta\lambda}\over | \sX|}\displaybreak[3]\\
+		&=\P(x^\star)-\delta\lambda+{1\over\beta}\log\left({|B(x^\star,\delta)|\over | \sX|}\right)\displaybreak[3]
+\end{align*}
+where (a) is from the fact that $\P$ is $\lambda$-Lipschitz and the definition of $B(x^\star,\delta)$.  Using intermediate results in the proof of Lemma 6 of \cite{Shah2010}, $|B(x^\star,\delta)|$
+ and $| \sX|$ are bounded as:
+ \begin{align}
+|B(x^\star,\delta)|&\geq \prod_{i=1}^m\left({\delta(n_i+1)\over 2ms_i} \right)^{s_i-1}
+,\text{ and}\label{e:Bstar}\displaybreak[3]\\
+| \sX|&\leq\prod_{i=1}^m(n_i+1)^{s_i-1}.%\nonumber
+\end{align}
+
+
+Now,
+\begin{align*}
+\E_\pi[\P(x)]	&\geq \P(x^\star) -\delta\lambda+ {1\over\beta}\log\left({|B(x^\star,\delta)|\over| \sX|}\right)\displaybreak[3]\\
+		&\geq \P(x^\star) -\delta\lambda+ {1\over\beta}\log\left({\prod_{i=1}^m\left({\delta(n_i+1)\over 2ms_i} \right)^{s_i-1}   \over \prod_{i=1}^m(n_i+1)^{s_i-1}}\right)\displaybreak[3]\\
+		&=\P(x^\star) -\delta\lambda+{1\over\beta} \log\prod_{i=1}^m \left({\delta\over 2ms_i}\right)^{s_i-1}\displaybreak[3]\\
+		&\geq\P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)
+\end{align*}
+\normalsize
+Consider two cases: (i) $\lambda\leq\eps/4,$ and (ii) $\lambda>\eps/4$.  For case (i), choose $\delta=1$ and let $\beta\geq {4m(s-1)\over\eps}\log 2 ms$.   Then,
+\begin{align*}
+\E_\pi[\P(x)] &\geq \P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)\displaybreak[3]\\
+&\geq \P(x^\star) -\eps/4 - {m(s-1)\over\beta} \log 2ms\displaybreak[3]\\
+&\geq \P(x^\star) -\eps/4 - {\eps m(s-1)\over 4m(s-1)\log 2ms}\log 2ms\displaybreak[3]\\
+&=\P(x^\star) - \eps/2
+\end{align*}
+\normalsize
+
+For case (ii),  note that $\lambda>\eps/4 \implies\delta=\eps/4\lambda<1$ so we may choose $\delta = \eps/4\lambda.$  Let $\beta\geq {4m(s-1)\over \eps}\log\left({8\lambda ms\over \eps} \right).$  Then
+\small
+\begin{align*}
+\E_\pi[\P(x)] &\geq \P(x^\star) -\delta\lambda+{m(s-1)\over\beta} \log \left({\delta\over 2ms}\right)\displaybreak[3]\\
+&=\P(x^\star) -\eps/4+{m(s-1)\over\beta} \log \left({\eps\over 8\lambda ms}\right)\displaybreak[3]\\
+&=\P(x^\star) -\eps/4-{m(s-1)\over\beta} \log \left({8\lambda ms\over\eps}\right)\displaybreak[3]\\
+&\geq\P(x^\star) -\eps/4-{\eps m(s-1)\over  4m(s-1) \log\left({8\lambda ms\over \eps} \right) } \log\left({8\lambda ms\over\eps}\right)\displaybreak[3]\\ 
+&=\P(x^\star) -\eps/2
+\end{align*}
+\normalsize
+as desired.\hfill\qed
+
+
+\begin{lemma}\label{l:mixing time} 
+For the Markov chain defined by modified log-linear learning with kernel $M$ and stationary distribution $\pi$, if the number of players within each population satisfies condition (ii) of Theorem~\ref{t:main theorem 1}, and $t$ is sufficiently large as in \eqref{e:time requirement}, then
+\begin{equation}\label{e:distToS}\| \mu(t) - \pi\|_{TV}\leq \eps/2.\end{equation}
+\end{lemma}
+
+
+\noindent\emph{Proof:}
+We begin by establishing a lower bound on the Sobolev constant for the Markov chain, $M$. We claim that, for the Markov chain $M$ defined in Appendix~\ref{a:M defn}, if $\P:  \sX\rightarrow [0,1]$ and
+$m+\sum_{i=1}^m n_i^2 \geq \sigma$, then
+\begin{equation}\label{e:rho bound}
+\rho(M)\geq {e^{-3\beta}\over c_1m(m(s-1))!^2 n^2}
+\end{equation}
+for some constant $c_1$ which depends only on $s$.  Then,  from \eqref{e:mix time bounds}, a lower bound on the Sobolev constant yields an upper bound on the mixing time for the chain $M$. 
+
+
+Using the technique of \cite{Shah2010}, we compare the Sobolev constants for the chain $M$ and a similar random walk on a convex set. The primary difference is that our proof accounts for dependencies on the number of populations, $m$, whereas theirs considers only the $m=1$ case. As a result, our state space is necessarily larger. 
+We accomplish this proof in four steps. In step 1, we define $M^\star$ to be the Markov chain $M$ with $\beta = 0,$ and establish the bound $\rho(M)\geq e^{-3\beta}\rho(M^\star).$ In step 2, we define a third Markov chain, $M^\dag$, and establish the bound $\rho(M^\star)\geq{1\over s}\rho(M^\dag).$ Then, in step 3, we establish a lower bound on the Sobolev constant of $M^\dag.$ Finally, in step 4, we combine the results of the first three steps to establish \eqref{e:rho bound}. 
+We now prove each step in detail.
+
+%-------------------------------- M to M star --------------------------------%
+\noindent\tb{Step 1, $M$ to $M^\star$:}
+Let $M^\star$  be the Markov chain $M$ with $\beta = 0,$ and let $\pi^\star$ be its stationary distribution. In $M^\star$ an updating agent chooses his next action uniformly at random. Per Equation \eqref{e:stationary distribution} with $\beta=0$, the stationary distribution $\pi^\star$ of $M^\star$ is the uniform distribution.
+  Let $x,y\in  \sX.$  We bound $\pi_x/\pi_x^\star$ and $M(x,y)/M^\star(x,y)$ in order to use Corollary 3.15 in \cite{Montenegro2006}:
+\begin{align*}
+\frac{\pi_{x}}{\pi_{x}^\star} &= \frac{e^{\beta\P(x)}}{\sum_{y\in  \sX} e^{\beta\P(y)}}\cdot\frac{\sum_{y\in  \sX} e^0}{e^0}=\frac{| \sX|e^{\beta\P(x)}}{\sum_{y\in  \sX} e^{\beta\P(y)}}
+\end{align*}
+Since $\P(x)\in [0,1]$ for all $ x\in  \sX,$ this implies
+\begin{equation}\label{e:ratio bound 1}
+e^{-\beta}\leq\frac{\pi_{x}}{\pi_{x}^\star}\leq e^\beta
+\end{equation}
+Similarly, for $y = (\bx_{j}+\frac{1}{n}(e_j^k - e_j^{\ell}),\bx_{-j})$,
+\begin{align*}
+\frac{M(x,y)}{M^\star(x,y)} &= 
+ \frac{s_je^{\beta\P(y)}}{\sum_{r = 1}^{s_j}e^{\beta\P(\bx_{j} + \frac{1}{n}(e^k _i- e^r_i),\bx_{-j})}}
+\end{align*}
+Since $\P(x)\in [0,1]$ for all $ x\in \sX,$
+  for any $x,y\in \sX$ of the above form,
+\begin{equation}\label{e:ratio bound 2}
+e^{-\beta}\leq \frac{M(x,y)}{M^\star(x,y)}\leq e^\beta.
+\end{equation}
+For a transition to any $y$ not of the form above, $M(x,y) = M^\star(x,y) = 0.$  Using this fact and Equations \eqref{e:ratio bound 1} and \eqref{e:ratio bound 2}, we apply Corollary 3.15 in \cite{Montenegro2006}: %to lower bound $\rho(M):$
+\begin{equation}\label{Sob const ineq 1}\rho(M)\geq e^{-3\beta}\rho(M^\star).\end{equation}
+
+
+%-------------------------------- M star to M dag --------------------------------%
+\noindent\tb{Step 2, $M^\star$ to $M^\dag$:}
+Consider the Markov chain $M^\dag$ on $ \sX $, where transitions from state $x$ to $y$ occur as follows:
+
+\begin{itemize}
+\item Choose a population $N_j$ with probability $s_j/\sigma$
+\item Choose  $k\in \{1,\ldots,s_j-1\}$ and choose $\kappa\in \{-1,1\}$, each uniformly at random.
+\begin{itemize}
+\item If $\kappa = -1$ and $\bx_{j}^k>0$, then $y = (\bx_{j} + \frac{1}{n}(e_{j}^{s_j} - e_j^k),\bx_{{-k}}).$ 
+\item If $\kappa = 1$ and $\bx_{j}^{s_j}>0$, then $y = (\bx_{j} + \frac{1}{n}(e_j^k - e_{j}^{s_j}),\bx_{{-j}}).$ 
+\end{itemize}
+\end{itemize}
+Since $M^\dag(x,y) = M^\dag(y,x)$ for any $x,y\in  \sX$, $M^\dag$ is reversible with the uniform distribution over $ \sX$.  Hence the stationary distribution is uniform, and $\pi^\dag = \pi^\star$.
+
+For a transition $x$ to $y$ in which an agent from population $N_j$ changes his action, $M^\star (x,y)\geq \frac{1}{s_j}M^\dag(x,y),$ implying 
+\begin{equation}\label{e:ratio 3}
+M^\star(x,y)\geq \frac{1}{s}M^\dag(x,y),\quad \forall x,y \in  \sX
+\end{equation}
+since $s\geq s_j,\;\forall i\in \{1,\ldots,m\}$.  Using \eqref{e:ratio 3} and the fact that $\pi^\star = \pi^\dag$, we apply Corollary 3.15 from \cite{Montenegro2006}:% to bound $\rho(M^\star)$:
+\begin{equation}\label{Sob const ineq 2}\rho(M^\star)\geq \frac{1}{s}\rho(M^\dag)\end{equation}
+
+
+%-------------------------------- M dag to random walk --------------------------------%
+\noindent\tb{Step 3, $M^\dag$ to a random walk:}\label{s:random walk}
+The following random walk on 
+\small
+$$C = \left\{(z_1,\ldots,z_m)\in \Z_+^{\sigma-m}\st z_j\in \Z_+^{s_j-1},\;\sum_{k=1}^{s_j-1} z_{j}^k \leq n_j,\, \forall j\right\}$$
+\normalsize
+is equivalent to $M^\dag$.  
+Transition from $x\to y$ in $C$ as follows:
+\begin{itemize}
+\item Choose $j\in [\sigma-m]$ and $\kappa\in\{-1,1\}$, each uniformly at random
+\item $y = \left\{\begin{array}{ll}x + \kappa e_j & \text{if } x+\kappa e_j \in C\\
+							x&\text{otherwise}\end{array}\right.$.
+\end{itemize}
+
+The stationary distribution of this random walk is uniform.  %, i.e., $\pi_{x} = 1/|C|,\;\forall x\in C$.  
+We lower bound the Sobolev constant, $\rho(M^\dag),$ which, using the above steps, lower bounds $\rho(M)$ and hence upper bounds the mixing time of our algorithm.
+
+Let $g:C\to \R$ be an arbitrary function.  To lower bound $\rho(M^\dag)$, we will lower bound $\mathcal{E}(g,g)$ and upper bound $\mathcal{L}(g)$.  The ratio of these two bounds in turn lower bounds the ratio $\mathcal{E}(g,g)/\mathcal{L}(g)$; since $g$ was chosen arbitrarily this also lower bounds the Sobolev constant. 
+We will use a theorem due to \cite{Frieze1998} which applies to an extension of a function $g:C\to \R$ to a function defined over the convex hull of $C$; here we define this extension. 
+
+Let $K$ be the convex hull of $C$.  Given $g: C\rightarrow \R$, we follow the procedure of \cite{Frieze1998, Shah2010} to extend $g$ to a function $g_\varepsilon: K\rightarrow \R$.  For $x\in C$, let $C(x)$ and $C(x,\eps)$ be the $\sigma-m$ dimensional cubes of center $x$ and sides 1 and $1-2\eps$ respectively.  For sufficiently small $\varepsilon>0$ and $z\in C(x)$, define $g_\eps : K\rightarrow \R$ by:
+\begin{equation*}\label{e:feps defn}
+g_\eps(z) := \left\{\begin{array}{ll}g(x) & \text{if } z\in C(x,\varepsilon)\\
+\frac{(1+\eta(z))g(x) + (1-\eta(z))g(y)}{2} & \text{otherwise } \end{array}\right.
+\end{equation*}
+\normalsize
+where $y\in C$ is a point such that $D := C(x)\cap C(y)$ is the closest face of $C(x)$ to $z$ (if more than one $y$ satisfy this condition, one such point may be chosen arbitrarily), and $\eta := \frac{\dist(z,D)}{\varepsilon}\in[0,1).$  The $\dist$ function represents standard Euclidean distance in $\R^{\sigma-m}.$   
+
+Define
+\small
+\begin{align}
+I_{\eps} &:= \int_K \bigl|\nabla g_\eps(z)\bigr|^2dz\\
+J_{\eps} &:= \int_K g_\eps(z)^2\log\frac{g_\eps(z)^2\vol(K)}{\int_K g_\eps(y)^2dy}dz. \label{e:Jeps}
+\end{align}
+\normalsize
+Applying Theorem 2 of \cite{Frieze1998} for $K\in \R^{\sigma-m}$ with diameter $\sqrt{\sum_{i=1}^m n_i^2}$, if $m+\sum_{i=1}^mn_i^2\geq\sigma,$
+\begin{equation}\label{IJ inequality}\frac{\eps I_\eps}{J_\eps}\geq \frac{1}{A\sum_{i=1}^m n_i^2}.\end{equation}
+We lower bound $\mathcal{E}(g,g)$ in terms of $\eps I_\eps$ and then upper bound $\mathcal{L}(g)$ in terms of $J_\eps$ to obtain a lower bound on their ratio with Equation \eqref{IJ inequality}.  
+The desired lower bound on the Sobolev constant follows. 
+
+Using similar techniques to \cite{Shah2010}, we lower bound $\mathcal{E}(g,g)$ in terms of $\eps I_\eps$ as
+\small
+\begin{align}
+I_\eps 	%&=\int_K\left|\nabla g_\eps(z)\right|^2dz\displaybreak[3]\nonumber\\
+		%&\leq\sum_{x\in C}\int_{C(x)}|\nabla g_\eps(z)|^2dz\displaybreak[3]\nonumber\\
+		%&=\sum_{x\in C}\Biggl(\int_{C(x,\eps)}|\nabla g(x)|^2 dz \nonumber\\
+		%&\quad+\int_{\substack{C(x)\setminus\\ C(x,\eps)}}\left|\nabla\left(\frac{(1+\eta(z))g(x) + (1-\eta(z))g(y) }{2}\right)\right|^2dz\Biggr)\displaybreak[3]\nonumber\\
+		%&\leq\sum_{x\in C}\sum_{\substack{y\in C :\\ \|x - y\|_1 = 1}}\int_{\substack{C(x)\setminus\\ C(x,\eps)}}\Biggl|\half\nabla\Bigl((1+\eta(z))g(x)\nonumber\\&\hspace{1.4in}
+		%	 + (1-\eta(z))g(y)\Bigr)\Biggr|^2dz\displaybreak[3]\nonumber\\
+		%&\substack{\leq\\ \eps\to 0}\, \eps^{-1}\sum_{x\in C}\sum_{\substack{y\in C :\\ \|x - y\|_1 = 1}}\left(\frac{g(x) - g(y)}{2}\right)^2 + O(1) \displaybreak[3]\nonumber\\
+		%&\stackrel{(a)}{=}\frac{2}{4\eps}(\sigma - m)|C|\sum_{x,y\in C}(g(x) - g(y))^2\pi_{x}^\dag M^\dag(x,y) + O(1) \displaybreak[3]\nonumber\\
+		 %&=
+		 &\leq\frac{|C|(\sigma - m)}{\eps}\mathcal{E}(g,g) + O(1)\displaybreak[3].\nonumber
+\end{align}
+\normalsize
+%where (a) uses the facts that $\pi_x^\dag = \frac{1}{|C|}$ and 
+%$$M^\dag(x,y) = \left\{\begin{array}{ll}\frac{1}{2(\sigma-m)}&\text{if } \|x-y\|_1 = 1,\; y\in C\\
+%0 &\text{otherwise}\end{array}\right.$$
+Then,
+$\eps I_\eps \;\mathop{\leq}_{\eps\rightarrow 0} \;|C|(\sigma - m)\mathcal{E}(g,g)$, and hence 
+\begin{equation}\label{I inequality}\mathcal{E}(g,g)\;\mathop{\geq}_{\eps\rightarrow 0}\;\frac{\eps I_\eps}{|C|(\sigma-m)}.\end{equation}
+%\begin{align*}
+%J_\eps  	&= \int_K g_\varepsilon(z)^2\log \frac{g_\eps(z)^2\vol(K)}{\int_Kg_\eps(y)^2dy}dz\displaybreak[3]\\
+%		&{\mathop{=}_{\eps\rightarrow 0} }\sum_{x\in C}\phixsq\vol(C(x)\cap K)\\
+%		&\hspace{1in}\times\log\frac{\phixsq\vol(K)}{\sum_{y\in C}\phiysq\vol(C(y)\cap K)}\displaybreak[3]\\
+		%&\hspace{1in}\times\log\frac{\phixsq\vol(K)}{\sum_{y\in C}\phiysq\vol(C(y)\cap K)}\displaybreak[3]\\
+%		&=\vol(K)\sum_{x\in C}g(x)^2\nu_{x}\log\frac{g(x)^2}{\sum_{y\in C}g(y)^2\nu_{y}}.
+%\end{align*}
+%\normalsize
+Again, using similar techniques as \cite{Shah2010}, we bound $J_\eps$ as
+%sand
+%\begin{equation}
+%\frac{J_\eps}{\vol(K)}\;{\mathop{\geq}_{\eps\to 0}}\; \frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\mathcal{L}(f).
+%eee \end{equation}
+\small
+\begin{align}
+\frac{J_\eps}{\vol(K)}	%&\stackrel{(a)}{\mathop{=}_{\eps\rightarrow 0}} \sum_{x\in C} g(x)^2\nu_{x}\log\frac{ g(x)^2}{\sum_{y\in C} g(y)^2\nu_{y}}\displaybreak[3]\nonumber\\
+					%&=\sumxC\nux\left( g(x)^2\log\frac{\phixsq}{\sumyC  g(y)^2\nuy} -  g(x)^2 \right)\nonumber\\ 
+					%&\hspace{1in}
+					%+  \sumxC\phixsq\nux\displaybreak[3]\nonumber\\
+					%&\stackrel{(b)}{=}\inf_{c>0}\left[\sumxC\nux\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right)+c\right]\displaybreak[3]\nonumber\\
+					%&\geq \min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\max_{x\in C}\frac{\pi_{x}}{\nu_{x}}\Biggr]\displaybreak[3]\nonumber\\
+					%&=\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\frac{\vol(K)}{|C|\min_{x\in C}\vol(C(x)\cap K)}\Biggr]\displaybreak[3]\nonumber\\
+					%&\stackrel{(c)}{\geq}\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}\Biggl[\sumxC\pix\left(\phixsq\log\frac{\phixsq}{c} - \phixsq\right) \displaybreak[3]\nonumber\\
+					%&\hspace{1in}
+					%+c\cdot\frac{1}{2^{\sigma-m}(\sigma-m)!}\Biggr]\displaybreak[3]\nonumber\\
+					%&\geq \frac{1}{2^{\sigma-m}(\sigma-m)!}\min_{x\in C}\frac{\nux}{\pix}\inf_{c>0}   \nonumber\\
+					%&\hspace{0.5in}
+					%\Biggl[\sumxC\pix\Biggl(\phixsq\log\frac{\phixsq}{c}-\phixsq\Biggr)+c\Biggr]\nonumber\displaybreak[3]\\
+					%&\stackrel{(d)}{=}\frac{1}{2^{\sigma-m}(\sigma-m)!}\min_{x\in C}\frac{\nux}{\pix} \nonumber\\
+					%&\hspace{0.5in}
+					%\Biggl[\sumxC\pix\Biggl(\phixsq\log\frac{\phixsq}{\sumyC\phiysq\piy}- \phixsq\Biggr)\nonumber\\
+					%&\hspace{1in}
+					%+\sumxC\phixsq\pix\Biggr]\displaybreak[3]\nonumber\\
+					%&\stackrel{(e)}{\geq}\frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\nonumber\\
+					%&\hspace{1in}\times
+					%\sumxC\pix\phixsq\log\frac{\phixsq}{\sumyC\phiysq\piy}\displaybreak[3]\nonumber\\
+					%&=
+					&\geq\frac{|C|}{2^{2(\sigma-m)}\vol(K)(\sigma-m)!^2}\mathcal{L}(f).\nonumber
+\end{align}
+%\normalsize
+%where (a) - (e) are due to the following:\\
+%{\raggedright{}
+%(a)  The cubes $C(x)$ cover $K$ and as $\eps\rightarrow 0$, $C(x,\eps)\rightarrow C(x)$, so that $g_\eps(z)\rightarrow g(x)$ for $z\in C(x)$\\
+%(b)  By taking the derivative of this expression with respect to $c$ we see that the minimum occurs at $c = \sumxC\phixsq\nux$\\
+%(b) The minimum occurs at $c = \sumxC\phixsq\nux$\\
+%(c) Apply \eqref{e:claim} and $\min_{x\in C}\vol(C(x)\cap K)\leq 1$.\\
+%(d) The infimum occurs at $c=\sumxC\phixsq\pix$ \\%as opposed to $\sumxC\phixsq\nux$ which minimized (b)\\
+%(e) The smallest possible value of the intersection} $C(x)\cap K$ occurs at a corner, so $\min_{x\in C}\vol(C(x)\cap K)\geq\frac{1}{2^{\sigma-m}(\sigma-m)!},$ and hence $\min_{x\in C}\frac{\nux}{\pix}\geq \frac{|C|}{2^{\sigma-m}\vol(K)(\sigma-m)!}.$
+Then %\begin{equation*}J_\eps\geq\frac{|C|}{(\sigma-m)!^2}\mathcal{L}(f)\end{equation*} and hence
+\small
+\begin{equation}\label{J inequality}\mathcal{L}(g)\mathop{\leq}_{\eps\to 0} \frac{2^{2(\sigma-m)}(\sigma-m)!^2}{|C|}J_\eps.\end{equation}
+\normalsize
+
+\noindent\tb{Step 4, Combining inequalities:}
+Using inequalities \eqref{IJ inequality}, \eqref{I inequality}, and \eqref{J inequality}, 
+\small
+\begin{equation}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}\geq \frac{1}{2^{2(\sigma-m)}A(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2},\end{equation}
+\normalsize
+$\forall f: C\rightarrow\R.$  Therefore,
+\small
+\begin{align}
+\rho(M^\dag) &= \min_{f: C\rightarrow \R}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}\displaybreak[3]\nonumber\\
+&\geq \frac{1}{2^{2(\sigma-m)}A(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2}\label{Sob const ineq 3}
+\end{align}
+\normalsize
+
+Combining equations \eqref{Sob const ineq 1}, \eqref{Sob const ineq 2}, and \eqref{Sob const ineq 3}
+\small
+$$\rho(M)\geq {e^{-3\beta}\over 2^{2ms} c_1m^2(m(s-1))!^2 n^2}$$
+%\normalsize
+%\small
+%\begin{align*}\label{Sobolev bound}
+%\rho(M)&\geq e^{-3\beta}\rho(M^\star)\\
+%&\geq \frac{e^{-3\beta}}{s}\rho(M^\dag)\\
+%&\geq\frac{e^{-3\beta}}{2^{2(\sigma-m)}As(\sigma-m)(\sigma - m)!^2\sum_{i = 1}^m n_i^2} \\
+%&\stackrel{(a)}{\geq}\frac{e^{-3\beta}}{2^{2ms}Asm(ms-m)(ms - m)!^2n^2} \\
+%&\geq {e^{-3\beta}\over 2^{2ms} c_1m^2(m(s-1))!^2 n^2}.
+%\end{align*}
+\normalsize
+ where $c_1$ is a constant depending only on $s$.  %Inequality (a) uses the facts that $ms\geq \sigma$ and $mn^2\geq \sum_{i=1}^m n_i^2.$
+ 
+From here, Lemma~\ref{l:mixing time} follows by applying Equation \eqref{e:mix time bounds} in a similar manner as the proof of Equation (23) in \cite{Shah2010}. The main difference is that the size of the state space is bounded as $|\sX|\leq\prod_{i=1}^m(n_i+1)^{s_i+1}$ due to the potential for multiple populations.
+ \hfill\qed
+ 
+
+
+Combining Lemmas~\ref{l:stationary distribution} and \ref{l:mixing time} results in a bound on the time it takes for the expected potential to be within $\eps$ of the maximum, provided $\beta$ is sufficiently large.
+The lemmas and method of proof for Theorem \ref{t:main theorem 1} follow the structure of the supporting lemmas and proof for Theorem 3 in \cite{Shah2010}. The main differences have arisen due to the facts that i) our analysis considers the multi-population case, so the size of our state space cannot be reduced as significantly as in the single population case of \cite{Shah2010}, and ii) update rates in our algorithm depend on behavior within each agent's own population, instead of on global behavior.
+
+\smallskip
+
+\noindent\emph{Proof of Theorem~\ref{t:main theorem 1}}:\\
+From Lemma \ref{l:stationary distribution},
+if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb},
+then 
+$\E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.$ 
+From Lemma \ref{l:mixing time}, if condition (ii) of Theorem~\ref{t:main theorem 1} is satisfied, and $t$ is sufficiently large as in \eqref{e:time requirement},
+then 
+$\|\mu(t) - \pi\|_{TV}\leq \eps/2.$
+Then
+\begin{align*}
+\E[\P(a(t)|_{\sX})] 	&=\E_{\mu(t)}[\P(x)] \nonumber\displaybreak[3]\\
+			&\geq \E_{\pi}[\P(x)] - \|\mu(t) - \pi\|_{TV}\cdot \max_{x\in  \sX}\P(x)\nonumber\displaybreak[3]\\
+&\stackrel{(a)}{\geq} \max_{x\in  \sX}\P(x) - \eps \nonumber\displaybreak[3]
+\end{align*}\
+where (a) follows from \eqref{e:expPot}, \eqref{e:distToS}, and the fact that $\P(x)\in[0,1].$
+\qed
+
+
+\subsection{Time-Varying Semi-Anonymous Potential Games}
+
+To analyze the dynamics associated with modified log-linear learning, we must analyze the behavior of the time-varying Markov chain, $M_t$, which corresponds to the time varying game $G^t = (N^t,\{A_i^t\},\{U_i^t\}\}$ for any $t\in \R^+.$ Let $n(t):= |N^t|$ and $n_j^t := |N_j^t|.$ The stationary distribution corresponding to $M_t$ will be denoted by $\pi(t).$ Here, the state space varies with time; denote the aggregate state space corresponding to $G^t$ by $\sX^t$, and define $\X:=\cup_{t\in \R^+} X^t.$ 
+
+A few additional definitions and notation will be useful in proving Theorem~\ref{t:main theorem 2}. 
+We begin by identifying the times at which changes in the state space $X^t$ may occur, i.e., a player becomes active or inactive. As in \cite{Shah2010}, consider the sequence of times
+ $t_0<t_1<\cdots$
+ where $N_i(t) = N_i(t^\prime)$ for all $t,t^\prime\in [t_\l,t_{\l+1}),\, i\in \{1,2,\ldots,m\}$ and 
+ \begin{equation}\label{e:lbd}
+\Lambda \leq |t_{\ell+1} - t_{\ell}|\leq 2\Lambda
+\end{equation}
+for all $\l = 0,1,2,\ldots.$ The times in this sequence represent times at which a player may either become active or inactive, with additional times (when no change occurs) inserted if necessary to satisfy the upper bound of \eqref{e:lbd}. For each $t_\l$, there are three cases:
+\begin{enumerate}[(i)]
+\item A player joins population $N_j$ at action $\a_j^i.$
+\item A player exits population $N_j$ from action $\a_j^i.$
+\item No change.
+\end{enumerate}
+For cases (i) and (ii), the state space $X^t$ changes when a player enters or exits a population. To assess the way this changes the distance between distributions $\pi(t)$ and $\mu(t)$, we project distributions from the old to the new state space using the projection operator, $$\cdot|_{X^t}:X^{t^-}\to X^{t^+},$$ which is identical to the operator in \cite{Shah2010}.  Here $X^{t^-}$ is the state space immediately before the change, and $X^{t^+}$ is the state space immediately after. 
+
+
+Let $e_j^i\in\R^{s_j}$ be the $i$th standard basis vector of length $s_j$ for $i\in \{1,2,\ldots,s_i\},$   let $n = n(t^-)$ be the number of players at time $t$ before the change occurs, and let $x = (\bx_{j},\bx_{{-j}}) = (\bx_{1},\bx_{2},\ldots,\bx_{m})\in X^{t^-} $.
+
+\noindent\emph{Case (i):} A player joins population $N_j$ at action $\a_j^i$. 
+\begin{equation}
+x|_{X^t} = \left(\frac{n(t^-)\bx_{j} + e_j^i}{n(t^-) +1}, \frac{n(t^-)\bx_{-j}}{n(t^-) +1}\right)
+\end{equation}
+
+\noindent\emph{Case (ii):} A player exits population $N_j$ from action $\a_j^i.$
+\begin{equation}
+x|_{X^t} = \left(\frac{n(t^-)\bx_{j} + e_j^i}{n(t^-) -1}, \frac{n(t^-)\bx_{-j}}{n(t^-) -1}\right)
+\end{equation}
+
+\noindent\emph{Case (iii):} No change.
+\begin{equation}
+x|_{X^t} = x.
+\end{equation}
+
+We project a distribution $\mu(t^-)\in \Delta X^{t^-}$  to a distribution $\mu(t)\in\Delta X^t$ by assigning the mass of state $x\in X^{t^-}$  in $\mu(t^-)$ to state $x|_{X^t}$ in the projected distribution, i.e., 
+\begin{equation}\label{e:mu1}
+\mu_{x|_{X^t}}(t) = \mu_x(t^-),\; \forall x\in X^{t^-},
+\end{equation}
+and $\mu_x(t) =0$ if there is no state in $X^{t^-}$ which projects to $x\in X^t.$ Here, $\mu(t)$ is the distribution immediately after the change, $\mu(t^-)$ is the distribution immediately prior, and $\mu_x(t)$ denotes the mass on state $x$ in the distribution $\mu(t).$ Using \eqref{e:mu1}, we extend the projection operator to distributions as
+\begin{equation}
+\mu(t) = \mu(t^-)|_{X^t}.
+\end{equation}
+ For notational simplicity, define
+\begin{equation}
+%\hat{\mu}(t_{\l+1}^-):=\mu(t_{\l+1}^-)|_{t_{\l+1}},\quad 
+\hat{\pi}(t_{\l}):=\pi(t_{\l})|_{t_{\l+1}}
+\end{equation}
+as in \cite{Shah2010}. %Note that $\hat{\mu}(t_{\l+1}^-) = \mu(t_{\l+1}^+),$ i.e., the distribution $\mu$ projected from time $t^-_{\l+1}$ to time $t^+_{\l+1}$
+%is the same as the actual distribution at time $t^._{\l+1}$. 
+Note that, in general, $\hat{\pi}(t_{\l})\neq \pi(t_{\l+1})$, i.e., the projected stationary distribution is not the stationary distribution of the new Markov chain.
+
+\noindent\emph{Notation summary for time-varying semi-anonymous potential games:}  Let $\mathcal{G} = \{G^t\}_{t\in \R^+},$ where $G^t$ is a semi-anonymous potential game for all $t\in \R^+.$ The following summarizes the notation corresponding to the time-varying game $\mathcal{G}.$
+\begin{itemize}
+\item $X^t$ - aggregate state space corresponding to game $G^t.$
+\item $\X:= \cup_{t\in \R^+} X^t$ - union of aggregate state spaces corresponding to games $G^t$ for all $t\in \R^+.$
+\item $n(t) := |N^t|$ - number of active players at time $t$
+\item $n_j(t) := |N_j^t|$ - size of the $j$th population at time $t$
+\item $\pi(t)$ - stationary distribution corresponding to the Markov chain $M_t$ for $t\in\R^+.$
+\item $\Lambda$ - bound on the length of time between possible changes in the state space, satisfies $\Lambda \leq |t_{\ell +1} - t_{\ell}|\leq 2\Lambda$, for all times $t_{\ell},t_{\ell+1}$, at which changes in the state space may occur.
+\item $\cdot |_{X^t} : X^{t^-}\to X^{t^+}$ - projection operator which projects distributions from state space $X^{t^-}$ to $X^{t^+}$, where $t^-$ denotes the time immediately prior to a possible change in the state space, and $t^+$ denotes the time immediately after.
+\item $\hat{\pi}(t_{\l}):=\pi(t_{\l})|_{t_{\l+1}}$ - the stationary distribution corresponding to $M_{t_\ell}$ projected to $X^{t_{\ell +1}}$
+\end{itemize}
+
+
+
+\subsection{Proof of Theorem~\ref{t:main theorem 2}}\label{a:theorem 2 proof}
+
+%A brief review of relevant Markov chain theory is provided in Appendix~\ref{s:Mchain prelims}.
+To prove Theorem~\ref{t:main theorem 2}, we analyze the limiting behavior of the time-varying Markov chain, $M_t,$ which governs the modified log-linear learning process. We use Lemma~\ref{l:stationary distribution} from Appendix~\ref{a:theorem 1 proof} and Lemma~\ref{l:usp lemma1} stated below.  
+%We require two supporting lemmas. Lemma~\ref{l:stationary distribution} is taken from \cite{Borowski2013} and establishes the stationary distribution for modified log-linear learning in a semi-anonymous potential game with a fixed number of players. It also establishes conditions which ensure that the expected value of the potential under the stationary distribution is within $\eps/2$ of its maximum. 
+%Note that Lemma~\ref{l:stationary distribution} only applies when the set of active players is fixed and finite, i.e., the game $G$ is stationary. 
+Lemma~\ref{l:usp lemma1} is analogous to Lemma~\ref{l:mixing time} for stationary semi-anonymous potential games, and establishes conditions under which the distribution $\mu(t)$ is within $\eps\mathop{/}2$ of the stationary distribution. 
+
+\begin{lemma}\label{l:usp lemma1}
+For the trajectory of semi-anonymous potential games, $\mathcal{G} = \{G^t\}_{t\geq \R^+}$, if Conditions (i) - (iv) of Theorem~\ref{t:main theorem 2} are met, then 
+\begin{equation}
+\|\mu(t) - \pi(t)\|_{TV} \leq \eps\mathop{/}2
+\end{equation}
+for all $t$ sufficiently large as in \eqref{e:t ub}.
+%\begin{equation}
+%t\geq n(0)e^{3\beta}c_0\left({(ms-m)\log(n(0)+2)+\beta\over\eps^2}-2\right)
+%\end{equation}
+\end{lemma}
+
+\noindent\emph{Proof:}\\
+To prove Lemma~\ref{l:usp lemma1}, we begin by bounding the change in entropy distance between $\mu(t)$ and $\pi(t)$ when a player becomes active or inactive. We claim that, if $n(t_\l)$ satisfies \eqref{e:num players}, then
+\begin{align}
+D\left(\mu(t_{\l+1}):\pi(t_{\l+1})\right)\nonumber\displaybreak[3]
+&\leq \left(1 - \frac{A_1}{n(t_\l)}\right)D\left(\mu(t_{\l}):\pi(t_\l)\right) + \frac{A_2}{n(t_\l)}\label{e:another equation}
+\end{align}
+where
+\begin{align*}
+A_1 := \frac{2e^{-3\beta}\Lambda }{c_0 },\quad A_2:= 6\beta\lambda + e^\beta c(s-1)
+\end{align*}
+
+The majority of details needed to prove equation~\eqref{e:another equation} follow closely to the proof of Lemma 7 in \cite{Shah2010} and are omitted for brevity. However differences arise in establishing the fact that, for any $\l>0,$ if $n_i(t_\l)\geq n(t_\l)\mathop{/}k$ for some $k>0,$ then
+\begin{equation}\label{e:ineq1}
+\sum_{x\in X^{t_{\l+1}}}\mu_x(t_{\l+1})\log \frac{\hat{\pi}_x(t_{\l})}{\pi_x(t_{\l+1})}\leq{6\beta\lambda + e^\beta k(s_j-1)  \over n(t_\l)}.
+\end{equation}
+
+
+
+
+
+%\medskip
+
+%Claim~\ref{l:second} may be proved using Claim~\ref{l:tech}, which is stated and proved in Appendix~\ref{s: claimT proof}. Additional details in the proof of Claim~\ref{l:second} follow almost exactly with the proof of Lemma 7 in \cite{Shah2010} and are omitted for brevity.
+
+
+
+
+The primary difference between this portion of the proof and the proof of Lemma 8 in \cite{Shah2010} is that we account for the fact that players may enter or exit any given population.
+There are three cases:
+\begin{enumerate}[(i)]
+\item No change in the number of players.
+\item Player joins population $N_j$ with action $\a_j^i$.
+\item Player exits population $N_j$ from action $\a_j^i$.
+\end{enumerate}
+Case (i) is trivial, as $\hat{\pi}_x(t_\l) = \pi_x(t_{\l+1})$ for all $x\in\X$ when there is no change in the number of players, so the left hand side of \eqref{e:ineq1} is zero.
+For Case (ii), let 
+$$n = n(t_{\l+1}) = n(t_\l) +1 = n(t^-_{\l+1})+1$$ 
+and let 
+$$n_j = n_j(t_{\l+1}) = n_j(t_\l) +1 = n_j(t^-_{\l+1})+1.$$ 
+We will use the following inequality:
+\begin{align*}
+\sum_{x\in X^{t_\l+1}}\mu_x(t_{\l+1})\log \frac{\hat{\pi}_x(t_{\l})}{\pi_x(t_{\l+1})}
+&\leq 
+\max_{x\in X^{t_\l+1} : \bx_j^i >0}\log\frac{\hat{\pi}_x(t_\l)}{\pi_x(t_{\l+1})}.
+\end{align*}
+This is because, if the new player joins population $j$ at action $\a_j^i$, then $\mu_x(t_{\l+1})=0$ for any state $x$ with $\bx_{j}^i=0.$ For $x\in X^{t_\l+1},$ 
+\begin{align*}
+\pi_x(t_{\l+1}) &= {\exp(\beta\P(x))\over C_1 }\displaybreak[3]\\
+\hat{\pi}_x(t_{\l})&= \left\{  \begin{array}{ll}
+\frac{\exp\left(\beta\P\left({nx-e_j^i\over n-1}  \right)\right)}{ C_2} & \text{if } \bx_j^i>0\\ 
+0 & \text{otherwise}  
+\end{array}\right.
+\end{align*}
+where
+\begin{align*}
+C_1&=\sum_{x\in X^{t_{\l+1}}}\exp(\beta\P(x))\\
+C_2&=\sum_{x\in X^{t_{\l+1}}\st \bx_j^i>0}\exp\left(\beta\P\left({nx-e_j^i\over n-1}  \right)\right).
+\end{align*}
+Then,
+\begin{align}
+\sum_{x\in X^{t_\l+1}}\mu_x(t_{\l+1})\log \frac{\hat{\pi}_x(t_{\l})}{\pi_x(t_{\l+1})}
+&\leq \max_{x\in X^{t_\l+1} : \bx_j^i >0}\log\frac{\hat{\pi}_x(t_\l)}{\pi_x(t_{\l+1})}\nonumber\displaybreak[3]\\
+%&\quad = \max_{x\in \X(t_\l+1) : x_j^i >0}\log\frac{C_1 \exp\left(\beta\P\left({nx-e_j^i\over n-1}  \right)\right)}{C_2 \exp\left(\beta\P(x)  \right)}\nonumber\displaybreak[3]\\
+&=\log{C_1\over C_2} + \max_{x\in X^{t_\l+1} : \bx_j^i >0} \beta\left( \P\left({nx-e_j^i\over n-1}  \right) - \P(x)   \right)\displaybreak[3] \nonumber\\
+&\leq \log{C_1\over C_2}+\frac{2\beta\lambda}{n-1}. \label{e:c1c2}%\text{\red{s in second term?}}\label{e:c1c2}
+\end{align}
+The last inequality follows from the $\lambda$-Lipschitz property of $\P.$  We can bound the $C_1\mathop{/}C_2$ in a similar fashion as the proof of Lemma 8 in \cite{Shah2010} to get
+\begin{equation}
+\frac{C_1}{C_2}\leq 1 + {4\beta\lambda + e^\beta k(s-1)\over n-1}.\label{e:c1c2bound}
+\end{equation}
+The primary difference is that we must make use of the fact that there exists a constant $k>0$ such that  $n_j\geq n/k$ for all $j\in \{1,2\ldots,m\}$ to achieve this upper bound in terms of $n$.
+
+Combining  \eqref{e:c1c2} and \eqref{e:c1c2bound},
+\begin{align}
+\sum_{x\in X^{t_\l+1}}\mu_x(t_{\l+1})\log \frac{\hat{\pi}_x(t_{\l})}{\pi_x(t_{\l+1})}\displaybreak[3]
+&\leq \log{C_1\over C_2}+\frac{2\beta\lambda}{n-1}\displaybreak[3]\nonumber\\
+&\leq\log\left(1 + {4\beta\lambda +e^\beta k(s-1)\over n-1}\right) + \frac{2\beta\lambda}{n-1}\displaybreak[3]\nonumber\\
+&\stackrel{(a)}{\leq}{6\beta\lambda +e^\beta k(s-1)  \over n-1}\displaybreak[3]\nonumber \\
+&= {6\beta\lambda + e^\beta k(s-1)  \over n(t_\l)}
+\end{align}
+(a) is from the fact that $\log(1+x)\leq x$ for $x\geq 0$.
+
+Case (iii) follows a similar argument as case (ii) to show that 
+\begin{equation*}
+\sum_{x\in X^{t_\l+1}}\mu_x(t_{\l+1})\log \frac{\hat{\pi}_x(t_{\l})}{\pi_x(t_{\l+1})} \leq \frac{6\beta\lambda}{n(t_{\l+1})}.
+\end{equation*}\qed
+
+The remainder of the proof of Lemma~\ref{l:usp lemma1} in a similar fashion as intermediate steps in the proof of Theorem 4 in \cite{Shah2010}. The primary difference is that the size of the initial state space is instead bounded as $X^{t_0}\leq \prod_{i=1}^m(n_i(t_0)+1)^{s_i-1}.$ \hfill\qed
+
+
+
+
+
+\noindent\emph{Proof of Theorem~\ref{t:main theorem 2}:}\\
+Using Lemmas~\ref{l:stationary distribution} and \ref{l:usp lemma1}, the proof of Theorem~\ref{t:main theorem 2} follows in exactly the same manner as the proof of Theorem~\ref{t:main theorem 1}.\qed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Learning Efficient Correlated Equilibria: Background and Proofs}\label{s:proof CCE}
+
+%\subsection{Proof of Theorem~\ref{t:main theorem}}
+
+Here, we provide the proof for Theorem~\ref{t:main theorem CCE}. The formulation of the decision making process defined in Section~\ref{s:learning algorithm} ensures that the evolution of the agents' states over the periods $\{0, 1, 2, \dots\}$ can be represented as a finite ergodic Markov chain over the state space
+%
+\begin{equation}
+X = X_1 \times \dots \times X_n
+\end{equation}
+%
+where $X_i = S_i\times \{C,D\}$ denotes the set of possible states of agent $i$.  Let $P^\eps$ denote this Markov chain for some $\eps > 0$, and $\delta = \eps$.  Proving Theorem~\ref{t:main theorem CCE} requires characterizing the stationary distribution of the family of Markov chains $\{P^\eps\}_{\eps > 0}$ for all sufficiently small $\eps$.  We employ the theory of resistance trees for regular perturbed processes, introduced in \cite{Young1993}, to accomplish this task.  We begin by reviewing this theory and then proceed with the proof of Theorem~\ref{t:main theorem CCE}.
+
+We begin by restating the main results associated with Theorem~\ref{t:main theorem CCE} (setting $\delta = \eps$) using the terminology defined in the previous section.  
+%
+\begin{itemize}%[leftmargin = .3cm]
+%
+\item If $q(S) \cap {\rm CCE} \neq \emptyset$, then a state $x=\{x_i = [s_i, m_i] \}_{i \in N}$ is stochastically stable if and only if (i) $m_i = C$ for all $i \in N$ and (ii) the strategy profile $s = (s_1, \dots, s_n)$ constitutes an efficient coarse correlated equilibrium, i.e., 
+%
+\begin{equation}\label{e:SS1}
+q(s) \in \underset{ q \in q(S) \cap {\rm CCE}}{\arg \max} \ \sum_{i \in N} \sum_{a \in \aee} \ U_i(a) q^a. 
+\end{equation}
+%
+%
+\item If $q(S) \cap {\rm CCE} = \emptyset$, then a state $x=\{x_i = [s_i, m_i] \}_{i \in N}$ is stochastically stable if and only if (i) $m_i = C$ for all $i \in N$ and (ii) the strategy profile $s = (s_1, \dots, s_n)$ constitutes an efficient action profile, i.e., 
+%
+\begin{equation}\label{e:SS2} 
+q(s) \in \underset{ q \in q(S)}{\arg \max} \ \sum_{i \in N} \sum_{a \in \aee} \ U_i(a) q^a. 
+\end{equation} 
+%
+\end{itemize}
+
+\noindent For convenience, and with an abuse of notation, define
+\begin{equation}
+U_i(s) := \sum_{a\in \mathcal{A}}U_i(a)q^a(s)
+\end{equation}
+to be agent $i$'s expected utility with respect to distribution $q(s)$, where $s\in S.$
+
+The proof of Theorem~\ref{t:main theorem CCE} will consist of the following steps:
+%
+\begin{enumerate}[(i)]
+\item Define the unperturbed process, $P^0$.
+\item Determine the recurrent classes of process $P^0$.   
+\item Establish transition probabilities of process $P^\eps$.
+\item Determine the stochastically stable states of $P^\eps$ using Theorem~\ref{t:Young Theorem}.
+\end{enumerate}
+
+\vspace{.2cm}
+\noindent \emph{Part 1:  Defining the unperturbed process}
+\vspace{.2cm}
+
+The unperturbed process $P^0$ is effectively the process identified in Section~\ref{s:learning algorithm} where $\eps = 0$.  Rather than dictate the entire process as done previously, here we highlight the main attributes of the unperturbed process that may not be obvious upon initial inspection.  
+
+\begin{itemize}%S[leftmargin = .3cm]
+%
+\item If agent $i$ is content, i.e., $x_i = [s_i^b, C]$, the trial action is $s_i^t = s_i^b$ with probability $1$. Otherwise, if agent $i$ is discontent, the trial action is selected according to (\ref{eq:981}). 
+%
+\item The baseline utility $u_i^b$ in (\ref{e:baseline payoff}) associated with joint baseline strategy $s^b$ is now of the form
+%
+\begin{eqnarray}\label{eq:980}
+u_i^b = U_i(s^b) .
+\end{eqnarray}
+%
+This results from invoking the law of large numbers since $\p = \lceil 1/\eps^{nc+1}\rceil$.  The trial utility $u_i^t$ and acceptance utility $u_i^a$ are also of the same form.  
+%
+\item A content player will only become discontent if $u_i^a < u_i^b$ where associated payoffs are computed according to (\ref{eq:980}).
+%
+\end{itemize}
+
+\vspace{.2cm}
+\noindent \emph{Part 2: Recurrent classes of the unperturbed process}
+\vspace{.2cm}
+
+The second part of the proof analyzes the recurrent classes of the unperturbed process $P^0$ defined above.  The following lemma identifies the recurrent classes of $P^0$.  
+
+\begin{lemma}\label{l:recurrent}
+A state $x = (x_1,x_2,\ldots,x_n)\in X$ belongs to a recurrent class of the unperturbed process $P^0$ if and only if the state $x$ fits into one of following two forms:
+%
+\begin{itemize}%[leftmargin = .3cm]
+%
+\item \emph{Form \#1:} The state for each agent $i \in N$ is of the form $x_i = \left[s_i^b,C\right]$ where $s_i^b \in S_i$. Each state of this form comprises a distinct recurrent classes.  We represent the set of states of this form by $C^0$.
+%
+\item \emph{Form \#2:} The state for each agent $i \in N$ is of the form $x_i = \left[s_i^b,D\right]$  where $s_i^b \in S_i$. All states of this form comprise a single recurrent class, represented by $D^0$. 
+%
+\end{itemize}
+%
+\end{lemma}
+%
+\vspace{.2cm}
+%
+\begin{proof}
+%
+We begin by showing that any state $x \in C^0$ is a recurrent class of the unperturbed process.  According to $P^0$, if the system reaches state $x$, then it remains at $x$ with certainty for all future time. Hence, each $x\in C^0$ is a recurrent class of $P^0.$  Next, we show that $D^0$ constitutes a single recurrent class.  Consider any two states $x,y\in D^0$.  According to the unperturbed process, $P^0$, the probability of transitioning from $x$ to $y$ is strictly positive $\left(\geq \prod_{i\in N}1/|S_i|\right)$; hence, the resistance of the transition $x \rightarrow y$ is $0$.  Further note that the probability of transitioning to any state not in $D^0$ is zero. Hence, $D^0$ forms a single recurrent class of $P^0$. 
+%
+
+
+The last part of the proof involves proving that any state $ x = \{[s_i^b, m_i]\}_{i \in N} \notin C^0 \cup D^0$ is not recurrent in $P^0$.  Since $x\notin {C^0\cup D^0}$, it consists of both content and discontent players.  Denote the set of discontent players by $J= \{i\in N\st m_i = D\} \neq \emptyset$.  We will show that the discontent players $J$ will play a sequence of strategies with positive probability that drives at least one content player to become discontent.  Repeating this argument at most $n$ times shows that any state $x$ of the above form will eventually transition to the all discontent state, proving that $x$ is not recurrent.  
+
+To that end, let $x(1) = x$ be the state at the beginning of the $1$-st period.  According to the unperturbed process $P^0$, each discontent player randomly selects a strategy $s_i \in S_i$ which becomes part of the player's state at the ensuing stage.  Suppose each discontent agent selects a trial strategy $s_i = (a_i^1, \dots, a_i^w) \in {\cal A}_i^w \subset S_i$ during the $1$-st period, i.e., the discontent players select strategies of the finest granularization. Note that each agent selects a strategy with probability $\geq {1\mathop{/}|S_i|}.$  Here, the trial payoff for each player $i \in N$ associated with the joint strategies $s = (\{s_i^b\}_{i \notin J}, \{s_i\}_{i \in J})$ is 
+%�
+\begin{eqnarray}
+u_i^t(s) &=&  \int_{0}^{1} U_i(s(z)) dz \\
+&=&  \frac{1}{w} U_i({a}) + \int_{w}^{1} U_i(s'(z)) dz, 
+\end{eqnarray}
+%
+for some ${a} \in {\cal A}$ as $s_i(z) = s_i(z')$ for any $z,z' \in [0,1/w]$ for any agent $i \in N$.  If  $u_i^t < u_i^b$ for any any agent $i \notin J$, agent $i$ becomes discontent in the next stage and we are done.  
+
+For the remainder of the proof suppose $u_i^t(s) \geq u_i^b(s^b)$ for all agents $i \notin J$. This implies all agents $N \setminus J$ will be content at the beginning of the second stage.  By interdependence, there exists a collective action $\tilde{a}_J \in \prod_{j \in J} {\cal A}_j$ and an agent $i \notin J$ such that $U_i(a) \neq U_i(\tilde{a}_J, a_{N\setminus J})$.   Suppose each discontent agent selects a trial strategy $s_i' = (\tilde{a}_i^1, a_i^2, \dots, a_i^w) \in {\cal A}_i^w \subset S_i$ during the second period, i.e., only the first component of the strategy changed.  The trial payoff for each player $i \in N$ associated with the joint strategies $s' = (\{s_i^b\}_{i \notin J}, \{s_i'\}_{i \in J})$ is 
+%
+\begin{eqnarray*}
+u_i^t(s') &=&  \int_{0}^{1} U_i(s'(z)) dz \\
+&=&  \frac{1}{w} U_i(\tilde{a}_J, a_{N\setminus J}) + \int_{w}^{1} U_i(s'(z)) dz \\ 
+&\neq&  u_i^t(s)
+\end{eqnarray*}
+%f
+If $u_i^t(s') < u_i^t(s)$, agent $i$ will become discontent at the ensuing stage and we are done.  Otherwise, %if $u_i^t(s') > u_i^t(s)$, 
+agent $i$ will stay content at the ensuing stage.  However, if each discontent agent selects a trial strategy $s_i'' = (a_i^1, a_i^2, \dots, a_i^w) \in {\cal A}_i^w \subset S_i$ during the third period, we know $u_i^t(s'') < u_i^t(s')$, where $s'' = (\{s_i^b\}_{i \notin J}, \{s_i''\}_{i \in J})$.  Hence, agent $i$ will become discontent at the beginning of period $4$. This argument can be repeated at most $n$ times, completing the proof.  
+%
+\end{proof}
+
+\vspace{.2cm}
+\noindent \emph{Part 3:  Transition probabilities of process $P^\eps$}
+\vspace{.2cm}
+
+Here, we establish the transition probability $P^\eps_{x\to x^+}$ for a pair of arbitrary states, $x,x^+\in X.$ %Then we show that this transition probability satisfies \eqref{e:RPP bounds} in the case where all agents transition from discontent to content; all other transitions follow in a similar manner. 
+ Let $x_i = [s_i,m_i]$, $x_i ^+= [s_i^+,m_i^+]$ for $i\in N,$  $s = (s_1,s_2,\ldots,s_n),$  and $s^+ = (s_1^+,s_2^+,\ldots,s_n^+).$ Then,
+%\small
+\begin{align}
+P^\eps_{x\to x^+} 
+&=\sum_{\tilde{s}s^t\in S}\sum_{\tilde{s}^a\in S}\biggl(\Pr[x^+\given s^t = \tilde{s}^t,\, s^a = \tilde{s}^a]\nonumber\\
+&\hspace{.4in}\times\Pr[s^a = \tilde{s}^a \given s^t = \tilde{s}^t]\Pr[s^t = \tilde{s}^t]\biggr).\label{e:prob1}
+\end{align}
+%\normalsize
+Note that the strategy selections and state transitions are conditioned on state $x$; for notational brevity we do not explicitly write this dependence. Here, $s^t$ and $s^a$ represent the joint trial and acceptance strategies during the period before the transition to $x^+.$. The double summation in \eqref{e:prob1} is over all possible trial actions, $\tilde{s}^t\in S$, and acceptance strategies, $\tilde{s}^a\in S$. However, recall from \eqref{e:state trans1a} - \eqref{e:D state trans} that, when transitioning from $x$ to $x^+$, not all strategies can serve as intermediate trial and acceptance strategies. In particular, transitioning to state $x^+$ requires that $s^a = s^+;$ hence if $\tilde{s}^a\neq s^+,$ then
+$\Pr[x^+\given s^t = \tilde{s}^t,\, s^a = \tilde{s}^a]=0,$ 
+so we can rewrite \eqref{e:prob1} as:
+\begin{align}
+P^\eps_{x\to x^+}
+%&\quad=\sum_{s\in S}\biggl(\Pr[x(k+1) = y\given s^t = s,\, s^a = s^y,\,x(k)=x]\nonumber\\
+%&\hspace{1in} \times\Pr[s^t = s, s^a = s^y\given x(k) = x]\biggr)\nonumber\\
+& = \sum_{\tilde{s}^t\in S}\biggl(\Pr[x^+\given s^t = \tilde{s}^t,\, s^a = s^+]\nonumber\\
+&\hspace{.3in} \times\Pr[ s^a = s^+\given s^t = \tilde{s}^t]\Pr[ s^t = \tilde{s}^t]\biggr)\label{e:prob2}
+\end{align}
+%The last term in \eqref{e:prob2}, $\Pr[ s^t = s\given x(k) = x]$, is defined in Section~\ref{s:learning algorithm} for the cases $m_i^x = C$ and $m_i^x = D$.
+There are three cases for the transition probabilities in \eqref{e:prob2}. Before proceeding, we make the following observations. The last term in \eqref{e:prob2}, $\Pr[ s^t = \tilde{s}^t]$, is defined in Section~\ref{s:learning algorithm}; we will not repeat the definition here. For the first two terms, agents' state transition and strategy selection probabilities are independent when conditioned state $x$ and on the joint trial and acceptance strategy selections. Hence, we can write the first term as:
+%We first examine $\Pr[ s^t = s\given x(k) = x]$ for an arbitrary joint strategy, $s = [s_1,s_2,\ldots,s_n]\in S.$ Because the trial strategy of each agent $i\in N$ in period $k$  depends only on its own state, $x_i(k) = [s_i^x, m_i^x]$, %and is independent of other agents' strategies,
+%\begin{align*}
+%\Pr[ s^t = s\given x(k) = x] = \prod_{i\in N}\Pr\bigl[s_i^t = s_i \given x_i(k) = [s_i^x,m_i^x]\bigr].
+%\end{align*}
+%From Section~\ref{s:learning algorithm}, if $m_i^x = C$, then
+%\small
+%\begin{equation*}
+%\Pr\bigl[s_i^t = s_i \given x_i(k) = [s_i^x,C]\bigr] = \left\{
+%\begin{array}{ll}
+%1 - \eps^c &\text{if } s_i^t = s_i^x\\
+%\eps^c\mathop{/}|\mathcal{A}_i| &\text{if } s_i^t = a_i,\\
+%&\quad\quad\, \forall\,a_i\in \mathcal{A}_i\\
+%0&\text{otherwise}
+%\end{array}
+%\right.
+%\end{equation*}
+%\normalsize
+%If $m_i^x = D$, then 
+%$$\Pr\bigl[s_i^t = s_i \given x_i(k) = [s_i^x,C]\bigr] = {1\over |S_i|},\,\forall\, s_i\in S_i.$$
+%Middle Term
+%In the term $\Pr[ s^a = s^y\given s^t = s,\,x(k) = x],$ each agent's acceptance strategy, $s_i^a$ depends on its current state, $x_i$, its trial strategy, $s_i^t$, and on the payoffs received in the evaluation and trial phases, $u_i^b$ and $u_i^t$.  Payoffs $u_i^b$ and $u_i^t$ depend on the joint baseline and joint trial strategies, $s^x$ and $s^t$.
+%$\Pr[x^+\given s^t = \tilde{s}^t, s^a = s^+]$:
+\begin{align}\label{e:first term}
+\Pr[x^+\given s^t = \tilde{s}^t, s^a = s^+]= \prod_{i\in N}\Pr[x_i^+\given s^t = \tilde{s}^t, s^a = s^+]
+\end{align}
+and the second term as:
+\begin{align}\label{e:second term}
+\Pr[ s^a = s^+\given s^t = \tilde{s}^t] = \prod_{i\in N}\Pr[ s_i^a = s_i^+\given s^t = \tilde{s}^t].
+\end{align}
+The following three cases specify individual agents' probability of choosing the acceptance strategy $s_i^a$ in \eqref{e:second term} and transitioning to state $x_i^+$ in \eqref{e:first term}. %For convenience, define $U_i^{b+} := U_i(s^b)+\eps,U_i^{b-} := U_i(s^b) - \eps,$ and define $U_i^{t+}$ and $U_i^{t-}$ in the same way.
+ %(i) agent $i$ is content, $m_i^x = C$, and did not experiment in the trial phase, (ii) agent $i$ is content, $m_i^x = C$,  and experimented during the trial phase, and (iii) agent $i$ is discontent, $m_i^x = D$.
+ 
+\noindent\emph{Case (i) agent $i$ is content in state $x$, i.e., $m_i = C$, and did not experiment, $s_i^t = s_i$:}\\
+\noindent For \eqref{e:second term}, since $s_i^a\in \{s_i^t,s_i\}$ we know that%the agent sets $s_i^a = s_i^t,$ regardless of its received payoffs in the evaluation and acceptance phases:
+\begin{align*}
+\Pr[ s_i^a = s_i^+\given s^t = \tilde{s}^t]
+=\left\{
+\begin{array}{ll}
+1 &\text{if } s_i^+ = s_i\\
+0 & \text{otherwise}
+\end{array}
+\right..
+\end{align*}
+In \eqref{e:first term}, for any trial strategy $s^t = \tilde{s}^t$, the probability of transitioning to a state $x_i^+$ depends on realized average payoffs $u_i^b$ and $u_i^a$. In particular, if $x_i^+  = [s_i^+,C]$, then we must have that $u_i^a\geq u_i^b - \eps$, so
+\begin{align*}
+&\Pr\biggl[x_i^+ = [s_i^+,C]\given s^a = s^+, s^t = \tilde{s}^t\biggr]\\
+&\hspace{.05in} = \int_0^1 \Pr[u_i^b = \eta ] \int_{\eta-\eps}^1 \Pr[u_i^a = \nu \given s^t = \tilde{s}^t, s^a = s^+] d\nu d\eta.
+\end{align*}
+Then, the probability that $x_i^+ = [s_i^+,D]$ is
+$$1 - \Pr\biggl[x_i^+ = [s_i^+,C]\given s^a = s^+, s^t = \tilde{s}^t\biggr].$$
+
+%
+\noindent\emph{Case (ii) agent $i$ is content and experimented, $s_i^t\neq s_i:$}\\
+\noindent For \eqref{e:second term}, agent $i$'s acceptance strategy depends on its average baseline and trial payoffs, $u_i^b$ and $u_i^t$. Recall, if $u_i^t\geq u_i^b+\eps,$ then $s_i^a = s_i$, i.e., agent $i$'s acceptance strategy is simply its baseline strategy from state $x$. Otherwise $s_i^a = s_i^t.$
+Utilities $u_i^b$ and $u_i^t$ depend on joint strategies $s$ and $s^t$ and on the common random signals sent during the corresponding phases. Therefore, 
+% 
+%\small
+\begin{align*}
+&\Pr[ s_i^a = s_i^+\given s^t = \tilde{s}^t\neq s]\nonumber\\
+&\quad=\int_0^1\int_0^1 \Pr[ s_i^a = s_i^+\given u_i^b = \eta, u_i^t = \nu, s_i^t = s_i]\nonumber\\
+&\hspace{.8in} \times \Pr[u_i^b = \eta]\Pr[u_i^t = \nu\given s^t = \tilde{s}^t]d\eta d\nu
+\end{align*}
+In \eqref{e:first term}, since agent $i$ remains content and sticks with its acceptance strategy from the previous period,
+{\allowdisplaybreaks[3]\begin{align*}
+&\Pr[x_i^+\given s^a = s^+, s^t = \tilde{s}^t]= \left\{
+\begin{array}{ll}
+1 & \text{if }s_i^+ = s_i^a\\
+0 & \text{otherwise}
+\end{array}
+\right..
+\end{align*}}
+%\normalsize
+
+\noindent\emph{Case (iii) agent $i$ is discontent:} \\
+\noindent For \eqref{e:second term}, %agent $i$ sets $s_i^a = s_i^t$ regardless of its average payoffs in the evaluation and acceptance phases:
+%\small
+\begin{align*}
+\Pr[ s_i^a = s_i^+\given s^t = \tilde{s}^t]%\nonumber\\
+%&\quad 
+= \left\{
+\begin{array}{ll}
+1 &\text{if } s_i^+ = s_i^t\\
+0 &\text{otherwise}
+\end{array}
+\right. .
+\end{align*}
+%\normalsize
+In \eqref{e:first term}, agent $i$'s probability of becoming content depends only on its received payoff during the acceptance phase; it becomes content with probability $\eps^{1 - u_i^a}$ and remains discontent with probability $1 - \eps^{1 - u_i^a}$. Hence, if $x_i^+ = [s_i^+,C]$,
+\begin{align*}
+&\Pr\biggl[x_i^+ = [s_i^+,C] \given s^a = s^+, s^t = \tilde{s}^t\biggr]\\
+&\quad= \int_0^1 \eps^{1 - \eta}\Pr[u_i^a = \eta \given s^a = s^+, s^t = \tilde{s}^t]d\eta.
+\end{align*}
+Then, 
+\begin{align*}
+&\Pr\biggl[x_i^+ = [s_i^+,D] \given s^a = s^+, s^t = \tilde{s}^t\biggr] \\
+&\quad= 1 - \Pr\biggl[x_i^+ = [s_i^+,C] \given s^a = s^+, s^t = \tilde{s}^t\biggr]
+\end{align*}
+%Likewise, if $m_i^y = D,$ 
+%\begin{align*}
+%&\Pr[x_i(k+1) = y_i\given s^t = s, s^a = s^y, x(k) = x)]\\
+%&\quad = \int_0^1 (1 - \eps^{1 - \eta})\Pr[u_i^a = \eta \given s^a]d\eta.
+%\end{align*}
+
+
+
+Now that we have established transition probabilities for process $P^\eps$, we may state the following lemma.
+\begin{lemma} \label{l:RPP}The process $P^\eps$ is a regular perturbation of $P^0.$ 
+\end{lemma}
+
+It is straightforward to see that $P^\eps$ satisfies the first two conditions of Definition~\ref{d:RPP} with respect to $P^0$. The fact that transition probabilities satisfy the third condition, Equation \eqref{e:RPP bounds}, follows from the fact that the dominant terms in $P^\eps_{x\to y}$ are polynomial in $\eps$. This is immediately clear in all but the incorporation of realized utilities into the transition probabilities, as in \eqref{e:prob2}. However, for any joint strategy, $s$, and associated average payoff $u_i$, since 
+$$\E[u_i] = \E\left[{1\over\bar{p}}\sum_{\tau = \ell}^{\ell+\bar{p}-1} U_i(\s(z(\tau)))\right] = U_i(\s).  $$
+for any time period of length $\bar{p}$ in which joint strategy $s$ is played throughout the entire period. Moreover,  
+$\Var\bigl[U_i(\s(z(\tau)))\bigr] \leq 1.$ Therefore, we may use Chebyschev's inequality and the fact that  $\bar{p} = \lceil  1\mathbin{/} \eps^{nc+2}  \rceil$ to see that
+\begin{equation}\label{e:old claim}
+\Pr \Bigl[\bigl| u_i - U_i(\s)\bigr|\geq \eps\Bigr] \leq { \Var\bigl[U_i(\s(z(\tau)))\bigr]\over \bar{p} \eps^2}\leq \eps^{nc}.
+\end{equation} 
+Note that this applies for all average utilities, $u_i^b, u_i^t,$ and $u_i^a$ in the aforementioned state transition probabilities.
+%and all other terms vanish in the limit when $r(x\to y)$ is chosen as the smallest power of $\eps$ in $P^\eps_{x\to y}$. The following claim bounds the size of any terms which may not be polynomial in $\eps$.
+
+%\begin{claim}\label{l:averages}
+%Let $\s^{b},\,\s^t,$ and $\s^a\in \S$ be the joint baseline, trial, and acceptance strategies played in period $k$ with corresponding average utilities $u_i^b,\,u_i^t,$ and $u_i^a$ as defined in \eqref{e:baseline payoff}, \eqref{e:trial payoff}, and \eqref{e:acceptance payoff}.  
+%  Then
+% $$\Pr\Bigl[u_i^\ell\notin [U_i(\s^\ell) \pm \eps]\Bigr] \leq \eps^{nc},\quad \ell\in \{b,t,a\}.$$
+%\end{claim}
+%
+%\noindent\emph{Proof of Claim~\ref{l:averages}:}
+%Since the signal $z(\tau)$ is chosen uniformly at random from $[0,1]$ for all $\tau\in\N$,
+%$$\E\bigl[U_i(\s^\ell(z(\tau)))\bigr] = U_i(\s^\ell).  $$
+%for any $\ell\in\{b,t,a\}.$
+%Moreover, because $U_i(\tilde{a})\in[0,1]$ for all $\tilde{a}\in\mathcal{A},$ 
+%$\Var\bigl[U_i(\s^\ell(z(\tau)))\bigr] \leq 1.$
+%Then, using Chebyschev's inequality and the fact that  $\bar{p} = \lceil  1\mathbin{/} \eps^{nc+2}  \rceil$,
+%$$\Pr \Bigl[\bigl| u_i - U_i(\s^\ell)\bigr|\geq \eps\Bigr] \leq { \Var\bigl[U_i(\s^\ell(z(\tau)))\bigr]\over \bar{p} \eps^2}\leq \eps^{nc}.$$
+%\hfill\QED
+
+
+%-------------------------- Recurrent classes --------------------------%
+\vspace{.2cm}
+\noindent \emph{Part 3:  Determining the stochastically stable states}
+\vspace{.2cm}
+
+%\subsection*{Recurrent classes}
+
+%Recall $D^0\cup C^0$ is precisely the set of recurrent classes of the unperturbed process.  The set $D^0$ comprises a single recurrent class, since transitions between any two states in $D^0$ occur with positive probability in the unperturbed process.  Each state $y\in C^0$ comprises a single recurrent class since, for any $y\in C^0$, the system remains in state $y$ for all future time according to process $P^0.$
+
+We begin by defining
+\begin{align*}
+&C^\star := \{x = \{[s_i,m_i]\}_{i\in N}\\
+&\hspace{0.75in}\st q(s)\in \text{CCE} \text{ and } m_i = C,\,\forall i\in N\}\subseteq C^0
+\end{align*} 
+Here, we show that, if $C^\star$ is nonempty, then a state $x$ is stochastically stable if and only if $q(s)$  satisfies \eqref{e:SS1}. The fact that $q(s)$ must satisfy \eqref{e:SS2} when $C^\star = \emptyset$ follows in a similar manner. To accomplish this task, we (1) establish resistances between recurrent classes, and (2) compute stochastic potentials of each recurrent class.
+%-------------------------- Edge Resistance Bounds --------------------------%
+\subsection{Resistances between recurrent classes}
+
+%Let $\s\in \S$ be the trial joint strategy  played during period $k\in \N.$  From Lemma~\ref{l:averages}, any transition which occurs when ${1\over p}\sum_{\ell=1}^p U_i(\s(z(t_\ell^k)))\notin [U_i(\s) - \eps,U_i(\s) + \eps]$ for at least one $i\in N$ occurs with probability at most $\eps^{nc},$ so has lower resistance $\lowerR(x,y) = nc$. 
+%Hence, a path, $P$, which includes such a transition has lower resistance $\lowerR(P) \geq nc$.  
+
+%Let $\s = (s_1^b,s_2^b,\ldots,s_n^b)$. For notational simplicity, define $U_i^+:= U_i(\s) + \eps$ and $U_i^-:= U_i(\s) - \eps.$ In the following, we state a series of claims about the resistances between recurrent classes. We provide a proof for Claim~\ref{c:r1} and omit proofs for the subsequent claims for brevity, since they follow in a similar manner.
+
+We summarize resistances between recurrent classes in the following claim. 
+
+%-----r(D->y)-----%
+\begin{claim}\label{c:resistances}
+ Resistances between recurrent classes satisfy:
+%\begin{enumerate}%[leftmargin = .3cm]
+
+\noindent For $x \in C^0$ with corresponding joint strategy $s$, 
+\begin{equation}\label{e:D to x} r(D^0\to x) = \sum_{i\in N}(1 - U_i(\s)).\end{equation}
+
+%\item 
+%For $x\in C^0\setminus C^\star$, $y\in C^0,$ 
+%$$r(x\to y)\geq c +\sum_{\stackrel{i\in N\st}{ U_i(s^y) < U_i(s^x)}}(1- U_i(s^y)).$$
+
+%\item  The resistance of a sequence of transitions of the form $D^0\to x^0\to x^1\to\cdots\to x^m=x$, with  $x^k\in C^0\setminus C^\star$ for each $k<m$, and $x \in C^0,$ satisfies
+%$$r(D^0\to x^0) + \sum_{k=1}^m r(x^{k-1}\to x^k)\geq \sum_{i\in N}(1-U_i(\s^x)) + mc.$$
+
+
+
+\noindent For a transition of the form $x\to y$, where $x\in C^\star$ and $y \in (C^0\cup D^0)\setminus \{x\},$ 
+\begin{equation}r(x\to y)\geq 2c.\end{equation}
+
+
+\noindent For a transition of the form $x\to y$  where $x\in C^0\setminus C^\star$ and $y\in (C^0\cup D^0 )\setminus \{x\}$,
+\begin{equation}r(x\to y)\geq c.\end{equation}
+
+
+\noindent For every $x\in C^0\setminus C^\star$, there exists a path 
+$x = x^0\to x^1\to\cdots\to x^m\in C^\star\cup D^0$ with resistance 
+\begin{equation}r(x^j\to x^{j+1}) = c,\;\forall j\in \{0,1,\ldots,m-1\}.\end{equation}
+
+\end{claim}
+
+These resistances are computed in a similar manner to the proof establishing resistances in \cite{Marden2013c}; however, care must be taken due to the fact that there is a small probability that average received utilities fall outside of the window $U_i(s)\pm\eps$ during a phase in which joint strategy $s$ is played. We illustrate this by proving \eqref{e:D to x} in detail; the proofs are omitted for other types of transitions for brevity.
+
+\begin{proof}
+Let $x\in D^0$, $x^+\in C^0$ with $x_i = [s_i,D]$ and $x_i^+ = [s_i^+,C]$  for each $i\in N.$ Again, for notational brevity, we drop the dependence on state $x$ in the following probabilities. Note that all agents must select $s^t = s_i^+$ in order to transition to state $x_i = [s_i^+,C];$ otherwise the transition probability is 0.
+%\begin{align*}
+%&\Pr[x_i(k+1) = y\given s^t, s^a = s^y,x_i] \\
+%&\quad := \Pr[x_i(k+1) = y\given s_i^t = s_i^y, s^a = s^y,x_i(k)=x_i]
+%\end{align*}
+we have
+{\allowdisplaybreaks[3]\begin{align*}
+P^\eps_{x\to x^+} & \stackrel{(a)}{=}\Pr[x^+\given s^a = s^+, s^t = s^+]\cdot \Pr[ s^a = s^+\given s^t = s^+]\cdot\Pr[ s^t = s^+]\\
+& \stackrel{(b)}{=}\Pr[x^+\given s^a = s^+, s^t = s^+]\cdot\Pr[ s^t = s^+]\\
+& \stackrel{(c)}{=}\Pr[x^+\given s^a = s^+, s^t = s^+]\cdot\prod_{i\in N}1\mathop{/}|S_i|\\
+%&\quad =\prod_{i\in N} \Pr[x_i(k+1) = y\given s^t, s^a = s^y,x_i]\prod_{i\in N}1\mathop{/}|S_i|\\
+& = \prod_{i\in N}{1\over|S_i|}\cdot\Pr[x_i^+\given s^a = s^+,s^t = s^+]
+\end{align*}}
+where:
+%\begin{enumerate*}[(a)]
+(a) follows from the fact that $s_i^a = s_i^t$ since $m_i = D$ in state $x$ for all $i\in N$,
+(b) $\Pr[ s^a = s^+\given s^t = s^+] = 1$ since all agents are discontent and hence commit to their trial strategies during the acceptance period, and
+(c) $\Pr[ s^t = s^+] = \prod_{i\in N}1\mathop{/}|S_i|$ since each discontent agent selects its trial strategy uniformly at random from $S_i$.
+
+
+We now show that
+\begin{equation}
+0 < \lim_{\eps\to 0^+} \frac{P^\eps_{x\to x^+}}{\eps^{\sum_{i\in N}1 - U_i(s^+)}}<\infty
+\end{equation}
+satisfying \eqref{e:RPP bounds}. For notational simplicity, we define 
+\begin{align}
+U_i^+	:= U_i(s^+)+\eps,\quad U_i^-	:=U_i(s^+) - \eps.\label{e:u defns}
+\end{align}
+We first lower bound $P^\eps_{x\to x^+} :$
+\small
+{\allowdisplaybreaks[3]\begin{align}
+P^\eps_{x\to x^+}	&= \prod_{i\in N}{1\over|S_i|}\Pr[x_i^+ \given s^a = s^+, s^t =s^+]\nonumber\\
+			&= \prod_{i\in N}{1\over |S_i|}\int_0^1 \Pr[u_i^a = \eta \given s^a = s^+, s^t = s^+]\eps^{1-\eta}d\eta\nonumber\\
+			%&\quad= \prod_{i\in N}{1\over |S_i|}\left(\int_0^{U_i^-} \Pr[u_i^a = \eta\given s^t, s^a = s^+]\eps^{1-\eta}d\eta \right.\\
+			%&\hspace{.7in} + \int_{U_i^-}^{U_i^+}\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta \\
+			%&\hspace{.7in} + \left.\int_{U_i^+}^1\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta\right)\\	
+			&\geq \prod_{i\in N}{1\over |S_i|}\int_{U_i^-}^{U_i^+}\Pr[u_i^a = \eta\given s^a = s^+, s^t = s^+ ]\eps^{1-\eta}d\eta\nonumber\\
+			&\stackrel{(a)}{\geq}\prod_{i\in N}{\eps^{1 - U_i^-}\over |S_i|}\int_{U_i^-}^{U_i^+} \Pr[u_i^a = \eta\given  s^a = s^+, s^t = s^+] d\eta\nonumber\\
+			&\stackrel{(b)}{\geq}\prod_{i\in N}{\eps^{1 - U_i^-}\over |S_i|}(1-\eps^{nc})\nonumber\\
+			%&\quad=\prod_{i\in N}{\eps^{1 - U_i^-} - \eps^{1 - U_i^+ +nc}\over|S_i|}\\
+			&={\eps^{\sum_{i\in N} 1 - U_i^-} + O(\eps^{nc})\over\prod_{i\in N} |S_i|}\label{e:lb}% \red{am i using this notation correctly?},
+\end{align}}
+\normalsize
+where
+%\begin{enumerate}[(a)]
+(a) is from the fact that $\eps^{1-\eta}$ is continuous and increasing in $\eta$ for $\eps\in(0,1),$ and 
+(b) follows from \eqref{e:old claim}.  
+%Then, 
+%\small
+%\begin{align}
+%&\lim_{\eps\to 0^+} {P^\eps_{x\to y}\over \eps^{\left(\sum_{i\in N} 1 - U_i(\s^y)  \right)} }\nonumber\\
+%	&\quad\quad\geq \left(\prod_{i\in N}{1\over |S_i|}\right)\lim_{\eps\to 0^+}{\eps^{\sum_{i\in N} 1 - U_i^+} +O(\eps^{nc})\over \eps^{\left(\sum_{i\in N} 1 - U_i(\s^y)  \right)} } \nonumber\\
+%	&\quad\quad= \prod_{i\in N}{1\over |S_i|}>0 \label{e:lb}
+%\end{align}
+%\normalsize
+%as desired.
+Continuing in a similar fashion, it is straightforward to show 
+\begin{equation}\label{e:ub}
+P^\eps_{x\to x^+}\leq\eps^{\sum_{i\in N}(1-U_i^+)} + O(\eps^{nc}).
+\end{equation}
+
+%\red{start}
+%\small
+%{\allowdisplaybreaks[3]\begin{align*}
+%&P^\eps_{x\to y}\\
+%			&\quad= \prod_{i\in N}{1\over |S_i|}\int_0^1 \Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta\\
+%			&\quad= \prod_{i\in N}{1\over |S_i|}\left(\int_0^{U_i^-} \Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta \right.\\
+%			&\hspace{.7in} + \int_{U_i^-}^{U_i^+}\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta  \\
+%			&\hspace{.7in}+ \left.\int_{U_i^+}^1\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]\eps^{1-\eta}d\eta\right)\\	
+%			&\quad\leq \prod_{i \in N}\left(\int_0^{U_i^-}\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]d\eta
+%			\right.\\
+%			&\hspace{.7in}+ \eps^{1 - U_i^+}\int_	{U_i^-}^{U_i^+}\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]d\eta \\
+%			&\hspace{.7in}+ \left.\int_{U_i^+}^1\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]d\eta	\right)\\
+%			&\quad\leq\prod_{i \in N}\left( \eps^{nc} + \eps^{1-U_i^+}\int_	{U_i^-}^{U_i^+}\Pr[u_i^a = \eta\given s^t, s^a = s^y,x_i]d\eta\right)\\
+%			&\quad\leq \prod_{i \in N}\left(\eps^{nc} + \eps^{1-U_i^+}\right)\\
+%			&\quad=\eps^{\sum_{i\in N}(1-U_i^+)} + O(\eps^{nc})
+%\end{align*}}
+%\normalsize
+%Then,
+%\small
+%\begin{align}
+%&\lim_{\eps\to 0^+}{\Pr[x_{N_1}\to y_{N_1}\given x_{N\setminus N_1}\to y_{N\setminus N_1}]\over \eps^{\left(\sum_{i\in N_1} 1 - U_i(\s^y)  \right)} }\nonumber\\
+%&\quad\quad\leq	\lim_{\eps\to 0^+}{\eps^{\sum_{i\in N_1}1 - U_i^+} + O(\eps^{nc})\over\eps^{\left(\sum_{i\in N_1} 1 - U_i(\s^y)  \right)} }  \nonumber\\
+%&\quad\quad= 1<\infty.\label{e:ub}
+%\end{align}
+%\normalsize
+%Therefore, the transition probability, $P^\eps_{x\to y}$ satisfies \eqref{e:RPP bounds} with resistance $r(x\to y) = \sum_{i\in N}\left(1 - U_i(s^y)\right).$ 
+%
+%\red{end}
+
+Given \eqref{e:lb} and \eqref{e:ub}, and the fact that $U_i^+$ and $U_i^-$ satisfy \eqref{e:u defns}, we have that $P_{x\to x^+}^\eps$ satisfies \eqref{e:RPP bounds} with resistance $\sum_{i\in N}\left(1 - U_i(s^+)\right)$ as desired.
+\end{proof}
+
+
+
+%\noindent\emph{Proof:}
+%To lower bound the resistance of a (multi-step) transition from $y\in C^0$ to $\tilde{y}\in C^0,$ we examine the easiest possible way for this transition to occur. Note that there are paths which require additional steps, or involve more agents experimenting, but these paths occur with higher resistance than the one outlined below.
+
+%First note that, in order to transition from $y\in C^0$ to $\tilde{y}\in C^0,$ at least one agent must experiment with an alternate strategy, which occurs with resistance $c$. Any agent whose utility increases as a result of this experimentation becomes content with the new joint strategy within two periods. Agents whose utilities decrease become discontent. By a similar argument to the proof of Claim~\ref{c:r1} each of these agents becomes content with the new joint strategy with a resistance of $1 - U_i(\tilde{s})$. Since this is the easiest, i.e., highest probability, way to transition from $y$ to $\tilde{y}$, the total resistance of any transition from $C^0\setminus C^\star$ to $C^\star$ is at least $c +\sum_{i\in N\st U_i(\tilde{s}) < U_i(\s)}(1- U_i(\tilde{s}))$.
+%\hfill\QED
+
+
+
+
+%\noindent\emph{Proof:}
+%This follows from the facts that:
+%(i) For each transition $y^j\to y^{j+1}$, some agent must experiment with an alternate strategy, which occurs with resistance $c$, and 
+%(ii) For each agent $i\in N$, either: \\
+%\noindent\textbullet \; During the transition $D\to y^0,$ agent $i$ accepts a payoff for a joint strategy which is less than or equal to the payoff $U_i(\s)$, which occurs with resistance at least $1 - U_i(\s)$, OR\\
+%\noindent\textbullet \; For some transition $y^j\to y^{j+1},$ agent $i$'s payoff decreases to a payoff less than or equal to $U_i(\s)$ as a result of an agent's experimentation. Agent $i$ accepts this new joint action with resistance at least $1 - U_i(\s).$
+%\hfill\QED
+
+
+%\noindent\emph{Proof:}
+%First note that, from state $y\in C^\star$, if a single agent $i\in N$ experiments with an alternate trial strategy, its payoff decreases. Hence, agent $i$ will reject that trial strategy, and return to its previous baseline strategy, causing all other agents to return to their previous content states. To transition to state $\tilde{y}$ at least two agents must experiment with alternate trial strategies at the same time, which occurs with a resistance of at least $2c$.
+%\hfill\QED
+
+
+%\noindent\emph{Proof:}
+%The highest probability way to transition from a state in $C^0$ to $D$ is for a single agent to experiment and accept the new trial action as its baseline. If the experimentation causes another agent's payoff to drop, that agent will then become discontent within two periods, causing all other agents to become discontent with resistance zero.
+%\hfill\QED
+
+
+%\noindent\emph{Proof:}
+%The highest probability way to transition from a state in $C^\star$ to a state in $D$ is for a single agent to become discontent, which occurs with a resistance of $2c$. All other agents subsequently become discontent with a resistance of zero. Alternately, two agents may experiment with and accept new trial strategies, which happens with resistance $2c$, causing some other agent to become discontent. Then all other agents become discontent with zero resistance. 
+
+%Note again that if a single agent experiments from a state in $C^\star$, its payoff will drop and it will not accept the new trial strategy.
+%\hfill\QED
+
+
+%\noindent\emph{Proof:}
+%Let $y\in C^0\setminus C^\star$ with associated joint baseline strategy $\s = (s_i^b,s_{-i}^b).$ 
+%Since $y\notin C^\star,$ there exists $i\in N$ and strategy $s_i^\prime = a_i^\prime$ for some $a_i\in\mathcal{A}_i$ such that $U_i(s_i^\prime,s_{-i}^b) > U_i(\s).$ If agent $i$ experiments with $s_i = a_i,$ it will become content with the trial strategy $s_i^\prime$ as its new baseline. This experimentation occurs with resistance $c$. If any other agent's payoff decreases as a result of agent $i$'s experimentation, that agent becomes discontent, leading all other agents to become discontent with resistance zero, and we are done. Hence we may assume that all agents' payoffs weakly increase as a result of agent $i$'s experimentation, so that the sum of agents' expected payoffs, $\sum_{i\in N} U_i(\s)$ strictly increases. 
+
+%If the result is a state in $C^0\setminus C^\star$, we may repeat the analysis. The sum of expected payoffs is uniquely determined by the state, the set $C^0\setminus C^\star$ is finite, and there exists a resistance $c$ transition to a state in either $D$ or a state in $C^0$ for all states in $C^0\setminus C^\star$. Therefore this process must eventually terminate with a resistance $c$ transition to $D$ or $C^\star$ as desired. %\red{this is messy i feel like I should be able to make is much shorter!}
+%\hfill\QED
+
+\subsection{Stochastic potentials}
+
+The following lemma specifies stochastic potentials of each recurrent class. Using resistances from Claim~\ref{c:resistances}, the stochastic potentials follow from the same arguments as in \cite{Marden2013c}. The proof is repeated below for completeness.%; we omit the proof for brevity.
+
+\begin{lemma}\label{l:sps}
+Let $x\in C^0\setminus C^\star$ with corresponding joint strategy $s$, and let $x^\star\in C^\star$ with corresponding joint strategy $s^\star.$ The stochastic potentials of each recurrent class are:
+\begin{align*}
+\gamma(D^0) &= c|C^0\setminus C^\star| + 2c|C^\star|,\\
+\gamma(x) &= \left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star| + \sum_{i\in N}(1 - U_i(\s)),\\
+%&\hspace{2in} x\in C^0\setminus C^\star\\
+\gamma(x^\star) &= |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^\star)),%\\
+%& \hspace{2in} x^\star\in C^\star.
+\end{align*}
+\end{lemma}
+
+\emph{Proof:}
+In order to establish the stochastic potentials for each recurrent class, we will lower and upper bound them.
+
+%-------------------------- SP lower bounds --------------------------%
+\noindent\emph{Lower bounding the stochastic potentials}: To lower bound the stochastic potentials of each recurrent class, we determine the lowest possible resistance that a tree rooted at each of these classes may have.
+
+\smallskip
+%\begin{itemize}[leftmargin = .3cm]
+\noindent 1) Lower bounding $\gamma(D^0)$:
+$$\gamma(D^0) \geq c|C^0\setminus C^\star| + 2c|C^\star|$$ 
+In a tree rooted at $D^0$, each state in $C^0$ must have an exiting edge. In order to exit a state in $C^0\setminus C^\star$, only a single agent must experiment, contributing resistance $c$. To exit a state in $C^\star$, at least two agents must experiment, contributing resistance $2c.$
+
+\smallskip
+
+\noindent 2) Lower bounding $\gamma(x)$, $x\in C^0\setminus C^\star$:
+$$\gamma(x) \geq \left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star| + \sum_{i\in N}(1 - U_i(\s))$$ 
+ Here, each state in $C^0\setminus \{x\}$ must have an exiting edge, which contributes resistance $\left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star|.$ The recurrent class $D^0$ must also have an exiting edge, contributing at least resistance $\sum_{i\in N}(1 - U_i(\s)).$
+
+\smallskip
+
+\noindent 3) Lower bounding $\gamma(x^\star)$, $x^\star\in C^\star$:
+$$\gamma(x^\star) \geq |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^\star))$$ 
+ Again, each state in $C^0\setminus \{x^\star\}$ must have an exiting edge, which contributes resistance $\left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star|.$ The recurrent class $D^0$ must also have an exiting edge, contributing resistance at least $\sum_{i\in N}(1 - U_i(\s^\star)).$
+
+\smallskip
+
+\noindent\emph{Upper bounding the stochastic potentials:} In order to upper bound the stochastic potentials, we construct trees rooted at each recurrent class which have precisely the resistances established above.
+
+\smallskip
+%\begin{itemize}[leftmargin = .3cm]
+\noindent 1) Upper bounding $\gamma(D^0)$:
+$$\gamma(D^0) \leq c|C^0\setminus C^\star| + 2c|C^\star|$$ 
+Begin with an empty graph with vertices $X$. For each state $x\in C^0\setminus C^\star$, add a path ending in $C^\star\cup D^0$ so that each edge has resistance $c$. This is possible due to Claim~\ref{c:resistances}. Now eliminate redundant edges; this contributes resistance at most $c|C^0\setminus C^\star|$ since each state in $C^0\setminus C^\star$ has exactly one outgoing edge. Finally, add an edge $x^\star \to D^0$ for each $x^\star\in C^0;$ this contributes resistance $2c|C^\star|$.
+
+\smallskip
+
+\noindent 2) Upper bounding $\gamma(x)$, $x\in C^0\setminus C^\star$:
+$$\gamma(x) \leq \left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star| + \sum_{i\in N}(1 - U_i(\s)),$$ 
+ This follows by a similar argument to the previous upper bound, except here we add an edge $D^0 \to x$ which contributes resistance $\sum_{i\in N}(1 - U_i(\s))$.
+
+\smallskip
+
+\noindent 3) Upper bounding $\gamma(x^\star)$, $x^\star\in C^\star:$
+$$\gamma(x^\star) \leq |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^\star)),$$ 
+ This follows from an identical argument to the previous bound.
+%\end{itemize}
+\hfill\qed
+
+
+
+
+%-------------------------- SP upper bounds --------------------------%
+%\subsubsection*{Upper bounding the stochastic potentials}
+
+%Here we show that the stochastic potentials of states in $C^0\cup D^0$ are precisely equal to the lower bounds established above. We do this by establishing upper bounds via tree construction arguments. 
+
+
+%\begin{lemma}\label{l:spC0}
+% For a state $y\in C^0\setminus C^\star$,
+%$$\gamma(y)= \left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star| + \sum_{i\in N}(1 - U_i(\s))$$
+%\end{lemma}
+
+%\noindent\emph{Proof:}
+%Let $y\in C^0\setminus C^\star$ with $y_i = [s_i^b,\s,C].$  We will construct a tree rooted at $y$ on the recurrent classes.  
+%\begin{itemize}[leftmargin = .3cm]
+%\item Add edge $D\to y$ which has resistance $\sum_{i\in N}(1-U_i(\s))$. 
+%\item For each state $\tilde{y} \in C^0\setminus C^\star$, add a path from $\tilde{y}$ to $C^\star\cup D$ such that each edge along the path has resistance $c$ (this is possible due to Lemma~\ref{l:path}) and eliminate redundant edges. This adds total resistance at most $c(|C^0\setminus C^\star| - 1),$ since it results in adding exactly one outgoing edge from each state in $C^0\setminus (C^\star\cup\{x\})$.  
+%\item Finally, add an edge $\tilde{y}\to D$, which has resistance $2c$, for each $\tilde{y} \in C^\star$. This step adds resistance $2c|C^\star|.$  
+%\end{itemize}
+%We have constructed a tree rooted at $y\in C^0\setminus C^\star$ with total resistance $\left(|C^0\setminus C^\star| - 1\right)c + 2c|C^\star| + \sum_{i\in N}(1 - U_i(\s)),$ upper bounding the stochastic potential of $y$. Combining this upper bound with the lower bound of Lemma~\ref{l:lbC0} establishes Lemma~\ref{l:spC0}.  
+%\hfill\QED
+
+
+%\begin{lemma}\label{l:spCstar}
+%For a state $y\in C^\star,$
+%$$\gamma(y)= |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s))$$
+%\end{lemma}
+%\noindent\emph{Proof:}
+%Lemma~\ref{l:spCstar} follows via a similar argument as the proof for Lemma~\ref{l:spC0}.
+%\hfill\QED
+
+%\begin{lemma}\label{l:spD}
+%The class $D^0$ has stochastic potential
+%$$\gamma(D^0)= c|C^0\setminus C^\star| + 2c|C^\star|.$$
+%\end{lemma}
+%\noindent\emph{Proof:}
+%Lemma~\ref{l:spD} follows via a similar argument as the proofs for the previous two lemmas. 
+%\hfill\QED
+
+We now use Lemma~\ref{l:sps} to complete the proof of Theorem~\ref{t:main theorem CCE}. For the first part, suppose $C^\star$ is nonempty, and let $$x^\star\in \argmax_{x\in C^\star} \sum{U_i(\s)},$$ where joint strategy $s$ corresponds to state $x$.  Then,
+\begin{align*}
+\gamma(x^\star)  	&=  |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^*))\\
+			&<  |C^0\setminus C^\star|c + 2c|C^\star|  \quad\text{(since $c\geq n$)} \\
+			&= \gamma(D).
+\end{align*}
+For $x \in C^0$, 
+\begin{align*}
+\gamma(x^\star)  	&=  |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^\star))\\
+			&<   |C^0\setminus C^\star - 1|c + 2c\left(|C^\star|\right) + \sum_{i\in N}(1 - U_i(s)) \\
+			&=\gamma(x).
+\end{align*}
+For $x\in C^\star$ with $$x\notin \argmax_{x\in C^\star} \sum{U_i(\s)},$$
+\begin{align*}
+\gamma(x^\star)  	&=  |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(\s^\star))\\
+				&<  |C^0\setminus C^\star|c + 2c\left(|C^\star|-1\right) + \sum_{i\in N}(1 - U_i(s)\\
+				&=\gamma(x).
+\end{align*}
+Applying Theorem~\ref{t:Young Theorem}, $x^\star$ is stochastically stable. Since all other states have strictly larger stochastic potential, \emph{only} states $x^\star\in C^\star$ with $x^\star\in \argmax_{x\in C^\star} \sum{U_i(\s)}$ are stochastically stable. From state $x^\star$, if each agent plays according to its baseline strategy, then the probability that joint action $a\in \mathcal{A}$ is played at any given time is $\Pr(a  = a^\prime) = q^{a^\prime(s^\star)}.$  This implies that a CCE which maximizes the sum of agents' payoffs is played with high probability as $\eps\to 0,$ after sufficient time has passed.
+
+The second part of the theorem follows similarly by considering the case when $C^\star = \emptyset.$ \hfill\qed
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Understanding Adversarial Influence in Distributed Systems: Background and Proofs}
+
+We begin by reviewing the underlying Markov process for log-linear learning in the adversarial models, and then we provide the proofs corresponding to the theorems in Chapter~\ref{ch4}.
+
+\subsection{Log-linear learning in the adversarial influence models}\label{a:LLL Markov}
+
+Log-linear learning dynamics define a family of aperiodic, irreducible Markov processes, $\{\tilde{P}_\beta\}_{\beta>0},$ over state space $\mathcal{A}\times\mathcal{S}_k$ with transition probabilities parameterized by $\beta$ \cite{Blume1993}. Under our adversarial model, transition probabilities are
+\begin{align}
+P_\beta(((a_i,a_{-i}), S)\to (a_i^\prime,a_{-i}),S^\prime)= {1\over n}\Pr[a_i(t+1) = a_i^\prime\,|\,a_{-i}(t) = a_{-i}, S(t) = S]
+\end{align}
+for any $i\in N,$ $a_i\in \{\vec{x},\vec{y}\},$  $(a_i,a_{-i})\in\mathcal{A}$ and $S,S^\prime\in\mathcal{S}_k$. Here $S$ transitions to $S^\prime$ according to the specified adversarial model. If $a$ and $a^\prime\in\mathcal{A}$ differ by more than one agent's action, then $P_\beta(a\to a^\prime) = 0$. 
+
+For each model of adversarial behavior, it is straightforward to reduce $\tilde{P}_\beta$ to a Markov chain, $P_\beta$ over state space $\mathcal{A}$.
+Since $P_\beta$  is aperiodic and irreducible for any $\beta >0$, it has a unique stationary distribution, $\pi_\beta$, with $\pi_\beta P_\beta = \pi_\beta$. 
+
+As $\beta\to\infty$, the stationary distribution, $\pi_\beta$, associated with log-linear learning converges to a unique distribution,
+%\begin{equation}
+$\pi := \lim_{\beta\to\infty} \pi_\beta.$  
+%\end{equation}
+If %$\pi(a)>0,$ then $a$ is \emph{stochastically stable}, and if 
+$\pi(a) = 1,$ then joint action $a$ is \emph{strictly stochastically stable} \cite{Foster1990}.\footnote{Note that this definition of strict stochastic stability is equivalent to the definition  in the introduction.}
+
+
+As $\beta\to \infty$, transition probabilities $P_\beta(a\to a^\prime)$ of  log-linear learning converge to the transition probabilities, $P(a\to a^\prime)$, of a best response process.  
+Distribution $\pi$ is one of possibly multiple stationary distributions of a best response process over game $G$. %Thus, log-linear learning selects a stationary distribution of the best response process. 
+
+\subsection{Stability in the presence of a fixed, intelligent adversary}\label{a:fixed line graph proofs}
+
+When a fixed, intelligent adversary influences set $S$, the corresponding influenced graphical coordination game is a potential game \cite{Monderer1996} with potential function 
+\begin{equation}
+\Phi^S(a_i,a_{-i}) = {1\over 2}\sum_{i\in N}\left(U_i(a_i,a_{-i}) + 2\cdot\mathds{1}_{i\in S, a_i = y}\right).
+\end{equation}
+
+This implies that the stationary distribution associated with log-linear learning influenced by a fixed adversary is 
+\begin{equation}\label{e:stationary distn}
+\pi(a) = {\exp(\beta\cdot \Phi^S(a))\over \sum_{a^\prime\in\mathcal{A}}\exp(\beta\cdot\Phi^S(a^\prime))},
+\end{equation}
+for $a\in\mathcal{A}$  \cite{Blume1993}. Hence, $a\in\mathcal{A}$ is strictly stochastically stable if and only if $\Phi^S(a) >\Phi^S(a^\prime)$ for all $a^\prime\in\mathcal{A},$ $a^\prime\neq a$. %This fact may be used to prove Theorems~\ref{t:A stable all} - \ref{t:fixed line graph}.
+
+%The proof of Theorem~\ref{t:fixed line graph} follows using \eqref{e:stationary distn}.
+
+\noindent\emph{Proof of Theorem~\ref{t:A stable all}:}
+This proof adapts Proposition 2 in \cite{Young2011} to our adversarial model. Let $\mathcal{G} = (N,E)$ and suppose $S(t) =N$ for all $t\in\N$.  Define
+$(\vec{y}_T,\vec{x}_{N\setminus T})$ to be the joint action $(a_1,\ldots,a_n)$ with $T = \{i\st a_i = y\}.$
+It is straightforward to show that
+%\small
+\begin{align}
+\alpha > {|T| - d(T,N\setminus T)\over d(T,N)},\quad\forall T\subseteq N\nonumber
+\end{align}
+if and only if
+\begin{align}
+\Phi^N(\vec{x})  &= (1+\alpha)d(N,N)\nonumber \\
+&> (1+\alpha)d(N\setminus T,N\setminus T) + d(T,T) + |T| &\nonumber\\
+&= \Phi^N(\vec{y}_T,\vec{x}_{N\setminus T})\displaybreak[3]\label{e:last eq}
+%&\iff\\
+%\Phi^N(\vec{x}) &> \Phi^N( \vec{y}_S,\vec{x}_{N\setminus S}),
+\end{align}
+\normalsize
+for all $T\subseteq N$, $R\neq \emptyset,$ implying the desired result.
+\hfill\qed
+
+
+
+\noindent\emph{Proof of Theorem~\ref{t:fixed line graph} part (a):}
+Let $\mathcal{G} = (N,E)$ be a line influenced by an adversary with  capability $k$. Joint action $\vec{x}$ is strictly stochastically stable for all $S\subseteq N$ with $|S| = k$ if and only if
+\begin{align}
+\Phi^S(\vec{x}) > \Phi^S(\vec{y}_T,\vec{x}_{N\setminus T})
+\iff
+(1+\alpha) &d(N,N) 
+>
+(1+\alpha)d(N\setminus T,N\setminus &T) + d(T,T) + |S\cap T|. \label{e:lastineq}
+\end{align}
+for all $S\subseteq N$ with $|S| = k$ and all $T\subseteq N$, $T\neq \emptyset$.
+
+Define $t:=|T|$, let $p$ denote the number of components in the graph $\mathcal{G}$ restricted to $T$, and let $\ell$ denote the number of components in the graph restricted to $N\setminus T$. Since $T\neq \emptyset$, we have $p\geq 1$ and $\ell \in \{p-1,p,p+1\}$. 
+
+The case where $T = N$ implies 
+\begin{equation*}
+\Phi^S(\vec{x}) = (1+\alpha)(n-1) >n-1+k = \Phi^S(\vec{y}),
+\end{equation*}
+which holds if and only if 
+%\begin{equation}\label{e:ab1}
+$\alpha > {k\mathop{/}(n-1)}.$
+%\end{equation}
+
+If $T\subset N$, the graph restricted to $N\setminus T$ has at least one component, i.e., $\ell\geq 1$. Then,
+\begin{align}
+\Phi^S(\vec{y}_T,\vec{x}_{N\setminus T}) %&= (1+\alpha)d(N\setminus T,N\setminus T) \nonumber\\
+%&\quad+ d(T,T) + |S\cap T|\nonumber\\
+&= (1+\alpha)(n-t-\ell) + t-p + |S\cap T|\nonumber\\
+%&\leq (1+\alpha)(n-t-1) + t-1 + |S\cap T|\nonumber\\
+&\leq (1+\alpha)(n-t-1) + t-1 + \min\{k,t\}\nonumber
+\end{align}
+where the inequality is an equality when $T = [t]$ and $S = [k].$ Then, 
+\begin{align*}
+\Phi^S(\vec{y}_T,\vec{x}_{N\setminus T})&\leq (1+\alpha)(n-t-1) + t-1 + \min\{k,t\} \\
+&< (1+\alpha)(n-1) \\
+&= \Phi^S(\vec{x})
+\end{align*}
+for all $T\subset N$ if and only if 
+%\begin{equation}\label{e:ab2}
+$\alpha >{(k-1)\mathop{/} k},$ as desired.
+%\end{equation}
+%Combining \eqref{e:ab1} and \eqref{e:ab2} gives the desired result.
+ \hfill\qed
+
+%\begin{Theorem}\label{t:stabilize B}
+
+%\end{Theorem}
+
+%\smallskip
+%
+\noindent\emph{Proof of Theorem~\ref{t:fixed line graph} part (b):}
+Suppose $\alpha < {k\mathop{/}(n-1)}.$ Then 
+$$\Phi^S(\vec{y}) = n-1+k > (1+\alpha)(n-1) = \Phi^S(\vec{x})$$
+for any $S\subseteq N$ with $|S| = k.$ Then, to show that $\vec{y}$ is stochastically stable for influenced set $S$ satisfying
+$$\left|S\cap [i,i+t]\right| \leq \left\lceil {kt\over n}\right\rceil,$$
+it remains to show that 
+$\Phi^S(\vec{y}) > \Phi^S(\vec{y}_T,\vec{x}_{N\setminus T})$
+for any $T\subset N$ with $T\neq \emptyset$ and $T\neq N.$ Suppose the graph restricted to set $T$ has $p$ components, where $p\geq 1.$ Label these components as $T_1,T_2,\ldots,T_p$ and define $t:=|T|$ and $t_i:=|T_i|$ Let $\ell$ represent the number of components in the graph restricted to $N\setminus T.$ Since $\mathcal{G}$ is the line graph, we have $\ell\in \{p-1,p,p+1\}$, and since $T\neq N$, $\ell \geq 1.$ 
+
+For any $T\subset N$ with $T\neq N,T\neq\emptyset,$ and $0<t<n,$ %we have:
+\begin{align}
+&\Phi^S(\vec{y}_{T},\vec{x}_{N\setminus T})\nonumber\\ 
+&\quad=(1+\alpha)(n-t-\ell) + \sum_{j=1}^p \left(t_j - 1 + |S\cap T_j|\right)  \nonumber\displaybreak[3]\\
+&\quad< n-1 +k\label{e:some label}\displaybreak[3]\\
+&\quad=\Phi^S(\vec{y})\nonumber
+\end{align}
+where \eqref{e:some label} is straightforward to verify.
+\hfill\qed
+
+The proofs of parts (c) and (d) follow in a similar manner to parts (a) and (b), by using the potential function $\Phi^S$ for stochastic stability analysis.
+
+\subsection{Stability in the presence of a mobile, random adversary}\label{a:mobile random}
+
+The following lemma applies to any graphical coordination game in the presence of a mobile, random adversary with capability $k\leq n-1$. It states that a mobile random adversary decreases the resistance of transitions when an agent in $N$ changes its action from $x$ to $y$, but does not change the resistance of transitions in the opposite direction.
+
+\begin{lemma}\label{t:mobile random}
+Suppose agents in $N$ update their actions according to log-linear learning in the presence of a mobile, random adversary with capability $k$, where $1\leq k\leq n-1.$ Then the resistance of a transition where agent $i\in N$ changes its action from $x$ to $y$ is:
+\begin{align}
+r((x,a_{-i})\to (y,a_{-i}) )
+=  \max\left\{U_i(x,a_{-i}) - U_i(y,a_{-i}) -1,0\right\}
+\end{align}
+and the resistance of a transition where agent $i\in N$ changes its action from $y$ to $x$ is:
+\begin{align}
+r((y,a_{-i})\to (x,a_{-i}) )=  \max\left\{U_i(y,a_{-i}) - U_i(x,a_{-i}), 0\right\}.\label{e:BtoA1}
+\end{align}
+Here $U_i:\mathcal{A}\to\R$, defined in \eqref{e:original utility}, is the utility function for agent $i$ in the uninfluenced game, $G$.  
+\end{lemma}
+
+\noindent\emph{Proof:}
+In the presence of a mobile, random agent, %the probability that agent $i\in N$ changes its action from $x$ to $y$ is:
+\begin{align*}
+P_\beta \left((x,a_{-i})\to (y,a_{-i})\right) 
+&= {1\over n} \left({k\over n}\cdot{\exp( \beta(U_i(y,a_{-i})+1))\over \exp( \beta (U_i(y,a_{-i})+1)) + \exp( \beta U_i(x,a_{-i}))}\right.\\
+&\quad\quad\quad + \left.{n-k\over n}\cdot{\exp( \beta U_i(y,a_{-i}))\over \exp( \beta U_i(y,a_{-i})) + \exp( \beta U_i(x,a_{-i}))}\right)
+\end{align*}
+Define $P_\eps\left((x,a_{-i})\to (y,a_{-i})\right)$ by substituting $\eps = e^{-\beta}$ into the above equation. It is straightforward to see that
+\begin{equation*}
+0<\lim_{\eps\to 0^+}{P_{\eps} \left((x,a_{-i})\to (y,a_{-i})\right)\over \eps^{  U_i(x,a_{-i}) - U_i(y,a_{-i}) -1 }}<\infty,
+\end{equation*}
+implying 
+\begin{align*}
+r((x,a_{-i})\to (y,a_{-i}) )=  \max\left\{U_i(x,a_{-i}) - U_i(y,a_{-i}) -1,0\right\}.
+\end{align*}
+Equation \eqref{e:BtoA1} may be similarly verified.
+\hfill\qed
+
+%Theorem~\ref{t:mr ss} follows by using Lemma~\ref{t:mobile random} and analyzing the resistance between recurrent classes of the  underlying Markov process to identify stochastically stable states. Theorem \ref{t:intelligent} follows similarly. Their details are omitted for brevity.
+
+
+\noindent\emph{Proof of Theorem~\ref{t:mr ss}: }\label{a:proof mr ss}
+First we show that, for any $\alpha >0,$ $\vec{x}$ and $ \vec{y}$ are the only two recurrent classes of the unperturbed process, $P$, for the line. Then we show that, for the perturbed process, 
+$R(\vec{x}, \vec{y}) < R( \vec{y},\vec{x}) \iff \alpha >1$ 
+and 
+$R( \vec{y},\vec{x}) < R(\vec{x}, \vec{y}) \iff \alpha <1.$
+That is, when $\alpha >1$ and $\beta$ is large, the lowest resistance path from $\vec{x}$ to $ \vec{y}$ occurs with higher probability than the lowest resistance path from $ \vec{y}$ to $\vec{x}$ in $P_\beta$, and vice versa when $\alpha <1.$ 
+ Combining this with Theorem~\ref{t:resistance trees theorem} proves Theorem~\ref{t:mr ss}.
+
+\noindent\emph{Recurrent classes of $P$ for the line:} Note that, 
+$P(\vec{x},a) = 0$ for all $a\in \mathcal{A}, a\neq \vec{x},$
+and
+$P( \vec{y},a) = 0$ for all $a\in \mathcal{A}, a\neq  \vec{y},$
+implying $\vec{x}$ and $ \vec{y}$ are recurrent. To show that no other state is recurrent, we will show that, for any $a\in \mathcal{A}\setminus \{\vec{x}, \vec{y}\}$, there is a sequence of positive probability transitions in $P$ leading from $a$ to $\vec{x}$.
+
+Let $a\in\mathcal{A}$ with $a\neq \vec{x}, \vec{y}.$ Without loss of generality, choose $i,i+1$ such that $a_i = y$ and $a_{i+1} = x.$ Denote $(a_i,a_{-i}) = a,$ and note that:
+\begin{equation}\label{e:pos prob}
+P((y,a_{-i})\to (x,a_{-i})) = {1\over n}\cdot{n-k\over n}>0
+\end{equation}
+for any $k\leq n-1$ and $\alpha >0$.
+Since \eqref{e:pos prob} holds for any $a\neq \vec{x},\vec{y},$ we can construct a sequence of at most $n-1$ positive probability transitions leading to joint action $\vec{x}$. Therefore $a$ cannot be recurrent in $P.$
+
+\noindent\emph{Resistance between recurrent classes $\vec{x}$ and $ \vec{y}$:} We will show that for all $1\leq k\leq n-1$,
+\begin{align}
+R( \vec{y}, \vec{x}) &= 1,\quad\forall \alpha >0, \label{e:B to A}\\
+R(\vec{x}, \vec{y}) &\geq \alpha,\quad\forall\alpha >0,\label{e:A to B ineq}\\
+\text{and}\quad R(\vec{x}, \vec{y})&=\alpha, \quad \forall \alpha \leq 1.\label{e:A to B eq}
+\end{align}
+For \eqref{e:B to A}, we have
+$r( \vec{y}, (x,y,\ldots,y)) = 1,$
+and $r( \vec{y},a) \geq 1$ for any $a\neq  \vec{y},$ implying that $R( \vec{y}, \vec{x}) \geq 1.$ Then, since 
+$$r\left((\vec{x}_{[t]}, \vec{y}_{[t+1,n]}),(\vec{x}_{[t+1]}, \vec{y}_{[t+2,n]}) \right)= 0,$$
+for any $1\leq t\leq n-1$, and 
+$$r\left((\vec{x}_{[n-1]}, \vec{y}_{[n,n]}),\vec{x}\right) = 0,$$ the path 
+$ \vec{y}\to(x,y,\ldots,y)\to (x,x,y,\ldots,y)\to\cdots\to  \vec{y}$
+has resistance 1. Since we know $R( \vec{y}, \vec{x}) \geq 1,$ this implies that $R( \vec{y}, \vec{x}) = 1.$
+
+Now, for \eqref{e:A to B ineq}, since $r(\vec{x}, a)\geq \alpha$
+for any $a\neq \vec{x},$ this implies $R(\vec{x}, \vec{y}) \geq \alpha.$ In particular $r(\vec{x}\to (y,x,\ldots,x)) = \alpha.$ When $\alpha <1,$ 
+$$r\left(( \vec{y}_{[t]},\vec{x}_{[t+1,n]}),( \vec{y}_{[t+1]},\vec{x}_{[t+2,n]})\right) = 0$$
+for any $1\leq t\leq n-1$, and
+$$r\left(( \vec{y}_{[n-1]},\vec{x}_{[n,n]}), \vec{y}\right) = 0,$$
+implying that the path 
+$\vec{x}\to (y,x,\ldots,x)\to (y,y,\ldots,x)\to\cdots\to  \vec{y}$
+has resistance $\alpha$ when $\alpha \leq 1.$ Hence $R(\vec{x}, \vec{y}) = \alpha.$
+
+Combining \eqref{e:B to A} - \eqref{e:A to B eq} with Theorem~\ref{t:resistance trees theorem} establishes Theorem~\ref{t:mr ss}.
+\hfill\qed
+
+\subsection{Stability in the presence of an intelligent, mobile agent}\label{a:intelligent proof}
+
+Define $P^\mu_\beta$ to be the Markov process associated with log-linear learning in the presence of a mobile, intelligent adversary using policy $\mu.$
+
+\noindent\emph{Proof of Theorem~\ref{t:intelligent} part (a):}
+Let $G = (N,E)$ be the line, influenced by a mobile, intelligent adversary with capability $k = 1.$ For any policy $\mu:\mathcal{A}\to\mathcal{S} = N$, if $\alpha \neq 1,$ only $\vec{x}$ and $ \vec{y}$ are recurrent in the unperturbed process, $P^\mu$. This can be shown via an argument similar to the one used in the proof of Theorem~\ref{t:mr ss}. 
+
+Define $\mu^\star$ as in \eqref{e:mustar 1}. We will show that, (1) in $P^{\mu^\star}_\beta$, $\vec{x}$ is stochastically stable if and only if $\alpha >1$, and $ \vec{y}$ is stochastically stable if and only if $\alpha<1$, and (2) $\mu^\star$ is optimal, i.e., if $\alpha = 1,$ $\vec{x}$ is stochastically stable for any $\mu\in M_1,$ and if $\alpha >1$, $\vec{x}$ is strictly stochastically stable for any $\mu\in M_1.$
+
+For policy $\mu\in M_1$, let $r^{\mu}(a,a^\prime)$ denote the single transition resistance from $a$ to $a^\prime\in \mathcal{A}$ in $P^\mu_\beta,$ and let $R^\mu(a,a^\prime)$, denote the resistance of the lowest resistance path from $a$ to $a^\prime\in \mathcal{A}$. 
+
+For any $\mu\in M_1$, we have
+%\begin{align*}
+$r^\mu(\vec{x}, a)\geq \alpha,\ \forall a\in\mathcal{A},a\neq \vec{x},$ and
+$r^\mu( \vec{y}, a) \geq 1,\quad\forall a\in\mathcal{A}, a\neq  \vec{y}.$
+Therefore
+\begin{align}
+R^\mu(\vec{x}\to \vec{y})\geq\alpha,\text{ and }R^\mu ( \vec{y},\vec{x})\geq 1\label{e:ab1}.%\\
+%\text{and } \label{e:ba1}
+\end{align}
+
+If $\alpha <1$, the path
+$\vec{x}\to(y,x,\ldots,x)\to (y,y,x,\ldots,x)\to\cdots\to  \vec{y}$
+in $P^{\mu^\star}_\beta$ has total resistance $\alpha$. Equation \eqref{e:ab1} implies that
+$R^{\mu^\star}(\vec{x}, \vec{y})  = \alpha < 1 \leq R^{\mu^\star}( \vec{y},\vec{x}),$
+so by Theorem~\ref{t:resistance trees theorem}, $ \vec{y}$ is strictly stochastically stable in $P^{\mu^\star}.$
+
+If $\alpha = 1,$ it is straightforward to show that both $\vec{x}$ and $ \vec{y}$ are stochastically stable in $P^{\mu^\star}_\beta$. Moreover, for any $\mu\in\mathcal{M}$, either the resistance of path 
+$$ \vec{y}\to (x,y,\ldots,y)\to (x,x,y,\ldots y)\to\cdots\to \vec{x}$$
+or the resistance of path 
+$$ \vec{y}\to (y,\ldots,y,x)\to (y\ldots,y,x,x)\to\cdots\to \vec{x}$$
+is 1, and hence it is impossible to find a policy with $R^\mu(\vec{x}, \vec{y}) < R^\mu( \vec{y},\vec{x}).$
+
+If $\alpha >1$, similar arguments show that $R^\mu( \vec{y},\vec{x}) = 1$ for any $\mu\in M_k.$ Combining this with \eqref{e:ab1} implies that $\vec{x}$ is stochastically stable for any $P^\mu_\beta,$ $\mu\in\mathcal{M}$.
+\hfill\qed
+
+\noindent\emph{Proof of (b):}
+Again let $G = (N,E)$ be the line, and suppose the adversary has capability $k$ with $2\leq k\leq n-1.$ We will show that, for a policy $\mu^\star$ which satisfies Conditions 1 - 3 of Theorem~\ref{t:intelligent}, $\vec{x}$ is strictly stochastically stable in $P^{\mu^\star}$ if and only if $\alpha > {n\over n-1}$, and $ \vec{y}$ is strictly stochastically stable if and only if $\alpha < {n\over n-1}.$ Since this is the same bound on $\alpha$ when we have an adversary with capability $n$, from Theorem~\ref{t:fixed line graph} part (a), this also proves that policy $\mu^\star$ is optimal, i.e., no other policy can stabilize a state $a\in \mathcal{A}$ with $a_i =  \vec{y}$ for some $i\in N$ when $\alpha > {n\over n-1}.$
+
+First note that only $ \vec{y}$ is recurrent in $P^{\mu^\star}$ when $\alpha \leq 1$, and hence $ \vec{y}$ is strictly stochastically stable in $P^{\mu^\star}_\beta$.
+
+Now assume $\alpha > 1.$ Again, it is straightforward to verify that only $\vec{x}$ and $ \vec{y}$ are recurrent in $P^{\mu^\star}$. Note that
+%\begin{align}
+$r(\vec{x}\to a) \geq \alpha, \forall a\neq \vec{x},$  and $ r( \vec{y}\to a) =2, \forall a\neq  \vec{y}.$
+%\text{and } %\label{e:res 2}
+%\end{align}
+Moreover, the path 
+$\vec{x}\to(y,x,\ldots,x)\to (y,y,x,\ldots,x)\to\cdots\to  \vec{y}$
+has total resistance $\alpha+(n-2)(\alpha-1)$ in $P^{\mu^\star}_\beta$. 
+
+It is straightforward to verify that this is the least resistance path from $\vec{x}$ to $ \vec{y}$ in $P^{\mu^\star}_{\beta}$, implying 
+%\begin{equation}\label{e:resistance path 1}
+$R(\vec{x}, \vec{y})= \alpha+(n-2)(\alpha-1).$
+%\end{equation}
+The path
+$ \vec{y}\to(x,y,\ldots,y)\to (x,x,y,\ldots,y)\to\cdots\to \vec{x}$
+has resistance 2; hence
+%\begin{equation}\label{e:resistance path 2}
+$R( \vec{y}\to \vec{x}) = 2.$
+%\end{equation}
+\hfill\qed
+
+
+
+
+

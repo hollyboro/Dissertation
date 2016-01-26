@@ -1,0 +1,166 @@
+\chapter{Technical Preliminaries}\label{appendixA}
+
+\section{Markov chain preliminaries}\label{a:MchainPrelims}
+
+A continuous time Markov chain, $\{Z_t\}_{t\geq 0}$, over a finite state space $\Omega$ may be written in terms of a corresponding discrete time chain with transition matrix $M$ \cite{Montenegro2006}, where the distribution $\mu(t)$ over $\Omega$ evolves as:\begin{equation}\label{e:contin time chain}
+\mu(t) = \mu(0)e^{t(M-I)} = \mu(0)e^{-t}\sum_{k=0}^\infty {t^kM^k\over k!},\quad t\geq 0
+\end{equation}
+\normalsize
+%
+where we refer to $M$ as the kernel of the process $Z_t$ and $\mu(0) \in \Delta(\Omega)$ is the initial distribution.  
+%
+%
+The following definitions and theorems are taken from \cite{Shah2010, Montenegro2006}.  Let $\mu,\nu$ be measures on the finite state space $\Omega.$  Total variation distance is defined as 
+\begin{equation}\|\mu - \nu\|_{TV} := \frac{1}{2}\sum_{x\in \Omega}|\mu_x - \nu_x|.\end{equation}
+and 
+\begin{equation}D(\mu:\nu) := \sum_{x\in\Omega}\mu_x\log\frac{\mu_x}{\nu_x}\end{equation}
+is defined to be the relative entropy between $\mu$ and $\nu$. The total variation distance between two distributions can be bounded using the relative entropy: 
+\begin{equation}\label{measure ineq}\|\mu - \nu\|_{TV}\leq \sqrt{\frac{D(\mu:\nu)}{2}}\end{equation}
+For a continuous time Markov chain with kernel $M$ and stationary distribution $\pi$, the distribution $\mu(t)$ obeys
+\begin{equation}\label{e:entropy decay}
+D(\mu(t):\pi)\leq e^{-4t\rho(M)}D(\mu(0):\pi),\quad t\geq 0
+\end{equation}
+where $\rho(M)$ is the Sobolev constant of $M$, defined by 
+\begin{equation}\label{e:Sobolev const}
+\rho(M) := \inf_{\substack{f: \Omega\to \R \st \\ \mathcal{L}(f)\neq 0}}\frac{\mathcal{E}(f,f)}{\mathcal{L}(f)}
+\end{equation}
+with 
+\begin{align}
+\mathcal{E}(f,f) &:= \half \sum_{x,y\in\Omega} (f(x) - f(y))^2 M(x,y)\pi_x\label{e:Eff}\displaybreak[3]\\
+\mathcal{L}(f) &:= \E_{\pi}\log {f^2\over \E_{\pi}f^2}.\label{e:Lf}
+\end{align}
+Here $\E_{\pi}$ denotes the expectation with respect to stationary distribution $\pi$.  For a Markov chain with initial distribution $\mu(0)$ and stationary distribution $\pi$,   the total variation and relative entropy mixing times are 
+\begin{align}
+T_{TV}(\eps) &:= \min_t\{\|\mu(t) - \pi\|\leq \eps\}\label{e:tv mix time}\\
+T_{D}(\eps) &:=\min_t\{D(\mu(t):\pi)\leq\eps\}
+\end{align}  
+respectively. From \cite{Montenegro2006}, Corollary 2.6 and Remark 2.11, 
+\begin{equation*}T_D(\eps)\leq \frac{1}{4\rho(M)}\left(\log\log\frac{1}{\pi_{\min}}+\log\frac{1}{\eps}\right),\end{equation*}
+where $\pi_{\min}:= \min_{x\in\Omega} \pi_x.$  Applying \eqref{measure ineq}, 
+\small
+\begin{align}
+T_{TV}(\varepsilon)&\leq T_D(2\eps^2)\displaybreak[3]\nonumber\\
+&\leq \frac{1}{4\rho(M)}\left(\log\log\frac{1}{\pi_{\min}}+2\log\frac{1}{\eps}\right).\label{e:mix time bounds}
+\end{align}
+\normalsize
+Hence, a lower bound on the Sobolev constant %$\rho(M)$ 
+yields an upper bound on the mixing time for the Markov chain.
+
+\section{Resistance Trees}\label{a:resistance trees}
+
+%\subsection{Background: Resistance Trees}\label{a:resistance trees}
+
+\todo[inline]{below is the resistance trees background from the CCE paper. Need to review and combine with the other resistance trees background (consistent notation, etc)}
+
+Define $P^0$ as the transition matrix for some nominal Markov process, and let $P^{\eps}$ be a perturbed version of this nominal process where the size of the perturbation is $\eps > 0$.  Throughout this paper, we focus on the following class of Markov chains.  
+
+\begin{defn}\label{d:RPP}%{\cite{Young1993}}
+A family of Markov chains defined over a finite state space $X$, whose transition matrices are denoted by $\{P^\eps\}_{\eps > 0}$, is called a \emph{regular perturbed process} of a nominal process $P^0$ if the following conditions are satisfied for all $x,x^\prime\in X$:
+%
+\begin{enumerate}
+\item There exists a constant $c>0$ such that $P^\eps$ is aperiodic and irreducible for all $\eps \in (0,c]$.
+\item $\lim_{\eps\to 0} P^{\eps}_{x \rightarrow x'}= P^0_{x \rightarrow x'}$.% where $P^{\eps}_{x \rightarrow x'}$ denotes the probability of transitioning from $x$ to $x'$ given the Markov chain $P^{\eps}$.  
+\item If $P^\eps_{x \rightarrow x'} > 0$ for some $\eps>0$, then there exists a constant $r(x \to x') \geq 0$ such that 
+\begin{equation}\label{e:RPP bounds}
+0<\lim_{\eps\to 0}
+\frac{P^\eps_{x \to x'}}
+{\eps^{r(x \to x')}}<\infty.
+\end{equation}
+The constant $r(x \to x')$ is referred to as the \emph{resistance} of the transition $x \to x'.$
+%
+\end{enumerate}
+\end{defn}
+
+For any $\eps > 0$, let $\mu^{\eps} = \{\mu^{\eps}_x \}_{x \in X}  \in \Delta(X)$ denote the unique stationary distribution associated with $P^{\eps}$.  The theory of resistance trees presented in \cite{Young1993} provides efficient mechanisms for computing the support of the limiting stationary distribution, i.e., $\lim_{\eps \rightarrow 0^+} \mu^{\eps}$, commonly referred to as the stochastically stable states.  
+
+\begin{defn}\label{d:ss}
+A state $x \in X$ is \emph{stochastically stable} \cite{Foster1990} if $\lim_{\eps\to 0^+}\mu_x^\eps>0$, where $\mu^\eps$ is the stationary distribution corresponding to $P^\eps.$
+\end{defn}
+
+In this paper, we adopt the technique provided in \cite{Young1993} for identifying the stochastically stable states through a graph theoretic analysis over the recurrent classes of the unperturbed process $P^0$.  To that end, let $Y_0, Y_1, \dots, Y_m$ denote the recurrent classes of $P^0$.  Define ${\cal P}_{i j}$ to be the set of all paths connecting $Y_i$ to $Y_j$, i.e., a path $p \in {\cal P}_{i j}$ is of the form $p=\{(x_1, x_2), (x_2, x_3), \dots, (x_{k-1}, x_k)\}$ where $x_1 \in Y_i$ and $x_k \in Y_j$.  The resistance associated with transitioning from $Y_i$ to $Y_j$ is defined as 
+%
+\begin{equation}\label{eq:321}
+r(Y_i , Y_j) = \min_{p \in {\cal P}_{i j}} \sum_{(x,x') \in p} r(x,x'). 
+\end{equation}
+
+The recurrent classes $Y_0,Y_1,\ldots,Y_m$ satisfy the following properties: (i) there is a zero resistance path, i.e., a sequence of transitions each with zero resistance, from any state $x \in X$ to at least one state $y$ in one of the recurrent classes; (ii) for any recurrent class $Y_i$ and any states $y_i,y_i' \in Y_i$, there is a zero resistance path from $y_i$ to $y_i'$; and (iii) for any state $y_i \in Y_i$ and $y_j \in Y_j$, $Y_i \neq Y_j$, any path from $y_i$ to $y_j$ has strictly positive resistance.  
+
+The first step in identifying the stochastically stable states is to identify the resistance between the various recurrent classes.  %
+The second step focuses on analyzing spanning trees of the weighted, directed graph $\mathcal{G}$ whose vertices are recurrent classes of the process $P^0,$ and whose edge weights are given by the resistances between classes in (\ref{eq:321}). Denote $\mathcal{T}_{i}$ to be the set of all spanning trees of $\mathcal{G}$ rooted at recurrent class $Y_i$. Next, we compute the stochastic potential of each recurrent class which is defined as follows:
+
+%
+\begin{defn}
+The \emph{stochastic potential} of recurrent class $Y_i$ is 
+\begin{equation*}
+\gamma(Y_i) = \min_{{\cal T} \in \mathcal{T}_{i}} \sum_{(Y, Y')\in {\cal T}} r(Y,Y')
+\end{equation*}
+\end{defn}
+%
+The following theorem characterizes the recurrent classes that are stochastically stable.
+
+\begin{Theorem}[\cite{Young1993}] \label{t:Young Theorem}
+Let $P^0$ be the transition matrix for a stationary Markov process over the finite state space $X$ with recurrent communication classes $Y_1,\ldots,Y_m$. For each $\eps > 0$, let $P^\eps$ be a regular perturbation of $P^0$ with a unique stationary distribution $\mu^\eps$. Then:
+\begin{enumerate}
+\item  As $\eps\to 0$, $\mu^\eps$ converges to a stationary distribution $\mu^0$ of $P^0.$
+\item A state $x \in X$ is stochastically stable if and only if $x$ is contained in a recurrent class $Y_j$ that minimizes $\gamma(Y_j).$
+\end{enumerate}
+\end{Theorem}
+
+%\section{Resistance trees for stochastic stability analysis (redundant!)}\label{a:resistance trees}
+%\todo{Combine this par with previous}
+%
+%
+%When graphical coordination game $G$ is influenced by a mobile adversary, it is no longer a potential game; resistance tree tools defined in this section enable us to determine stochastically stable states.
+%
+%The Markov process, $P_\beta$, defined by log-linear learning dynamics over a normal form game is a \emph{regular perturbation} of a best response process. In particular, log-linear learning is a regular perturbation of the best response process defined in Appendix~\ref{a:LLL Markov}, where the size of the perturbation is parameterized by $\eps = e^{-\beta}.$ The following definitions and analysis techniques are taken from \cite{Young1993}. 
+%
+%\begin{defn}[\cite{Young1993}]
+%A Markov process with transition matrix $M_\eps$ defined over state space $\Omega$ and parameterized by perturbation $\eps\in (0,a]$ for some $a>0$ is a \emph{regular perturbation} of the process $M_0$ if it satisfies:
+%\begin{enumerate}[leftmargin=1.5em]
+%\item $M_\eps$ is aperiodic and irreducible for all $\eps\in (0,a]$.
+%\item $\lim_{\eps\to 0^+}M_\eps (x,y) \to M(x,y)$ for all $x,y\in\Omega.$
+%\item If $M_\eps(x,y) >0$ for some $\eps \in (0,a]$ then there exists $r(x,y)$ such that 
+%\begin{equation}\label{e:resistance}
+%0<\lim_{\eps\to 0^+} {M_\eps(x,y)\over \eps^{r(x,y)}} <\infty,
+%\end{equation}
+%where $r(x,y)$ is referred to as the \emph{resistance} of transition $x\to y$.
+%\end{enumerate}
+%\end{defn}
+%
+%Let Markov process $M_\eps$ be a regular perturbation of process $M_0$ over state space $\Omega$, where perturbations are parameterized by $\eps\in (0,a]$ for some $a>0.$ Define graph $G = (\Omega,E)$ to be the directed graph with $(x,y)\in E \iff M_\eps(x,y)>0$ for some $\eps\in(0,a].$ Edge $(x,y)\in E$ is weighted by the resistance $r(x,y)$ defined in \eqref{e:resistance}.
+%
+%Now let $\Omega_1,\Omega_2,\ldots,\Omega_n$ denote the recurrent classes of process $M_0.$ In graph $G$, these classes satisfy:
+%\begin{enumerate}[leftmargin=1.5em]
+%\item For all $x\in \Omega$, there is a zero resistance path from $x$ to $\Omega_i$ for some $i\in \{1,2,\ldots,n\}.$
+%\item For all $i\in \{1,2,\ldots,n\}$ and all $x,y\in \Omega_i$ there exists a zero resistance path from $x$ to $y$ and from $y$ to $x$.
+%\item For all $x,y$ with $x\in \Omega_i$ for some $i\in \{1,2,\ldots,n\},$ and $y\notin \Omega_i$, $r(x,y) >0.$ %\blue{be sure and define the resistance of a zero probability transition to be $\infty$!}
+%\end{enumerate}
+%Define a second directed graph, $\mathcal{G} = (V,\mathcal{E})$, where $V = \{1,2,\ldots,n\}$ are the indices of the $n$ recurrent classes in $\Omega.$ For this graph, $(i,j)\in \mathcal{E}$ for all $i,j\in \{1,2,\ldots,n\},$ $i\neq j.$ Edge $(i,j)$ is weighted by the resistance of the lowest resistance path starting in $\Omega_i$ and ending in $\Omega_j$, i.e., 
+%\begin{equation}
+%R(i,j):=\min_{i\in \Omega_i,j\in\Omega_j}\min_{p\in \mathcal{P}(i\to j)} r(p),
+%\end{equation}
+%where $\mathcal{P}(i\to j)$ denotes the set of all simple paths in $G$ beginning at $i$ and ending at $j$. For path $p = (e_1,e_2,\ldots,e_k)$, 
+%\begin{equation}
+%r(p):= \sum_{\ell = 1}^k r(e_\ell).
+%\end{equation}
+%Let $\mathcal{T}_i$ be the set of all trees in $\mathcal{G}$ rooted at $i$, and define 
+%\begin{equation}
+%\gamma_i := \min_{t\in \mathcal{T}_i} R(t)
+%\end{equation}
+%to be the \emph{stochastic potential} of $\Omega_i,$ where the resistance of tree $t$ is the sum of the resistances (in $\mathcal{G}$) of its edges,
+%\begin{equation}
+%R(t) := \sum_{e\in t} R(e).
+%\end{equation}
+%We use the following theorem due to \cite{Young1993} in our analysis:
+%\begin{Theorem}[\cite{Young1993}]\label{t:resistance trees theorem}
+%State $x\in \Omega$ is stochastically stable if and only if $x\in \Omega_i$ where 
+%\begin{equation}
+%\gamma_i = \min_{j\in \{1,2,\ldots,n\}}\gamma_j,
+%\end{equation}
+%i.e., $x$ belongs to a recurrent class which minimizes the stochastic potential. 
+%Furthermore, $x$ is strictly stochastically stable if and only if $\Omega_i = \{x\}$ and 
+%$\gamma_i<\gamma_j,\quad\forall j\neq i.$
+%\end{Theorem}
+%
+%
+%
