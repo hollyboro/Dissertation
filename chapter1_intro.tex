@@ -3,6 +3,8 @@
 
 Large scale systems that consist of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. The objectives for these systems are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large scale multi-agent systems are often controlled in a distributed fashion. Here, individual agents must make decisions based on local, often incomplete information, potentially exacerbating the tradeoffs between performance and speed. Furthermore, the distributed nature of such systems may create vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.%Furthermore, the distributed nature of these systems could create vulnerability to adversarial manipulation: if an adversary can influence a small subset of agents, the resulting effects may cascade throughout the system, ultimately degrading overall performance.
 
+\todo[inline]{Add a simple motivating example here.}
+
 \section{Informal statement of contributions}
 
 The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information available to agents in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. %Additionally, I aim to further explore the applicability of game theoretic control laws in physical systems.
@@ -58,11 +60,15 @@ Agents in a distributed system often interact and share information according to
 
 \section{Technical Preliminaries}
 
+
+\todo[inline]{OK, i took out the utility function + learning rule table, because I think it's distracting. The majority of my work isn't specific to resource allocation games, and doesn't do anything with utility design, so I don't want to discuss it too much. Think about this some more.}
+
+
 \begin{enumerate}
     \item the setting: a distributed control system. agents, actions, objective function
     \item Our approach: game theoretic control
     \begin{enumerate}
-        \item Utility function that maps local information to a utility/payoff
+        \item Utility function that maps local information to a utility/payoff. Give a small preview of the types of utility function we use. Appropriate design varies depending on the application. My focus was on learning algorithms, so typically I assigned utilities that made analysis simple in order to gain intuition about the question I was trying to ask. Not sure whether to say this or how to convey it....
         \item Learning rule that dictates agents' decisions. Our focus is on probabilistic learning rules. Reference Markov chains section in the appendix. Discrete time, so this yields a sequence of joint actions $a(0),a(1),\ldots.$ Small discussion that these are random variables, perhaps. Include an example (LLL) and state that the majority of the dissertation will focus on LLL, with the exception of the CCE work.
     \end{enumerate}
     \item Goal (in general): design utilities and learning rules with desired performance
@@ -82,6 +88,8 @@ Agents in a distributed system often interact and share information according to
 Relate to the goals above. State each main theorem as a contribution here. First a reminder of the three main questions.
 
 \subsection{Fast convergence contributions}
+
+\subsection{CCE contributions}
 
 \subsection{Adversarial vulnerability contributions}
 
