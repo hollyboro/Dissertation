@@ -19,7 +19,8 @@ In order to address these goals, this dissertation focuses specifically on the f
 \section{Informal statement of contributions}
 
 
-This dissertations focuses on game theoretic methods for distributed control. Game theoretic learning algorithms have gained traction as a design tool for distributed control systems \cite{Marden2008,Zhu2009,Goto2010,Staudigl2012,Fox2010}.  Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  
+This dissertations focuses on game theoretic methods for distributed control. Game theoretic learning algorithms have gained traction as a design tool for distributed control systems \cite{Marden2008,Zhu2009,Goto2010,Staudigl2012,Fox2010}.  %Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  
+\todo[inline]{add utility plus learning rule discussion. also might be good to include the chart, and the phrases ``what should agents optimize" and ``how should agents optimize"}
 
 The following informally summarizes this dissertation's primary contributions for game theoretic distributed control, with respect to the three research questions posed above.
 %Emergent collective behavior for such revision strategies has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
@@ -30,9 +31,9 @@ The following informally summarizes this dissertation's primary contributions fo
 \end{description}
 
 
-Emergent collective behavior for game theoretic learning rules has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
+%Emergent collective behavior for game theoretic learning rules has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
-One well-studied method of optimizing behavior in a multi-agent system is to assign agent utilities to be their {\it marginal contribution} to the overall system objective \cite{Wolpert1999}, and have agents make decisions according to the {\it log-linear learning} rule \cite{Blume1993}. In log-linear learning, agents primarily choose utility maximizing actions, but choose suboptimally with a small probability that decreases exponentially with respect to the associated payoff loss. In the long run, marginal contribution + log-linear learning dynamics spends the majority of time at the global objective function maximizer. Unfortunately, worst-case convergence times for log-linear learning are known to be exponential in the number of agents, \cite{Shah2010} often rendering this game theoretic control method impractical for large-scale distributed systems. 
+One well-studied method of optimizing behavior in a multi-agent system is to assign agent utilities to be their {\it marginal contribution} to the overall system objective \cite{Wolpert1999}, and have agents make decisions according to the {\it log-linear learning} rule \cite{Blume1993}. In log-linear learning, agents primarily choose utility maximizing actions, but choose suboptimally with a small probability that decreases exponentially with respect to the associated payoff loss. In the long run, marginal contribution utilities with log-linear learning dynamics spends the majority of time at the global objective function maximizer. Unfortunately, worst-case convergence times for log-linear learning are known to be exponential in the number of agents, \cite{Shah2010} often rendering this game theoretic control method impractical for large-scale distributed systems. 
 
 However, when system heterogeneity is limited, i.e., agents can be grouped into a small number of populations according to their action sets and impact on the objective function, a variant of log-linear learning achieves improved worst-case convergence times. In Chapter~\ref{ch2}, I build on the work of \cite{Shah2010} to derive this variant, which converges in near-linear time with respect to the number of agents. 
 
@@ -61,6 +62,8 @@ However, when system heterogeneity is limited, i.e., agents can be grouped into 
 
 %\noindent{\it \emph{Research question: Can agents learn near optimal correlated behavior despite severely limited information about one another's behavior?}}\\
 %\noindent{\emph{Contribution: Following the algorithm in Chapter~\ref{ch3}, agents with limited knowledge of each other's behavior can learn a utility-maximizing correlated equilibrium.}}
+
+\todo[inline]{put the stuff from CCE chapter back here!}
 
 Here, we focus on the scenario where the system objective is to maximize the sum of agents' payoffs. This type of objective can be useful when we wish to balance multiple local objectives. 
 
