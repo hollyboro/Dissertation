@@ -1,13 +1,13 @@
 \chapter{\Large Introduction}
 \label{introchap}
 
-Large scale systems consisting of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. Objectives for these systems are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large multi-agent systems are often controlled in a distributed fashion. Here, individual agents must make decisions based on local, often incomplete information, potentially exacerbating tradeoffs between performance and speed. Furthermore, the distributed nature of such systems may introduce vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.%Furthermore, the distributed nature of these systems could create vulnerability to adversarial manipulation: if an adversary can influence a small subset of agents, the resulting effects may cascade throughout the system, ultimately degrading overall performance.
+Large scale systems consisting of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. The objectives for these applications are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large multi-agent systems are often controlled in a distributed fashion. Here, individual agents, or subsystems, must make decisions based on local, often incomplete information, potentially exacerbating tradeoffs between performance and speed. Furthermore, the distributed nature of these multi-agent systems may introduce vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.%Furthermore, the distributed nature of these systems could create vulnerability to adversarial manipulation: if an adversary can influence a small subset of agents, the resulting effects may cascade throughout the system, ultimately degrading overall performance.
 
-The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. %Additionally, I aim to further explore the applicability of game theoretic control laws in physical systems.
+The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information available to agents in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. %Additionally, I aim to further explore the applicability of game theoretic control laws in physical systems.
 In order to address these goals, this dissertation focuses specifically on the following questions:
 %I continue to investigate in order to address these research goals are:
 
-\todo[inline]{try and fit these questions on the first page}
+%\todo[inline]{try and fit these questions on the first page}
 
 \begin{itemize}[leftmargin=*]
 \item \textbf{When is fast convergence to near-optimal behavior possible?} (Chapter~\ref{ch2})
@@ -19,16 +19,32 @@ In order to address these goals, this dissertation focuses specifically on the f
 \section{Informal statement of contributions}
 
 
-This dissertations focuses on game theoretic methods for distributed control. Game theoretic learning algorithms have gained traction as a design tool for distributed control systems \cite{Marden2008,Zhu2009,Goto2010,Staudigl2012,Fox2010}.  %Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  
-\todo[inline]{add utility plus learning rule discussion. also might be good to include the chart, and the phrases ``what should agents optimize" and ``how should agents optimize"}
+This dissertation focuses on game theoretic methods for distributed control \cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010}.  Here, agents are assigned (1) {\it utility functions}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and (2) {\it learning rules}\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.}, which together comprise a distributed control law. 
+
+\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
+
+\noindent{\it Utility functions: }An agent's utility function dictates {\it what} it should seek to optimize, and typically depends on its own actions and on information about agents' collective actions along with information about the surrounding environment. The structure of system level objectives often leads to highly coupled agent utilities. This means that agents do not have full control over the quantity they seek to optimize, i.e., agents are ``optimizing among optimizers." %\todo[inline]{Find a quote from Jeff to put here. And make it sound a little nicer. Maybe reference a review of various objectives (if it's included) that will come later...Also possibly add some example utilities here.}
+
+\noindent{\it Learning rules: } An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as we will demonstrate in Example~\ref{}. Hence, many alternative learning rules have been studied in the literature. \todo{cite some learning rules here}. In this dissertation, we primarily focus on noisy best response rules, such as log-linear learning, which we describe in detail in Section~\ref{}.
+%\todo[inline]{think about adding a list of learning rules here. or maybe just leave it for the figure. ok fine bring back the diagram thingy}
+
+The combination of agents' utility functions and learning rules dictates system dynamics, and hence determines both (1) performance with respect to the system level objective, and (2) speed of convergence. \todo[inline]{Something about vulnerability here...}
+
+
+
+%Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  
+%\todo[inline]{add utility plus learning rule discussion. also might be good to include the chart, and the phrases ``what should agents optimize" and ``how should agents optimize"}
 
 The following informally summarizes this dissertation's primary contributions for game theoretic distributed control, with respect to the three research questions posed above.
 %Emergent collective behavior for such revision strategies has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
-\begin{description}[leftmargin=*]
-\item[{\it \emph{Research question:}}]{\it\emph{When is fast convergence to near-optimal behavior possible? }} 
-\item[Contribution:] \textbf{Fast convergence is possible with limited agent heterogeneity, provided agents revise their behavior according to a mild variant of log-linear learning.}
-\end{description}
+%\begin{description}[leftmargin=*]
+\noindent{\it\emph{Research question: When is fast convergence to near-optimal collective behavior possible? }}
+
+\smallskip
+
+\noindent \textbf{Contribution: Fast convergence to near-optimal collective behavior is possible when agents revise their actions according a a mild variant of log-linear learning, provided agents' utilities are their marginal contribution to the system level objective, and heterogeneity among agents is limited.}
+%\end{description}
 
 
 %Emergent collective behavior for game theoretic learning rules has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
@@ -55,28 +71,39 @@ However, when system heterogeneity is limited, i.e., agents can be grouped into 
 %In ongoing work, I aim to develop and characterize similar distributed algorithms with desirable short and medium term performance guarantees, since long run steady state behavior often cannot be achieved in a reasonable amount of time. Ultimately I would like to improve the practicality of these algorithms for use in real systems; thus, I am also interested in studying their implementation in distributed systems.
 
 
-\begin{description}[leftmargin=*]
-\item[{\it \emph{Research question:}}]{\it \emph{Can agents learn near-optimal correlated behavior despite severely limited information about one another's behavior? }}
-\item[Contribution: ]\textbf{Following the algorithm in Chapter~\ref{ch3}, agents with limited knowledge of each other's behavior can learn a utility-maximizing correlated equilibrium.}
-\end{description}
+%\begin{description}[leftmargin=*]
+\noindent{\it \emph{Research question: Can agents learn near-optimal correlated behavior despite severely limited information about one another's behavior? }}
 
-%\noindent{\it \emph{Research question: Can agents learn near optimal correlated behavior despite severely limited information about one another's behavior?}}\\
-%\noindent{\emph{Contribution: Following the algorithm in Chapter~\ref{ch3}, agents with limited knowledge of each other's behavior can learn a utility-maximizing correlated equilibrium.}}
+\smallskip
 
-\todo[inline]{put the stuff from CCE chapter back here!}
+\noindent\textbf{Contribution: Following the algorithm in Chapter~\ref{ch3}, agents with limited knowledge of each other's behavior can learn a utility-maximizing correlated equilibrium.}
 
-Here, we focus on the scenario where the system objective is to maximize the sum of agents' payoffs. This type of objective can be useful when we wish to balance multiple local objectives. 
 
-Agents' average utilities can often be improved when they act according to a distribution over multiple joint actions, instead of staying fixed at a single joint action.  In many cases, the desired collective behavior constitutes a {\it coarse correlated equilibrium}. A coarse correlated equilibrium is a probability distribution over the joint action space such that no agent can improve its payoff by deviating to a fixed action \cite{Aumann1987}.  Previously, algorithms existed which converged to the {\it set} of coarse correlated equilibrium, e.g., \cite{Hart2000}, without selecting any particular equilibrium; these algorithms provided no performance guarantees. An algorithm which achieves a payoff maximizing coarse correlated equilibrium through deterministic, cyclic behavior is presented in \cite{Marden2013c}. However, predictable cyclic behavior may be undesirable in many settings, e.g., in the presence of an adversary.
+Significant research has been directed at deriving distributed learning rules that possess desirable asymptotic performance guarantees and convergence rates and enable agents to make decisions based on limited information. The majority of this research has focused on attaining convergence to (pure) Nash equilibria under stringent information conditions \cite{Young2009, Frihauf2012, Foster2006, Boussaton2012, Poveda2013, Gharesifard2012}. Recently, the research focus has shifted to ensuring convergence to alternate types of equilibria that often yield more efficient behavior than Nash equilibria.  In particular, results have emerged that guarantee convergence to Pareto efficient Nash equilibria \cite{Marden2009,Pradelski2012}, potential function maximizers \cite{Blume1993, Marden2012}, welfare maximizing action profiles \cite{Marden2011, Arieli2012}, and the set of correlated equilibria \cite{Hart2000,Marden2013c,Aumann1987,Foster1997}, among others.  
+
+In most cases highlighted above, the derived algorithms guarantee (probabilistic) convergence to the specified equilibria.  However, the class of correlated equilibria has posed significant challenges with regards to this goal. Learning algorithms that converge to an efficient correlated equilibrium are desirable because optimal system behavior can often be characterized by a correlated equilibrium. Unfortunately, the aforementioned learning algorithms, such as regret matching \cite{Hart2000}, merely converge to the \emph{set} of correlated equilibria. This means that the long run behavior does not necessarily constitute -- or even approximate -- a specific correlated equilibrium at any instance of time.
+
+%We provide a distributed learning algorithm that converges to the most efficient, i.e., welfare maximizing, correlated equilibrium.  
+
+
+
+
+
+%Agents' average utilities can often be improved when they act according to a distribution over multiple joint actions, instead of staying fixed at a single joint action.  In many cases, the desired collective behavior constitutes a {\it coarse correlated equilibrium}. A coarse correlated equilibrium is a probability distribution over the joint action space such that no agent can improve its payoff by deviating to a fixed action \cite{Aumann1987}.  Previously, algorithms existed which converged to the {\it set} of coarse correlated equilibrium, e.g., \cite{Hart2000}, without selecting any particular equilibrium; these algorithms provided no performance guarantees. An algorithm which achieves a payoff maximizing coarse correlated equilibrium through deterministic, cyclic behavior is presented in \cite{Marden2013c}. However, predictable cyclic behavior may be undesirable in many settings, e.g., in the presence of an adversary.
 
 In Chapter~\ref{ch3} I design and analyze an algorithm that converges to a payoff maximizing coarse correlated equilibrium when agents have no knowledge of others' behavior. Here, agents' utilities depend on collective behavior, but they have no way of evaluating the utility of alternative actions. My algorithm uses a common random signal as a coordinating entity to eventually drive agents toward the desired collective behavior. In the long run, day to day behavior is selected probabilistically according to the payoff maximizing coarse correlated equilibrium.
+
+\todo[inline]{change I's to we's? at least make it consistent}
  
 %Slow convergence rates are a major drawback to this algorithm: in practice it can take a prohibitively long time to reach the desired behavior. Hence, in my future work I seek to improve upon this algorithm's convergence rates and derive a variant which is more practical in distributed system applications.
 
-\begin{description}[leftmargin=*]
-\item[{\it \emph{Research question:}}]{\it \emph{How does the structure of agent interaction impact a distributed system's vulnerability to adversarial manipulation?}}
-\item[Contribution:] \textbf{If every subset of agent interacts with sufficiently many other agents, the system is more resilient to adversarial manipulation.}
-\end{description}
+%\begin{description}[leftmargin=*]
+\noindent{\it \emph{Research question: How does the structure of agent interaction impact a distributed system's vulnerability to adversarial manipulation?}}
+
+\smallskip
+
+ \noindent\textbf{Contribution: If every subset of agent interacts with sufficiently many other agents, the system is more resilient to adversarial manipulation.}
+
 
 Agents in a distributed system often interact and share information according to a network. The structure of this network not only has an impact on a distributed control algorithm's performance and speed, but also on its resilience to adversarial manipulation. A loosely connected network may be easier to influence, because an adversary may be able to more easily manipulate the information available to subsets of agents, thereby creating impacts that cascade throughout the system. On the other hand, a well-connected network may be more difficult to influence in this way. In Chapter~\ref{ch4}, I investigate such vulnerabilities for  {\it graphical coordination games} \cite{Ullmann1977,Cooper1999} with agents revising their actions according to log-linear learning. In this work, I provided a condition based on network structure which guarantees resilience in a graphical coordination game. 
 

@@ -1,0 +1,358 @@
+\begin{thebibliography}{10}
+
+\bibitem{Alos-Ferrer2010}
+C.~Al{\'{o}}s-Ferrer and N.~Netzer.
+\newblock {The logit-response dynamics}.
+\newblock {\em Games and Economic Behavior}, 68(2):413--427, 2010.
+
+\bibitem{Alpcan2010}
+T.~Alpcan and T.~Basar.
+\newblock {\em {Network Security: A Decision and Game-Theoretic Approach}}.
+\newblock Cambridge University Press, 1st edition, 2010.
+
+\bibitem{Arieli2012}
+I.~Arieli and Y.~Babichenko.
+\newblock {Average Testing and the Efficient Boundary}.
+\newblock {\em Journal of Economic Theory}, 147:2376--2398, 2012.
+
+\bibitem{Arieli2011}
+I.~Arieli and H.P. Young.
+\newblock {Fast convergence in population games}.
+\newblock 2011.
+
+\bibitem{Arslan2007}
+G.~Arslan, J.~R. Marden, and J.~S. Shamma.
+\newblock {Autonomous vehicle-target assignment: a game theoretical
+  formulation}.
+\newblock {\em ASME Journal of Dynamic Systems, Measurement and Control},
+  129(5):584--596, 2007.
+
+\bibitem{Aumann1987}
+R.~Aumann.
+\newblock {Correlated Equilibrium as an Expression of Bayesian Rationality}.
+\newblock {\em Econometrica}, 55(1):1--18, 1987.
+
+\bibitem{Bai2014}
+C.Z. Bai and V.~Gupta.
+\newblock {On Kalman filtering in the presence of a compromised sensor:
+  Fundamental performance bounds}.
+\newblock {\em Proceedings of the American Control Conference}, 2014.
+
+\bibitem{Beckmann1956}
+M.~Beckmann, C.B. McGuire, and C.~B. Winsten.
+\newblock {\em {Studies in the Economics of Transportation}}.
+\newblock Yale University Press, New Haven, 1956.
+
+\bibitem{Blume1993}
+L.~Blume.
+\newblock {The statistical mechanics of strategic interaction}.
+\newblock {\em Games and Economic Behavior}, 1993.
+
+\bibitem{Blume1996}
+L.~Blume.
+\newblock {Population Games}.
+\newblock {\em Econometrica}, 68(5):1127--1150, 1996.
+
+\bibitem{Boussaton2012}
+O.~Boussaton and J.~Cohen.
+\newblock {On the distributed learning of Nash equilibria with minimal
+  information}.
+\newblock {\em 6th International Conference on Network Games, Control, and
+  Optimization}, 2012.
+
+\bibitem{Carfang2013}
+A.~Carfang, E.~Frew, and D.~Kingston.
+\newblock {A Cascaded Approach to Optimize Aircraft Trajectories for Persistent
+  Data Ferrying}.
+\newblock In {\em AIAA Gui}, 2013.
+
+\bibitem{Cooper1999}
+R.~Cooper.
+\newblock {\em {Coordination Games}}.
+\newblock Cambridge University Press, Cambridge, UK, 1999.
+
+\bibitem{Ellison2000}
+G.~Ellison.
+\newblock {Basins of attraction, long-run stochastic stability, and the speed
+  of step-by-step evolution}.
+\newblock {\em The Review of Economic Studies}, pages 17--45, 2000.
+
+\bibitem{Fawzi2014}
+H.~Fawzi, P.~Tabuada, and S.~Diggavi.
+\newblock {Secure estimation and control for cyber-physical systems under
+  adversarial attacks}.
+\newblock {\em IEEE Transactions on Automatic Control}, 59:1454--1467, 2014.
+
+\bibitem{Foster1997}
+D.~Foster and R.~Vohra.
+\newblock {Calibrated Learning and Correlated Equilibrium}.
+\newblock {\em Games and Economic Behavior}, 21:40--55, oct 1997.
+
+\bibitem{Foster1990}
+D.~Foster and H.~Young.
+\newblock {Stochastic evolutionary game dynamics}.
+\newblock {\em Theoretical Population Biology}, 38(2), 1990.
+
+\bibitem{Foster2006}
+D.~Foster and H.~Young.
+\newblock {Regret testing: learning to play Nash equilibrium without knowing
+  you have an opponent}.
+\newblock {\em Theoretical Economics}, 1:341--367, 2006.
+
+\bibitem{fp2}
+D.~P. Foster and H.~P. Young.
+\newblock {On the Nonconvergence of Fictitious Play in Coordination Games}.
+\newblock {\em Games and Economic Behavior}, 25(1):79--96, oct 1998.
+
+\bibitem{Fox2010}
+M.~Fox and J.~Shamma.
+\newblock {Communication, convergence, and stochastic stability in
+  self-assembly}.
+\newblock In {\em 49th IEEE Conference on Decision and Control (CDC)}, dec
+  2010.
+
+\bibitem{Frieze1998}
+A.~Frieze and R.~Kannan.
+\newblock {Log-Sobolev inequalities and sampling from log-concave
+  distributions}.
+\newblock {\em The Annals of Applied Probability}, 1998.
+
+\bibitem{Frihauf2012}
+P.~Frihauf, M.~Krstic, and T.~Bas.
+\newblock {Nash Equilibrium Seeking in Noncooperative Games}.
+\newblock {\em IEEE Transactions on Automatic Control}, 57(5):1192--1207, 2012.
+
+\bibitem{Gharesifard2012}
+B.~Gharesifard and J.~Cortes.
+\newblock {Distributed convergence to Nash equilibria by adversarial networks
+  with directed topologies}.
+\newblock In {\em 51st IEEE Conference on Decision and Control}, 2012.
+
+\bibitem{Goto2010}
+T.~Goto, T.~Hatanaka, and M.~Fujita.
+\newblock {Potential game theoretic attitude coordination on the circle:
+  Synchronization and balanced circular formation}.
+\newblock {\em 2010 IEEE International Symposium on Intelligent Control}, pages
+  2314--2319, sep 2010.
+
+\bibitem{Han2012}
+Z.~Han, D.~Niyato, W.~Saad, T.~Başar, and A.~Hj{\o}rungnes.
+\newblock {\em {Game Theory in Wireless and Communication Networks: Theory,
+  Models, and Applications}}.
+\newblock Cambridge University Press, 1st edition, 2012.
+
+\bibitem{Hart2010}
+S.~Hart and Y.~Mansour.
+\newblock {How long to equilibrium? The communication complexity of uncoupled
+  equilibrium procedures}.
+\newblock {\em Games and Economic Behavior}, 69:107--126, may 2010.
+
+\bibitem{Hart2000}
+S.~Hart and A.~Mas-Colell.
+\newblock {A Simple Adaptive Procedure Leading to Correlated Equilibrium}.
+\newblock {\em Econometrica}, 68(5):1127--1150, 2000.
+
+\bibitem{Hendricks2014}
+J.M. Hendrickx, K.H Johansson, R.M. Jungers, H.~Sandberg, and K.C. Sou.
+\newblock {Efficient Computations of a Security Index for False Data Attacks in
+  Power Networks}.
+\newblock {\em IEEE Transactions on Automatic Control}, 59(12):3194--3208,
+  2014.
+
+\bibitem{Ho1974}
+Y.~Ho and F.~Sun.
+\newblock {Value of Information in Two-Team Zero-Sum Problems}.
+\newblock {\em Journal of Optimization Theory and Applications}, 14(5), 1974.
+
+\bibitem{Jiang2011}
+A.~Jiang and K.~Leyton-Brown.
+\newblock {Polynomial-time computation of exact correlated equilibrium in
+  compact games}.
+\newblock In {\em Proceedings of the Twelfth ACM Electronic Commerce
+  Conference}, feb 2011.
+
+\bibitem{Kandori1993}
+M.~Kandori, G.~Mailath, and R.~Rob.
+\newblock {Learning, Mutation, and Long Run Equilibria in Games}.
+\newblock {\em Econometrica}, 61(1):29--56, 1993.
+
+\bibitem{Kearns2001}
+M.~Kearns, M.L. Littman, and S.~Singh.
+\newblock {Graphical Models for Game Theory}.
+\newblock In {\em 17th Conference in Uncertainty in Artificial Intelligence},
+  2001.
+
+\bibitem{Kreindler2011}
+G.~Kreindler and H.~Young.
+\newblock {Fast convergence in evolutionary equilibrium selection}.
+\newblock 2011.
+
+\bibitem{Lasaulce2011}
+S.~Lasauce and H.~Tembine.
+\newblock {\em {Game Theory and Learning for Wireless Networks}}.
+\newblock Elsevier, 1st edition, 2011.
+
+\bibitem{Lim2014}
+Y.~Lim.
+\newblock {\em {Game Theoretic Distributed Coordination}}.
+\newblock PhD thesis, Georgia Tech, 2014.
+
+\bibitem{MacKenzie2006}
+A.~MacKenzie and L.~DaSilva.
+\newblock {\em {Game Theory for Wireless Engineers}}.
+\newblock Morgan {\&} Claypool Publishers, 1st edition, 2006.
+
+\bibitem{jsfp}
+J.~Marden.
+\newblock {Joint strategy fictitious play with inertia for potential games}.
+\newblock {\em IEEE Transactions on Automatic Control}, 54(2):208--220, 2009.
+
+\bibitem{Marden2013c}
+J.~Marden.
+\newblock {Selecting Efficient Correlated Equilibria Through Distributed
+  Learning}.
+\newblock {\em in submission}, 2013.
+
+\bibitem{Marden2007a}
+J.~Marden, G.~Arslan, and J.~Shamma.
+\newblock {Connections between cooperative control and potential games
+  illustrated on the consensus problem}.
+\newblock {\em Proceedings of 2007 the European Control Conference}, 2007.
+
+\bibitem{Marden2007}
+J.~Marden, G.~Arslan, and J.~Shamma.
+\newblock {Regret based dynamics: convergence in weakly acyclic games}.
+\newblock In {\em Sixth International Joint Conference on Autonomous Agents and
+  Multi-Agent Systems}, volume~5, 2007.
+
+\bibitem{Marden2012}
+J.~Marden and J.~Shamma.
+\newblock {Revisiting log-linear learning: Asynchrony, completeness and
+  payoff-based implementation}.
+\newblock {\em Games and Economic Behavior}, 75(2):788--808, 2012.
+
+\bibitem{Marden2008}
+J.~Marden and A.~Wierman.
+\newblock {Distributed welfare games}.
+\newblock {\em Operations Research}, 61(1):155--168, 2013.
+
+\bibitem{Marden2009}
+J.~Marden, H.~Young, G.~Arslan, and J.~Shamma.
+\newblock {Payoff Based Dynamics for Multi-Player Weakly Acyclic Games}.
+\newblock {\em SIAM Journal on Control and Optimization}, 48(1):373--396, 2009.
+
+\bibitem{Marden2011}
+J.~Marden, H.~Young, and L.~Pao.
+\newblock {Achieving pareto optimality through distributed learning}.
+\newblock dec 2011.
+
+\bibitem{Menache2011}
+I.~Menache and A.~Ozdaglar.
+\newblock {\em {Network Games: Theory, Models, and Dynamics}}.
+\newblock Morgan {\&} Claypool Publishers, 1st edition, 2011.
+
+\bibitem{fp1}
+D.~Monderer and L.~Shapley.
+\newblock {Fictitious Play Property for Games with Identical Interests}.
+\newblock {\em Journal of Economic Theory}, (68):258--265, 1996.
+
+\bibitem{Monderer1996}
+D.~Monderer and L.~Shapley.
+\newblock {Potential games}.
+\newblock {\em Games and Economic Behavior}, 14:124--143, 1996.
+
+\bibitem{Montanari2010}
+A.~Montanari and A.~Saberi.
+\newblock {The spread of innovations in social networks}.
+\newblock {\em Proceedings of the National Academy of Sciences}, pages
+  20196--20201, 2010.
+
+\bibitem{Montenegro2006}
+R.~Montenegro and P.~Tetali.
+\newblock {Mathematical Aspects of Mixing Times in Markov Chains}.
+\newblock {\em Foundations and Trends in Theoretical Computer Science},
+  1(3):237--354, 2006.
+
+\bibitem{Ortiz}
+LE~Ortiz.
+\newblock {Maximum entropy correlated equilibria}.
+\newblock {\em AISTATS}, pages 347--354, 2007.
+
+\bibitem{Papadimitriou2008}
+C.~Papadimitriou and T.~Roughgarden.
+\newblock {Computing correlated equilibria in multi-player games}.
+\newblock {\em Journal of the ACM}, 55(3):1--29, jul 2008.
+
+\bibitem{Pasqualetti2012}
+F.~Pasqualetti, F.~D{\"{o}}rfler, and F.~Bullo.
+\newblock {Cyber-physical security via geometric control: Distributed
+  monitoring and malicious attacks}.
+\newblock {\em Proceedings of the IEEE Conference on Decision and Control},
+  (i):3418--3425, 2012.
+
+\bibitem{Poveda2013}
+J.~Poveda and N.~Quijano.
+\newblock {Distributed Extremum Seeking for Real-Time Resource Allocation}.
+\newblock In {\em American Control Conference}, 2013.
+
+\bibitem{Pradelski2012}
+B.~Pradelski and H.~Young.
+\newblock {Learning efficient Nash equilibria in distributed systems}.
+\newblock 2012.
+
+\bibitem{Shah2010}
+D.~Shah and J.~Shin.
+\newblock {Dynamics in Congestion Games}.
+\newblock In {\em ACM SIGMETRICS International Conference on Measurement and
+  Modeling of Computer Systems}, 2010.
+
+\bibitem{Staudigl2012}
+M.~Staudigl.
+\newblock {Stochastic stability in asymmetric binary choice coordination
+  games}.
+\newblock {\em Games and Economic Behavior}, 75(1):372--401, may 2012.
+
+\bibitem{Ullmann1977}
+E.~Ullmann-Margalit.
+\newblock {\em {The Emergence of Norms}}.
+\newblock Oxford University Press, 1977.
+
+\bibitem{Stengel1997}
+B.~von Stengel and D.~Koller.
+\newblock {Team-Maxmin Equilibria}.
+\newblock {\em Games and Economic Behavior}, 21(1-2):309 -- 321, 1997.
+
+\bibitem{Wolpert1999}
+D.~Wolpert and K.~Tumer.
+\newblock {An Introduction To Collective Intelligence}.
+\newblock Technical report, Handbook of Agent technology. AAAI, 1999.
+
+\bibitem{Wolpert2001}
+D.~Wolpert and K.~Tumer.
+\newblock {Optimal Payoff Functions for Members of Collectives}.
+\newblock {\em Advances in Complex Systems}, 4:265--279, 2001.
+
+\bibitem{Young1993}
+H.~Young.
+\newblock {The Evolution of Conventions}.
+\newblock {\em Econometrica}, 61(1):57--84, 1993.
+
+\bibitem{Young2009}
+H.~Young.
+\newblock {Learning by trial and error}.
+\newblock {\em Games and economic behavior}, 65:626--643, 2009.
+
+\bibitem{Young2011}
+H.~P. Young.
+\newblock {Colloquium Paper: The dynamics of social innovation}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  108:21285--21291, 2011.
+
+\bibitem{Zhu2009}
+M.~Zhu and S.~Martinez.
+\newblock {Distributed coverage games for mobile visual sensors (I): Reaching
+  the set of Nash equilibria}.
+\newblock In {\em Joint 48th IEEE Conference on Decision and Control and 28th
+  Chinese Control Conference}, 2009.
+
+\end{thebibliography}
