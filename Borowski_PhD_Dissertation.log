@@ -1,4 +1,4 @@
-This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  27 JAN 2016 20:36
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=pdflatex 2007.5.18)  1 FEB 2016 19:01
 entering extended mode
 \write18 enabled.
  file:line:error style messages enabled.
@@ -958,359 +958,381 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 19.
 
 
-LaTeX Warning: Reference `' on page 3 undefined on input line 28.
+LaTeX Warning: Citation `Staudigle2012' on page 3 undefined on input line 23.
 
 
-LaTeX Warning: Reference `' on page 3 undefined on input line 28.
+LaTeX Warning: Reference `' on page 3 undefined on input line 34.
 
-[3] [4] [5]
+[3]
 
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@encoding' on input line 117.
+LaTeX Warning: Citation `wolpert' on page 4 undefined on input line 36.
 
 
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<let>-command' on input line 117.
+LaTeX Warning: Citation `mardenpaper' on page 4 undefined on input line 36.
 
 
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
+LaTeX Warning: Citation `shapleypaper' on page 4 undefined on input line 36.
 
 
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@family' on input line 117.
+LaTeX Warning: Reference `' on page 4 undefined on input line 36.
 
 
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
+LaTeX Warning: Reference `' on page 4 undefined on input line 41.
 
+
+LaTeX Warning: Citation `blah' on page 4 undefined on input line 41.
+
+
+LaTeX Warning: Reference `' on page 4 undefined on input line 41.
+
+[4] [5] [6]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@series' on input line 117.
+(hyperref)                removing `\<def>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
+(hyperref)                removing `\f@encoding' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@shape' on input line 117.
+(hyperref)                removing `\<let>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
+(hyperref)                removing `\<def>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\font@name' on input line 117.
+(hyperref)                removing `\f@family' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\OT1/cmr/bx/n/12' on input line 117.
+(hyperref)                removing `\<def>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\spaceskip' on input line 117.
+(hyperref)                removing `\f@series' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\z@' on input line 117.
+(hyperref)                removing `\<def>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 117.
+(hyperref)                removing `\f@shape' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\font@name' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\OT1/cmr/bx/n/12' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\spaceskip' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\z@' on input line 129.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
- 117.
+ 129.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\ignorespaces' on input line 117.
+(hyperref)                removing `\ignorespaces' on input line 129.
 
-[6]
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
-
+[7]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@encoding' on input line 142.
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<let>-command' on input line 142.
+(hyperref)                removing `\f@encoding' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
+(hyperref)                removing `\<let>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@family' on input line 142.
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
+(hyperref)                removing `\f@family' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@series' on input line 142.
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
+(hyperref)                removing `\f@series' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@shape' on input line 142.
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
+(hyperref)                removing `\f@shape' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\font@name' on input line 142.
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\OT1/cmr/bx/n/12' on input line 142.
+(hyperref)                removing `\font@name' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\spaceskip' on input line 142.
+(hyperref)                removing `\OT1/cmr/bx/n/12' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\z@' on input line 142.
+(hyperref)                removing `\spaceskip' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 142.
+(hyperref)                removing `\z@' on input line 154.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
- 142.
+ 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\ignorespaces' on input line 142.
+(hyperref)                removing `\ignorespaces' on input line 154.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@encoding' on input line 146.
+(hyperref)                removing `\f@encoding' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<let>-command' on input line 146.
+(hyperref)                removing `\<let>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@family' on input line 146.
+(hyperref)                removing `\f@family' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@series' on input line 146.
+(hyperref)                removing `\f@series' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@shape' on input line 146.
+(hyperref)                removing `\f@shape' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\font@name' on input line 146.
+(hyperref)                removing `\font@name' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 146.
+(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\spaceskip' on input line 146.
+(hyperref)                removing `\spaceskip' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\z@' on input line 146.
+(hyperref)                removing `\z@' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 146.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
- 146.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\ignorespaces' on input line 146.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@encoding' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<let>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@family' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@series' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@shape' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\font@name' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\spaceskip' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\z@' on input line 148.
-
-
-Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 148.
+(hyperref)                removing `\<def>-command' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
- 148.
+ 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\ignorespaces' on input line 148.
+(hyperref)                removing `\ignorespaces' on input line 158.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@encoding' on input line 150.
+(hyperref)                removing `\f@encoding' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<let>-command' on input line 150.
+(hyperref)                removing `\<let>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@family' on input line 150.
+(hyperref)                removing `\f@family' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@series' on input line 150.
+(hyperref)                removing `\f@series' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\f@shape' on input line 150.
+(hyperref)                removing `\f@shape' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\font@name' on input line 150.
+(hyperref)                removing `\font@name' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 150.
+(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\spaceskip' on input line 150.
+(hyperref)                removing `\spaceskip' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\z@' on input line 150.
+(hyperref)                removing `\z@' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\<def>-command' on input line 150.
+(hyperref)                removing `\<def>-command' on input line 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
- 150.
+ 160.
 
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
-(hyperref)                removing `\ignorespaces' on input line 150.
+(hyperref)                removing `\ignorespaces' on input line 160.
 
-) (./chapter2_semiAnon.tex [7]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@encoding' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@family' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@series' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@shape' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\font@name' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\OT1/cmr/bx/n/10.95' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\spaceskip' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\z@' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\@EverySelectfont@AtNextHook' on input line
+ 162.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\ignorespaces' on input line 162.
+
+) (./chapter2_semiAnon.tex [8]
  \th@ChapterStyle\th@DoChapCenterChapter \th@ChapterStyle 2.
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
@@ -1382,9 +1404,9 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 5.
 
 centered
-[8
+[9
 
-] [9]
+] [10]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 41.
@@ -1454,13 +1476,13 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 41.
 
-[10]
+[11]
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 60.
 
-[11]
+[12]
 Overfull \hbox (5.04799pt too wide) in paragraph at lines 104--106
 []\OT1/cmr/bx/n/10.95 Example 2. []\OT1/cmr/m/n/10.95 Con-sider a re-source al-
 lo-ca-tion game with $\OML/cmm/m/it/10.95 n$ \OT1/cmr/m/n/10.95 play-ers and th
@@ -1468,7 +1490,7 @@ ree re-sources, $\OML/cmm/m/it/10.95 R \OT1/cmr/m/n/10.95 = \OMS/cmsy/m/n/10.95
  f\OML/cmm/m/it/10.95 r[]; r[]; r[]\OMS/cmsy/m/n/10.95 g\OML/cmm/m/it/10.95 :$
  []
 
-[12]
+[13]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 130.
@@ -1538,7 +1560,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 130.
 
-[13]
+[14]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 134.
@@ -1608,7 +1630,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 134.
 
-[14]
+[15]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 154.
@@ -1678,7 +1700,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 154.
 
-[15]
+[16]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 197.
@@ -1748,7 +1770,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 197.
 
-[16] [17]
+[17] [18]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 253.
@@ -1818,49 +1840,49 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 253.
 
-[18] [19]
+[19] [20]
 
 Package amsmath Warning: Foreign command \atopwithdelims;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 310.
 
-[20] <figs/convTimes.pdf, id=647, 722.7pt x 542.025pt>
+[21] <figs/convTimes.pdf, id=658, 722.7pt x 542.025pt>
 File: figs/convTimes.pdf Graphic file (type pdf)
 
-<use figs/convTimes.pdf> [21] [22pdfTeX warning (ext4): destination with the sa
+<use figs/convTimes.pdf> [22] [23pdfTeX warning (ext4): destination with the sa
 me identifier (name{figure.2.1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.401 
        <./figs/convTimes.pdf>]
-<figs/LargeActionSets.pdf, id=709, 1390.19376pt x 789.95125pt>
+<figs/LargeActionSets.pdf, id=721, 1390.19376pt x 789.95125pt>
 File: figs/LargeActionSets.pdf Graphic file (type pdf)
 
-<use figs/LargeActionSets.pdf> [23pdfTeX warning (ext4): destination with the s
+<use figs/LargeActionSets.pdf> [24pdfTeX warning (ext4): destination with the s
 ame identifier (name{figure.2.2}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.424 \end{equation}
-                     <./figs/LargeActionSets.pdf>] [24]
-<figs/SensorTargetErrBars.pdf, id=745, 614.295pt x 794.97pt>
+                     <./figs/LargeActionSets.pdf>] [25]
+<figs/SensorTargetErrBars.pdf, id=756, 614.295pt x 794.97pt>
 File: figs/SensorTargetErrBars.pdf Graphic file (type pdf)
 
-<use figs/SensorTargetErrBars.pdf> [25pdfTeX warning (ext4): destination with t
+<use figs/SensorTargetErrBars.pdf> [26pdfTeX warning (ext4): destination with t
 he same identifier (name{figure.2.3}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.455 \FloatBarrier
-                    <./figs/SensorTargetErrBars.pdf>] [26pdfTeX warning (ext4):
+                    <./figs/SensorTargetErrBars.pdf>] [27pdfTeX warning (ext4):
  destination with the same identifier (name{table.2.1}) has been already used, 
 duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
 l.455 \FloatBarrier
-                   ]) (./chapter3_CCE.tex [27
+                   ]) (./chapter3_CCE.tex [28
 
 ]
  \th@ChapterStyle\th@DoChapCenterChapter \th@ChapterStyle 3.
@@ -1934,9 +1956,9 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1.
 
 centered
-[28
+[29
 
-] [29]
+] [30]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 49.
@@ -2006,7 +2028,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 49.
 
-[30] [31]
+[31] [32]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 110.
@@ -2145,7 +2167,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 114.
 
-[32]
+[33]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 139.
@@ -2215,10 +2237,10 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 139.
 
-<figs/algorithm.pdf, id=827, 1284.8pt x 722.7pt>
+<figs/algorithm.pdf, id=838, 1284.8pt x 722.7pt>
 File: figs/algorithm.pdf Graphic file (type pdf)
  <use figs/algorithm.pdf>
-[33] [34pdfTeX warning (ext4): destination with the same identifier (name{figur
+[34] [35pdfTeX warning (ext4): destination with the same identifier (name{figur
 e.3.1}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2294,7 +2316,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 168.
 
-[35] [36] [37]
+[36] [37] [38]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 323.
@@ -2364,7 +2386,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 323.
 
-[38]
+[39]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 355.
@@ -2434,7 +2456,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 355.
 
-[39]) (./chapter4_adversaries.tex [40] [41]
+[40]) (./chapter4_adversaries.tex [41] [42]
  \th@ChapterStyle\th@DoChapCenterChapter \th@ChapterStyle 4.
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
@@ -2506,9 +2528,9 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1.
 
 centered
-[42
+[43
 
-] [43] [44]
+] [44] [45]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 55.
@@ -2578,7 +2600,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 55.
 
-[45] [46]
+[46] [47]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 101.
@@ -2652,7 +2674,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `!tbp') on input line 113.
 
-<figs/Presentation2.pdf, id=1018, 722.7pt x 542.025pt>
+<figs/Presentation2.pdf, id=1031, 722.7pt x 542.025pt>
 File: figs/Presentation2.pdf Graphic file (type pdf)
 
 <use figs/Presentation2.pdf>
@@ -2725,7 +2747,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 119.
 
-[47]
+[48]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 122.
@@ -2795,7 +2817,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 122.
 
-[48pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
+[49pdfTeX warning (ext4): destination with the same identifier (name{figure.4.1
 }) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
@@ -2871,7 +2893,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 143.
 
-[49] [50]
+[50] [51]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 214.
@@ -3010,7 +3032,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 232.
 
-[51] [52]) (./chapter5_conclusion.tex [53]
+[52] [53]) (./chapter5_conclusion.tex [54]
  \th@ChapterStyle\th@DoChapCenterChapter \th@ChapterStyle 5.
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
@@ -3082,7 +3104,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1.
 
 centered
-) (./Borowski_PhD_Dissertation.bbl [54
+) (./Borowski_PhD_Dissertation.bbl [55
 
 ]
 centered
@@ -3224,7 +3246,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1.
 
-[55
+[56
 
 ]
 Missing character: There is no Å in font cmr10!
@@ -3240,7 +3262,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--143
 |   []\OT1/cmr/m/n/10.95 .
  []
 
-[56] [57]) (./appendix_technicalPrelims.tex [58]
+[57] [58]) (./appendix_technicalPrelims.tex [59]
  \th@ChapterStyle\th@DoChapCenterAppendix \th@ChapterStyle A.
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
@@ -3381,7 +3403,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 3.
 
-[59
+[60
 
 ]
 
@@ -3453,7 +3475,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 49.
 
-[60] [61]) (./appendix_proofs.tex [62]
+[61] [62]) (./appendix_proofs.tex [63]
  \th@ChapterStyle\th@DoChapCenterAppendix \th@ChapterStyle B.
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
@@ -3663,7 +3685,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 7.
 
-[63
+[64
 
 ]
 Overfull \hbox (14.56744pt too wide) in paragraph at lines 37--40
@@ -3674,7 +3696,7 @@ MS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 N; \OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10
 /m/it/10.95 U[]\OMS/cmsy/m/n/10.95 gg$
  []
 
-[64]
+[65]
 Overfull \hbox (28.35368pt too wide) in paragraph at lines 54--55
 []$\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 x[]; x[]\OT1/cmr/m/n/10.95 ) = (\OML
 /cmm/m/it/10.95 x[]; x[]; [] ; x[]\OT1/cmr/m/n/10.95 ) \OMS/cmsy/m/n/10.95 2 \O
@@ -3752,7 +3774,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 60.
 
-[65] [66] [67] [68] [69] [70] [71]
+[66] [67] [68] [69] [70] [71] [72]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 378.
@@ -3822,7 +3844,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 378.
 
-[72] [73]
+[73] [74]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 446.
@@ -3892,12 +3914,12 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 446.
 
-[74]
+[75]
 
-LaTeX Warning: Reference `e:another equation' on page 75 undefined on input lin
+LaTeX Warning: Reference `e:another equation' on page 76 undefined on input lin
 e 476.
 
-[75] [76]
+[76] [77]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 577.
@@ -3967,10 +3989,10 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 577.
 
-[77] [78]
+[78] [79]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 656.
- [79] [80] [81] [82] [83] [84]
+ [80] [81] [82] [83] [84] [85]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 873.
@@ -4040,7 +4062,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 873.
 
-[85] [86]
+[86] [87]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 1053.
@@ -4110,7 +4132,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1053.
 
-[87]
+[88]
 Overfull \hbox (4.99434pt too wide) in paragraph at lines 1083--1085
 \OT1/cmr/m/n/10.95 Here, each state in $\OML/cmm/m/it/10.95 C[] \OMS/cmsy/m/n/1
 0.95 n f\OML/cmm/m/it/10.95 x\OMS/cmsy/m/n/10.95 g$ \OT1/cmr/m/n/10.95 must hav
@@ -4126,7 +4148,7 @@ have an ex-it-ing edge, which con-tributes re-sis-tance $[] \OML/cmm/m/it/10.95
  c \OT1/cmr/m/n/10.95 +
  []
 
-[88] [89]
+[89] [90]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 1190.
@@ -4265,7 +4287,7 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1194.
 
-[90]
+[91]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 1216.
@@ -4339,8 +4361,8 @@ LaTeX Font Info:    Try loading font information for U+dsrom on input line 1220
 .
 (/usr/local/texlive/2007/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-) [91]
-[92]
+) [92]
+[93]
 
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\<def>-command' on input line 1323.
@@ -4410,14 +4432,14 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1323.
 
-[93]
+[94]
 
-LaTeX Warning: Reference `t:resistance trees theorem' on page 94 undefined on i
+LaTeX Warning: Reference `t:resistance trees theorem' on page 95 undefined on i
 nput line 1367.
 
-[94] [95]
+[95] [96]
 
-LaTeX Warning: Reference `t:resistance trees theorem' on page 96 undefined on i
+LaTeX Warning: Reference `t:resistance trees theorem' on page 97 undefined on i
 nput line 1406.
 
 
@@ -4490,10 +4512,10 @@ Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
 (hyperref)                removing `\ignorespaces' on input line 1409.
 
 
-LaTeX Warning: Reference `t:resistance trees theorem' on page 96 undefined on i
+LaTeX Warning: Reference `t:resistance trees theorem' on page 97 undefined on i
 nput line 1434.
 
-[96]) [97] (./Borowski_PhD_Dissertation.aux)
+[97]) [98] (./Borowski_PhD_Dissertation.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -4502,10 +4524,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 16226 strings out of 94073
- 288429 string characters out of 1162984
- 357002 words of memory out of 1500000
- 18668 multiletter control sequences out of 10000+50000
+ 16230 strings out of 94073
+ 288454 string characters out of 1162984
+ 356978 words of memory out of 1500000
+ 18672 multiletter control sequences out of 10000+50000
  20777 words of font info for 78 fonts, out of 1200000 for 2000
  645 hyphenation exceptions out of 8191
  63i,17n,80p,1913b,690s stack positions out of 5000i,500n,6000p,200000b,5000s
@@ -4538,9 +4560,9 @@ xlive/2007/texmf-dist/fonts/type1/bluesky/cm/cmti10.pfb></usr/local/texlive/200
 dist/fonts/type1/public/cmex/fmex8.pfb></usr/local/texlive/2007/texmf-dist/font
 s/type1/bluesky/ams/msbm10.pfb></usr/local/texlive/2007/texmf-dist/fonts/type1/
 bluesky/ams/msbm7.pfb>
-Output written on Borowski_PhD_Dissertation.pdf (105 pages, 952732 bytes).
+Output written on Borowski_PhD_Dissertation.pdf (106 pages, 955861 bytes).
 PDF statistics:
- 1866 PDF objects out of 2073 (max. 8388607)
+ 1873 PDF objects out of 2073 (max. 8388607)
  448 named destinations out of 1000 (max. 131072)
  476 words of extra memory for PDF output out of 10000 (max. 10000000)
 

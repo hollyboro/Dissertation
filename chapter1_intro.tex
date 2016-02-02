@@ -27,31 +27,20 @@ Game theory has recently emerged as a framework for assigning agents' local cont
 
 %\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
 
-\noindent{\it Utility functions: what should agents optimize?}An agent's local utility function dictates {\it what} it should seek to optimize. Effective utility functions are aligned with the global objective. This means that when the system is near a globally optimal configuration, individual agents are performing well with respect to their local utility functions, given others' collective behavior.  An agent's utility function typically depends on its own action choice and on the actions of others. Utilities are frequently designed to be interdependent in this way to reflect the fact that an agent's best action with respect to the system objective function depends on others' behavior. For example, if a subset of agents were to fail, changes to the the remaining agents' utilities can motivate them to adjust their behavior accordingly.
+\noindent{\it Utility functions: what should agents optimize?}  
 
-However, interdependence in agents' utility functions adds complexity to the optimization problem. Individual agents do not have full control over the function they aim to optimize. Therefore, if agents simply optimize their utility functions, this may lead to undesirable collective behavior, as we will show in Example~\ref{}. \todo[inline]{add an example here} 
+An agent's local utility function dictates {\it what} it should seek to optimize. Effective utility functions are aligned with the global objective. This means when the system is near a globally optimal configuration, individual agents are performing well with respect to their local utility functions, given others' collective behavior.  An agent's utility function typically depends on its own action choice and on the actions of others. This interdependence results from the fact that an agent's best action with respect to the system objective often depends on others' behavior. For example, if a subset of agents were to fail, changes to the the remaining agents' utilities can motivate them to adjust their behavior accordingly.
 
+However, interdependence in agents' utility functions adds complexity to the optimization problem. Individual agents do not have full control over the function they aim to optimize. Therefore, if agents simply optimize their utility functions, this may lead to undesirable collective behavior, as we show in Example~\ref{}. \todo[inline]{add an example here}
 
-
-%Local utility functions typically align with the global objective: when collective behavior is near-optimal with respect to the system level objective function, then each agent's  action should also be near-optimal with respect to it's local utility function, {\it given other agents' current behavior}. Local utility functions are often highly coupled, i.e., an agent's utility typically depends not only on its own action, but also on other agents' actions. This coupling enables an often desirable aspect of behavior in a multi-agent system: agents should respond to one another's actions. For example, if some subset of agents were to fail, this would impact the remaining agents' utility functions, providing the impetus for these remaining agents to pick up the slack
-
-
-%Desired performance guarantees frequently leads to highly coupled agent utility functions, e.g., if some subset of agents fail, this should lead to a utility decrease in the remaining agents
+Well-studied utility functions from the literature include {\it marginal contribution} \cite{wolpert}, {\it equal share} \cite{marden paper}, and {\it Shapley value} \cite{shapley paper} utilities. This dissertation will primarily focus on marginal contribution utilities, to be introduced in Section~\ref{}, but will also consider others. 
 
 
+\noindent{\it Learning rules: how should agents optimize?} 
 
-%, i.e., when the system as a whole is performing optimally, then each agent should also be performing optimally within
+An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as saw in Example~\ref{}. Hence, many alternative learning rules, such as log-linear learning \cite{Blume1993}, regret matching \cite{blah}, or fictitious play \cite{blah}, have been studied in the literature. \todo{cite some learning rules here}. In this dissertation, we primarily focus on noisy best response rules, such as log-linear learning, which we describe in detail in Section~\ref{}.
 
-
-%, and typically depends on the agent's own actions and on locally available information about other agents' behavior and the surrounding environment. 
-
-
-%The structure of system level objectives often leads to highly coupled agent utilities. This means that agents do not have full control over the quantity they seek to optimize, i.e., agents are ``optimizing among optimizers." %\todo[inline]{Find a quote from Jeff to put here. And make it sound a little nicer. Maybe reference a review of various objectives (if it's included) that will come later...Also possibly add some example utilities here.}
-
-\noindent{\it Learning rules: } An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as we will demonstrate in Example~\ref{}. Hence, many alternative learning rules have been studied in the literature. \todo{cite some learning rules here}. In this dissertation, we primarily focus on noisy best response rules, such as log-linear learning, which we describe in detail in Section~\ref{}.
-%\todo[inline]{think about adding a list of learning rules here. or maybe just leave it for the figure. ok fine bring back the diagram thingy}
-
-The combination of agents' utility functions and learning rules dictates system dynamics, and hence determines both (1) performance with respect to the system level objective, and (2) speed of convergence. \todo[inline]{Something about vulnerability here...}
+The combination of agents' utility functions and learning rules dictates system dynamics, and hence determines both (1) performance with respect to the system level objective, and (2) speed of convergence. Furthermore, agents' ability to evaluate their utility functions depends on locally available information. Thus, information available to agents also impacts system dynamics, and becomes a potential source for vulnerability.
 
 
 
@@ -62,13 +51,15 @@ The following informally summarizes this dissertation's primary contributions fo
 %Emergent collective behavior for such revision strategies has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
 %\begin{description}[leftmargin=*]
-\noindent{\it\emph{Research question: When is fast convergence to near-optimal collective behavior possible? }}
+\noindent{\it\emph{Research question \#1: When is fast convergence to near-optimal collective behavior possible in a distributed system? }}
 
 \smallskip
 
 \noindent \textbf{Contribution: Fast convergence to near-optimal collective behavior is possible when agents revise their actions according a a mild variant of log-linear learning, provided agents' utilities are their marginal contribution to the system level objective, and heterogeneity among agents is limited.}
 %\end{description}
 
+
+\todo[inline]{check research questions for consistency}
 
 %Emergent collective behavior for game theoretic learning rules has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
