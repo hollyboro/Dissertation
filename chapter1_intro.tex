@@ -33,17 +33,17 @@ However, interdependence in agents' utility functions adds complexity to the opt
 
 
 
-Local utility functions typically align with the global objective: when collective behavior is near-optimal with respect to the system level objective function, then each agent's  action should also be near-optimal with respect to it's local utility function, {\it given other agents' current behavior}. Local utility functions are often highly coupled, i.e., an agent's utility typically depends not only on its own action, but also on other agents' actions. This coupling enables an often desirable aspect of behavior in a multi-agent system: agents should respond to one another's actions. For example, if some subset of agents were to fail, this would impact the remaining agents' utility functions, providing the impetus for these remaining agents to pick up the slack
+%Local utility functions typically align with the global objective: when collective behavior is near-optimal with respect to the system level objective function, then each agent's  action should also be near-optimal with respect to it's local utility function, {\it given other agents' current behavior}. Local utility functions are often highly coupled, i.e., an agent's utility typically depends not only on its own action, but also on other agents' actions. This coupling enables an often desirable aspect of behavior in a multi-agent system: agents should respond to one another's actions. For example, if some subset of agents were to fail, this would impact the remaining agents' utility functions, providing the impetus for these remaining agents to pick up the slack
 
 
-Desired performance guarantees frequently leads to highly coupled agent utility functions, e.g., if some subset of agents fail, this should lead to a utility decrease in the remaining agents
+%Desired performance guarantees frequently leads to highly coupled agent utility functions, e.g., if some subset of agents fail, this should lead to a utility decrease in the remaining agents
 
 
 
-, i.e., when the system as a whole is performing optimally, then each agent should also be performing optimally within
+%, i.e., when the system as a whole is performing optimally, then each agent should also be performing optimally within
 
 
-, and typically depends on the agent's own actions and on locally available information about other agents' behavior and the surrounding environment. 
+%, and typically depends on the agent's own actions and on locally available information about other agents' behavior and the surrounding environment. 
 
 
 %The structure of system level objectives often leads to highly coupled agent utilities. This means that agents do not have full control over the quantity they seek to optimize, i.e., agents are ``optimizing among optimizers." %\todo[inline]{Find a quote from Jeff to put here. And make it sound a little nicer. Maybe reference a review of various objectives (if it's included) that will come later...Also possibly add some example utilities here.}
