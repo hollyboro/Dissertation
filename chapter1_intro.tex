@@ -10,20 +10,43 @@ In order to address these goals, this dissertation focuses specifically on the f
 %\todo[inline]{try and fit these questions on the first page}
 
 \begin{itemize}[leftmargin=*]
-\item \textbf{When is fast convergence to near-optimal behavior possible?} (Chapter~\ref{ch2})
-\item\textbf{Can agents learn near-optimal correlated behavior despite severely limited information about one another's behavior?} (Chapter~\ref{ch3})
+\item \textbf{When is fast convergence to near-optimal behavior possible in a distributed system?} (Chapter~\ref{ch2})
+\item\textbf{Can agents in a distributed system learn near-optimal correlated behavior despite severely limited information about one another's behavior?} (Chapter~\ref{ch3})
 \item\textbf{How does the structure of agent interaction impact the system's vulnerability to adversarial manipulation?} (Chapter~\ref{ch4})
 \end{itemize}
 
 
 \section{Informal statement of contributions}
 
+Agents' control laws are a crucial component of any multi-agent system. They dictate how individual agents process locally available information to make decisions. Factors that determine the quality of a control law include informational dependencies, asymptotic performance guarantees, convergence rates, and resilience to adversarial influence.
 
-This dissertation focuses on game theoretic methods for distributed control \cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010}.  Here, agents are assigned (1) {\it utility functions}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and (2) {\it learning rules}\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.}, which together comprise a distributed control law. 
+Game theory has recently emerged as a framework for assigning agents' local control laws in a distributed system \cite{Marden2008, Zhu2009, Goto2010, Staudigle2012, Fox2010, Lasaulce2011, Alpcan2010, Han2012, MacKenzie2006, Menache2011}. Here, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
 
-\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
 
-\noindent{\it Utility functions: }An agent's utility function dictates {\it what} it should seek to optimize, and typically depends on its own actions and on information about agents' collective actions along with information about the surrounding environment. The structure of system level objectives often leads to highly coupled agent utilities. This means that agents do not have full control over the quantity they seek to optimize, i.e., agents are ``optimizing among optimizers." %\todo[inline]{Find a quote from Jeff to put here. And make it sound a little nicer. Maybe reference a review of various objectives (if it's included) that will come later...Also possibly add some example utilities here.}
+%This dissertation focuses on game theoretic distributed control methods, which have recently gained traction as a design tool for assigning decision making rules in multi-agent systems\cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010}.  Here, agents are assigned (1) {\it utility functions}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and (2) {\it learning rules}\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.}, which together comprise a distributed control law. 
+
+%\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
+
+\noindent{\it Utility functions: what should agents optimize?}An agent's local utility function dictates {\it what} it should seek to optimize. Effective utility functions are aligned with the global objective. This means that when the system is near a globally optimal configuration, individual agents are performing well with respect to their local utility functions, given others' collective behavior.  An agent's utility function typically depends on its own action choice and on the actions of others. Utilities are frequently designed to be interdependent in this way to reflect the fact that an agent's best action with respect to the system objective function depends on others' behavior. For example, if a subset of agents were to fail, changes to the the remaining agents' utilities can motivate them to adjust their behavior accordingly.
+
+However, interdependence in agents' utility functions adds complexity to the optimization problem. Individual agents do not have full control over the function they aim to optimize. Therefore, if agents simply optimize their utility functions, this may lead to undesirable collective behavior, as we will show in Example~\ref{}. \todo[inline]{add an example here} 
+
+
+
+Local utility functions typically align with the global objective: when collective behavior is near-optimal with respect to the system level objective function, then each agent's  action should also be near-optimal with respect to it's local utility function, {\it given other agents' current behavior}. Local utility functions are often highly coupled, i.e., an agent's utility typically depends not only on its own action, but also on other agents' actions. This coupling enables an often desirable aspect of behavior in a multi-agent system: agents should respond to one another's actions. For example, if some subset of agents were to fail, this would impact the remaining agents' utility functions, providing the impetus for these remaining agents to pick up the slack
+
+
+Desired performance guarantees frequently leads to highly coupled agent utility functions, e.g., if some subset of agents fail, this should lead to a utility decrease in the remaining agents
+
+
+
+, i.e., when the system as a whole is performing optimally, then each agent should also be performing optimally within
+
+
+, and typically depends on the agent's own actions and on locally available information about other agents' behavior and the surrounding environment. 
+
+
+%The structure of system level objectives often leads to highly coupled agent utilities. This means that agents do not have full control over the quantity they seek to optimize, i.e., agents are ``optimizing among optimizers." %\todo[inline]{Find a quote from Jeff to put here. And make it sound a little nicer. Maybe reference a review of various objectives (if it's included) that will come later...Also possibly add some example utilities here.}
 
 \noindent{\it Learning rules: } An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as we will demonstrate in Example~\ref{}. Hence, many alternative learning rules have been studied in the literature. \todo{cite some learning rules here}. In this dissertation, we primarily focus on noisy best response rules, such as log-linear learning, which we describe in detail in Section~\ref{}.
 %\todo[inline]{think about adding a list of learning rules here. or maybe just leave it for the figure. ok fine bring back the diagram thingy}
