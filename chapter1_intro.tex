@@ -4,7 +4,7 @@
 Large scale systems consisting of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. The objectives for these applications are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large multi-agent systems are often controlled in a distributed fashion. Here, individual agents, or subsystems, must make decisions based on local, often incomplete information, potentially exacerbating tradeoffs between performance and speed. Furthermore, the distributed nature of these multi-agent systems may introduce vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.%Furthermore, the distributed nature of these systems could create vulnerability to adversarial manipulation: if an adversary can influence a small subset of agents, the resulting effects may cascade throughout the system, ultimately degrading overall performance.
 
 The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information available to agents in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. %Additionally, I aim to further explore the applicability of game theoretic control laws in physical systems.
-In order to address these goals, this dissertation focuses specifically on the following questions:
+In order to address these goals, we focus specifically on the following questions:
 %I continue to investigate in order to address these research goals are:
 
 %\todo[inline]{try and fit these questions on the first page}
@@ -15,39 +15,91 @@ In order to address these goals, this dissertation focuses specifically on the f
 \item\textbf{How does the structure of agent interaction impact the system's vulnerability to adversarial manipulation?} (Chapter~\ref{ch4})
 \end{itemize}
 
+This dissertation focuses on game theoretic methods of distributed control, which provide a framework for prescribing agents' control laws in a distributed control system \cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010, Lasaulce2011, Alpcan2010, Han2012, MacKenzie2006, Menache2011}. We begin by providing an informal background on game theoretic distributed control, and then we informally state the contributions of this thesis, as prompted by the three research questions above. This informal discussion will be followed by a formal development of necessary background materials, and then a formal summary of  contributions. 
 
-\section{Informal statement of contributions}
+\subsection{Background: Game theoretic distributed control}
 
 Agents' control laws are a crucial component of any multi-agent system. They dictate how individual agents process locally available information to make decisions. Factors that determine the quality of a control law include informational dependencies, asymptotic performance guarantees, convergence rates, and resilience to adversarial influence.
 
-Game theory has recently emerged as a framework for assigning agents' local control laws in a distributed system \cite{Marden2008, Zhu2009, Goto2010, Staudigle2012, Fox2010, Lasaulce2011, Alpcan2010, Han2012, MacKenzie2006, Menache2011}. Here, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
+In a game theoretic control law, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
 
 
 %This dissertation focuses on game theoretic distributed control methods, which have recently gained traction as a design tool for assigning decision making rules in multi-agent systems\cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010}.  Here, agents are assigned (1) {\it utility functions}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and (2) {\it learning rules}\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.}, which together comprise a distributed control law. 
 
 %\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
 
-\noindent{\it Utility functions: what should agents optimize?}  
+\noindent{\it \emph{Utility functions: what should agents optimize?} } 
 
-An agent's local utility function dictates {\it what} it should seek to optimize. Effective utility functions are aligned with the global objective. This means when the system is near a globally optimal configuration, individual agents are performing well with respect to their local utility functions, given others' collective behavior.  An agent's utility function typically depends on its own action choice and on the actions of others. This interdependence results from the fact that an agent's best action with respect to the system objective often depends on others' behavior. For example, if a subset of agents were to fail, changes to the the remaining agents' utilities can motivate them to adjust their behavior accordingly.
+An agent's local utility function dictates {\it what} it should seek to optimize. Well-studied utility functions from the literature include {\it marginal contribution} \cite{wolpert}, {\it equal share} \cite{marden paper}, and {\it Shapley value} \cite{shapley paper} utilities. Effective utility functions are aligned with the global objective function. This means that when the system is near a globally optimal configuration, individual agents are also performing well with respect to their local utility functions.  An agent's individual utility function typically depends on its own action and on available information about other agents' actions. This interdependence is desirable because an agent's best action with respect to the global objective often depends on the behavior of others. For example, if a subset of agents fails, the remaining agents should compensate accordingly; interdependent utility functions can enable this.
 
-However, interdependence in agents' utility functions adds complexity to the optimization problem. Individual agents do not have full control over the function they aim to optimize. Therefore, if agents simply optimize their utility functions, this may lead to undesirable collective behavior, as we show in Example~\ref{}. \todo[inline]{add an example here}
+However, interdependence in agents' utility functions adds complexity to the distributed optimization problem. Individual agents do not have full control over the functions they seek to optimize. This can often lead to the emergence of undesirable equilibria when agents simply respond optimally to others' actions. Example~\ref{e:interdependent utilities} demonstrates a simple situation where undesirable equilibria can emerge when agents simply choose the optimal action, conditioned on others' actions. The emergence of inefficient equilibria motivates the study of alternative decision making rules which can act as methods for selecting desired equilibria.
 
-Well-studied utility functions from the literature include {\it marginal contribution} \cite{wolpert}, {\it equal share} \cite{marden paper}, and {\it Shapley value} \cite{shapley paper} utilities. This dissertation will primarily focus on marginal contribution utilities, to be introduced in Section~\ref{}, but will also consider others. 
+\begin{example}\label{e:interdependent utilities}
+Suppose we have two agents, {\it agent 1} and {\it agent 2}. Each agent can perform one of two tasks, {\it task 1}, which has a value of 10, or {\it task 2}, which has a value of 1.  The two agents can observe each other's behavior, but cannot communicate to coordinate their actions. Suppose that the agents can accomplish either task by working together on it, but they cannot accomplish it if they miscoordinate. This scenario is depicted in Figure~\ref{t:simple coordination}.
+
+Because agents can observe each other's actions, they have sufficient information to evaluate the global objective function. Hence we can simply assign agents' utilities to equal the global objective. In general, this utility assignment is often impossible because agents do not have access to global information. However, even when agents' utilities are equal to the global objective, {\it inefficient Nash equilibria} can emerge.
+
+In this example, there are two Nash equilibria: one efficient equilibrium when the two agents coordinate on task 1, and another inefficient, or suboptimal, equilibrium when the two agents coordinate on task 2. Informally, in a Nash equilibrium, no agent can improve its utility via a unilateral change of action. When agents simply optimize their utilities given others' behavior, they may settle on either an inefficient or an efficient equilibrium. Furthermore, the performance loss associated with inefficient equilibria need not be bounded.
 
 
-\noindent{\it Learning rules: how should agents optimize?} 
 
-An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as saw in Example~\ref{}. Hence, many alternative learning rules, such as log-linear learning \cite{Blume1993}, regret matching \cite{blah}, or fictitious play \cite{blah}, have been studied in the literature. \todo{cite some learning rules here}. In this dissertation, we primarily focus on noisy best response rules, such as log-linear learning, which we describe in detail in Section~\ref{}.
+\begin{figure}
+\begin{center}
+\begin{tabular}{rr|c|c|}
+\multicolumn{1}{c}{}&\multicolumn{3}{c}{\textbf{\underline{System objective}}}\\
+\multicolumn{2}{r}{}&\multicolumn{2}{c}{\textbf{agent 2}}\\
+\multicolumn{2}{r}{}
+ &  \multicolumn{1}{c}{task 1}
+ & \multicolumn{1}{c}{task 2} \\
+\cline{3-4}
+\multirow{2}{*}{\textbf{agent 1}}
+&task 1 & 10 & 0 \\
+\cline{3-4}
+&task 2 & 0 & 1 \\
+\cline{3-4}
+\end{tabular}\quad\quad\quad
+\begin{tabular}{rr|c|c|}
+\multicolumn{1}{c}{}&\multicolumn{3}{c}{\textbf{\underline{Agent utilities}}}\\
+\multicolumn{2}{r}{}&\multicolumn{2}{c}{\textbf{agent 2}}\\
+\multicolumn{2}{r}{}
+ &  \multicolumn{1}{c}{task 1}
+ & \multicolumn{1}{c}{task 2} \\
+\cline{3-4}
+\multirow{2}{*}{\textbf{agent 1}}
+&task 1 & \cellcolor[gray]{0.8}10,10 & 0,0 \\
+\cline{3-4}
+&task 2 & 0,0 & \cellcolor[gray]{0.8}1,1 \\
+\cline{3-4}
+\end{tabular}
+\end{center}
+\caption{A simple coordination task, with the system objective function on the left, and a possible choice of agent utilities on the right. Here, the goal is to design agents' utilities so that they coordinate to accomplish a task. Task 1 is more desirable than task 2. The shaded boxes represent Nash equilibria: neither agent can improve its utility via a unilateral change of action. Coordination on task 2 does not maximize the overall objective or agents' utilities, and is known as an {\it inefficient Nash equilibrium.} One objective in designing effective agent learning rules is to select Nash equilibrium which also maximizes the objective, namely coordination on task 1.}
+\label{t:simple coordination}
+\end{figure}
+
+\FloatBarrier
+\end{example}
+
+
+
+\noindent{\it \emph{Learning rules: how should agents optimize?}} 
+
+An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as shown in Example~\ref{e:interdependent utilities}. Alternative learning rules, such as log-linear learning \cite{Blume1993}, regret matching \cite{blah}, or fictitious play \cite{blah}, have been studied in the literature. \todo{cite some learning rules here}. Noisy best response learning rules are often effective for leading the system toward a global objective optimizer in distributed control systems. Here, agents optimize their utilities most of the time, but occasionally make suboptimal choices. These types of learning rules will be the focus of this dissertation.
 
 The combination of agents' utility functions and learning rules dictates system dynamics, and hence determines both (1) performance with respect to the system level objective, and (2) speed of convergence. Furthermore, agents' ability to evaluate their utility functions depends on locally available information. Thus, information available to agents also impacts system dynamics, and becomes a potential source for vulnerability.
+
+
+
+
+\section{Informal statement of contributions}
+
+
 
 
 
 %Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  
 %\todo[inline]{add utility plus learning rule discussion. also might be good to include the chart, and the phrases ``what should agents optimize" and ``how should agents optimize"}
 
-The following informally summarizes this dissertation's primary contributions for game theoretic distributed control, with respect to the three research questions posed above.
+The following informally summarizes this dissertation's primary contributions in the area of game theoretic distributed control, with respect to the three research questions posed above.
 %Emergent collective behavior for such revision strategies has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
 %\begin{description}[leftmargin=*]
@@ -55,7 +107,7 @@ The following informally summarizes this dissertation's primary contributions fo
 
 \smallskip
 
-\noindent \textbf{Contribution: Fast convergence to near-optimal collective behavior is possible when agents revise their actions according a a mild variant of log-linear learning, provided agents' utilities are their marginal contribution to the system level objective, and heterogeneity among agents is limited.}
+\noindent \textbf{Contribution: Fast convergence to near-optimal collective behavior is possible when agents revise their actions according a a mild variant of log-linear learning, provided (1) agents' utilities are their marginal contribution to the system level objective, and (2) heterogeneity among agents is limited.}
 %\end{description}
 
 
@@ -65,7 +117,7 @@ The following informally summarizes this dissertation's primary contributions fo
 
 One well-studied method of optimizing behavior in a multi-agent system is to assign agent utilities to be their {\it marginal contribution} to the overall system objective \cite{Wolpert1999}, and have agents make decisions according to the {\it log-linear learning} rule \cite{Blume1993}. In log-linear learning, agents primarily choose utility maximizing actions, but choose suboptimally with a small probability that decreases exponentially with respect to the associated payoff loss. In the long run, marginal contribution utilities with log-linear learning dynamics spends the majority of time at the global objective function maximizer. Unfortunately, worst-case convergence times for log-linear learning are known to be exponential in the number of agents, \cite{Shah2010} often rendering this game theoretic control method impractical for large-scale distributed systems. 
 
-However, when system heterogeneity is limited, i.e., agents can be grouped into a small number of populations according to their action sets and impact on the objective function, a variant of log-linear learning achieves improved worst-case convergence times. In Chapter~\ref{ch2}, I build on the work of \cite{Shah2010} to derive this variant, which converges in near-linear time with respect to the number of agents. 
+However, when system heterogeneity is limited, i.e., agents can be grouped into a small number of populations according to their action sets and impact on the objective function, a variant of log-linear learning achieves improved worst-case convergence times. In Chapter~\ref{ch2}, we build on the work of \cite{Shah2010} to derive this variant, which converges in near-linear time with respect to the number of agents. 
 
 
 
@@ -95,7 +147,7 @@ However, when system heterogeneity is limited, i.e., agents can be grouped into 
 
 Significant research has been directed at deriving distributed learning rules that possess desirable asymptotic performance guarantees and convergence rates and enable agents to make decisions based on limited information. The majority of this research has focused on attaining convergence to (pure) Nash equilibria under stringent information conditions \cite{Young2009, Frihauf2012, Foster2006, Boussaton2012, Poveda2013, Gharesifard2012}. Recently, the research focus has shifted to ensuring convergence to alternate types of equilibria that often yield more efficient behavior than Nash equilibria.  In particular, results have emerged that guarantee convergence to Pareto efficient Nash equilibria \cite{Marden2009,Pradelski2012}, potential function maximizers \cite{Blume1993, Marden2012}, welfare maximizing action profiles \cite{Marden2011, Arieli2012}, and the set of correlated equilibria \cite{Hart2000,Marden2013c,Aumann1987,Foster1997}, among others.  
 
-In most cases highlighted above, the derived algorithms guarantee (probabilistic) convergence to the specified equilibria.  However, the class of correlated equilibria has posed significant challenges with regards to this goal. Learning algorithms that converge to an efficient correlated equilibrium are desirable because optimal system behavior can often be characterized by a correlated equilibrium. Unfortunately, the aforementioned learning algorithms, such as regret matching \cite{Hart2000}, merely converge to the \emph{set} of correlated equilibria. This means that the long run behavior does not necessarily constitute -- or even approximate -- a specific correlated equilibrium at any instance of time.
+In most cases highlighted above, the derived algorithms guarantee (probabilistic) convergence to the specified equilibria.  However, the class of correlated equilibria has posed significant challenges with regards to this goal. Learning algorithms that converge to an efficient correlated equilibrium are desirable because optimal system behavior can often be characterized by a correlated equilibrium. Unfortunately, the aforementioned learning algorithms, such as regret matching \cite{Hart2000}, merely converge to the \emph{set} of correlated equilibria. This means that the long run behavior does not necessarily constitute a specific correlated equilibrium at any instance of time.
 
 %We provide a distributed learning algorithm that converges to the most efficient, i.e., welfare maximizing, correlated equilibrium.  
 
@@ -105,7 +157,7 @@ In most cases highlighted above, the derived algorithms guarantee (probabilistic
 
 %Agents' average utilities can often be improved when they act according to a distribution over multiple joint actions, instead of staying fixed at a single joint action.  In many cases, the desired collective behavior constitutes a {\it coarse correlated equilibrium}. A coarse correlated equilibrium is a probability distribution over the joint action space such that no agent can improve its payoff by deviating to a fixed action \cite{Aumann1987}.  Previously, algorithms existed which converged to the {\it set} of coarse correlated equilibrium, e.g., \cite{Hart2000}, without selecting any particular equilibrium; these algorithms provided no performance guarantees. An algorithm which achieves a payoff maximizing coarse correlated equilibrium through deterministic, cyclic behavior is presented in \cite{Marden2013c}. However, predictable cyclic behavior may be undesirable in many settings, e.g., in the presence of an adversary.
 
-In Chapter~\ref{ch3} I design and analyze an algorithm that converges to a payoff maximizing coarse correlated equilibrium when agents have no knowledge of others' behavior. Here, agents' utilities depend on collective behavior, but they have no way of evaluating the utility of alternative actions. My algorithm uses a common random signal as a coordinating entity to eventually drive agents toward the desired collective behavior. In the long run, day to day behavior is selected probabilistically according to the payoff maximizing coarse correlated equilibrium.
+In Chapter~\ref{ch3} we design and analyze an algorithm that converges to a payoff maximizing coarse correlated equilibrium when agents have no knowledge of others' behavior. Here, agents' utilities depend on collective behavior, but they have no way of evaluating the utility of alternative actions. Our algorithm uses a common random signal as a coordinating entity to eventually drive agents toward the desired collective behavior. In the long run, day to day behavior is selected probabilistically according to the payoff maximizing coarse correlated equilibrium.
 
 \todo[inline]{change I's to we's? at least make it consistent}
  
@@ -119,7 +171,7 @@ In Chapter~\ref{ch3} I design and analyze an algorithm that converges to a payof
  \noindent\textbf{Contribution: If every subset of agent interacts with sufficiently many other agents, the system is more resilient to adversarial manipulation.}
 
 
-Agents in a distributed system often interact and share information according to a network. The structure of this network not only has an impact on a distributed control algorithm's performance and speed, but also on its resilience to adversarial manipulation. A loosely connected network may be easier to influence, because an adversary may be able to more easily manipulate the information available to subsets of agents, thereby creating impacts that cascade throughout the system. On the other hand, a well-connected network may be more difficult to influence in this way. In Chapter~\ref{ch4}, I investigate such vulnerabilities for  {\it graphical coordination games} \cite{Ullmann1977,Cooper1999} with agents revising their actions according to log-linear learning. In this work, I provided a condition based on network structure which guarantees resilience in a graphical coordination game. 
+Agents in a distributed system often interact and share information according to a network. The structure of this network not only has an impact on a distributed control algorithm's performance and speed, but also on its resilience to adversarial manipulation. A loosely connected network may be easier to influence, because an adversary may be able to more easily manipulate the information available to subsets of agents, thereby creating impacts that cascade throughout the system. On the other hand, a well-connected network may be more difficult to influence in this way. In Chapter~\ref{ch4}, we investigate such vulnerabilities for  {\it graphical coordination games} \cite{Ullmann1977,Cooper1999} with agents revising their actions according to log-linear learning. Here, we provided a condition based on network structure which guarantees resilience in a graphical coordination game. 
 
 %I am currently working to fully characterize resilient systems for various models of adversarial behavior. I also aim to extend this analysis beyond simple coordination games, to systems with significantly more complex objective functions. Additionally, I am interested in investigating vulnerabilities in real distributed systems, in order to develop mathematical models that more accurately reflect the ways an adversary may seek to impact behavior. \\
 
