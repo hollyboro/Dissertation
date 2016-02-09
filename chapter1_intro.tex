@@ -1,10 +1,30 @@
 \chapter{\Large Introduction}
 \label{introchap}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Introduction								%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Large scale systems consisting of many interacting subsystems are increasingly common, with applications such as computer networks, smart grids, and robotic sensor networks. The objectives for these applications are often complex; even centralized methods must make tradeoffs between performance and speed in order to optimize these non-convex, nonlinear systems. However, due to inherent limitations in computation, communication, or sensing, large multi-agent systems are often controlled in a distributed fashion. Here, individual agents, or subsystems, must make decisions based on local, often incomplete information, potentially exacerbating tradeoffs between performance and speed. Furthermore, the distributed nature of these multi-agent systems may introduce vulnerabilities to adversarial manipulation: by influencing small subsets of agents, a malicious agent may be able to degrade a system's overall performance.
 The overarching goals of this dissertation are to (1) characterize tradeoffs between speed, performance, vulnerability, and information available to agents in distributed control systems, and (2) design algorithms with desirable guarantees in these aspects. 
 In order to address these goals, we focus specifically on the following questions:
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Research Questions							%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{itemize}[leftmargin=*]
 \item \textbf{When is fast convergence to near-optimal behavior possible in a distributed system?} (Chapter~\ref{ch2})
@@ -14,16 +34,22 @@ In order to address these goals, we focus specifically on the following question
 
 This dissertation focuses on game theoretic methods of distributed control, which provide a framework for prescribing agents' control laws in a distributed control system \cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010, Lasaulce2011, Alpcan2010, Han2012, MacKenzie2006, Menache2011}. We begin by providing an informal background on game theoretic distributed control, and then we informally state the contributions of this thesis, as prompted by the three research questions above. This informal discussion will be followed by a formal development of necessary background materials, and then a formal summary of  contributions. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Informal GT background    						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \subsection{Background: Game theoretic distributed control}
 
 Agents' control laws are a crucial component of any multi-agent system. They dictate how individual agents process locally available information to make decisions. Factors that determine the quality of a control law include informational dependencies, asymptotic performance guarantees, convergence rates, and resilience to adversarial influence.
 
 In a game theoretic control law, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
 
-
-%This dissertation focuses on game theoretic distributed control methods, which have recently gained traction as a design tool for assigning decision making rules in multi-agent systems\cite{Marden2008, Zhu2009, Goto2010, Staudigl2012, Fox2010}.  Here, agents are assigned (1) {\it utility functions}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and (2) {\it learning rules}\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.}, which together comprise a distributed control law. 
-
-%\todo[inline]{see wording in CCE chapter (commented out). Sounds a little better maybe}
 
 \noindent{\it \emph{Utility functions: what should agents optimize?} } 
 
@@ -80,12 +106,20 @@ In this example, there are two Nash equilibria: one efficient equilibrium when t
 
 \noindent{\it \emph{Learning rules: how should agents optimize?}} 
 
-An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to simply choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as shown in Example~\ref{e:interdependent utilities}. Alternative learning rules, such as log-linear learning \cite{Blume1993}, regret matching \cite{blah}, or fictitious play \cite{blah}, have been studied in the literature. \todo{cite some learning rules here}. Noisy best response learning rules are often effective for leading the system toward a global objective optimizer in distributed control systems. Here, agents optimize their utilities most of the time, but occasionally make suboptimal choices. These types of learning rules will be the focus of this dissertation.
+An agent's learning rule dictate {\it how} it should optimize its utility function. In some cases, it may suffice for each agent to choose the action which maximizes its utility function, given others' current behavior. This is know as a {\it best response} learning rule. However, in many distributed systems, this approach can lead to undesirable equilibria, as shown in Example~\ref{e:interdependent utilities}. Alternative learning rules, such as log-linear learning \cite{Blume1993}, regret matching \cite{blah}, or fictitious play \cite{blah}, have been studied in the literature. \todo{cite some learning rules here}. Noisy best response learning rules can often lead agents toward a global objective optimizer in distributed control systems. Here, agents optimize their utilities most of the time, but occasionally make suboptimal choices. These types of learning rules will be the focus of this dissertation.
 
 The combination of agents' utility functions and learning rules dictates system dynamics, and hence determines both (1) performance with respect to the system level objective, and (2) speed of convergence. Furthermore, agents' ability to evaluate their utility functions depends on locally available information. Thus, information available to agents also impacts system dynamics, and becomes a potential source for vulnerability.
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Informal statement of contributions				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Informal statement of contributions}
 
@@ -130,40 +164,72 @@ In Chapter~\ref{ch3} we design and analyze an algorithm that converges to a payo
 
 Agents in a distributed system often interact and share information according to a network. The structure of this network not only has an impact on a distributed control algorithm's performance and speed, but also on its resilience to adversarial manipulation. A loosely connected network may be easier to influence, because an adversary may be able to more easily manipulate the information available to subsets of agents, thereby creating impacts that cascade throughout the system. On the other hand, a well-connected network may be more difficult to influence in this way. In Chapter~\ref{ch4}, we investigate such vulnerabilities for  {\it graphical coordination games} \cite{Ullmann1977,Cooper1999} with agents revising their actions according to log-linear learning. Here, we provided a condition based on network structure which guarantees resilience in a graphical coordination game. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%						Technical Preliminaries						%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 
 \section{Technical Preliminaries}
 
-
-\todo[inline]{OK, i took out the utility function + learning rule table, because I think it's distracting. The majority of my work isn't specific to resource allocation games, and doesn't do anything with utility design, so I don't want to discuss it too much. Think about this some more.}
-
-
-\begin{enumerate}
-    \item the setting: a distributed control system. agents, actions, objective function
-    \item Our approach: game theoretic control
-    \begin{enumerate}
-        \item Utility function that maps local information to a utility/payoff. Give a small preview of the types of utility function we use. Appropriate design varies depending on the application. My focus was on learning algorithms, so typically I assigned utilities that made analysis simple in order to gain intuition about the question I was trying to ask. Not sure whether to say this or how to convey it....
-        \item Learning rule that dictates agents' decisions. Our focus is on probabilistic learning rules. Reference Markov chains section in the appendix. Discrete time, so this yields a sequence of joint actions $a(0),a(1),\ldots.$ Small discussion that these are random variables, perhaps. Include an example (LLL) and state that the majority of the dissertation will focus on LLL, with the exception of the CCE work.
-    \end{enumerate}
-    \item Goal (in general): design utilities and learning rules with desired performance
-    \begin{enumerate}
-        \item Desired long run performance. Given parameter $\varepsilon>0$, should be able to tune learning algorithm parameters to achieve:
-        $$\lim_{t\to\infty}\mathbb{E}[ W(a(t)]\geq \max_{a\in\mathcal{A}}W(a) - \varepsilon$$
-        \item Fast convergence rates. Given $\delta > \varepsilon$, desired
-        $$\mathbb{E}[W(a(t))]\geq \max_{a\in\mathcal{A}}W(a) - \delta$$
-        for all $t\geq T$, for some ``reasonable" convergence time $T$. Discussion here that $T$ typically depends on the number of agents, action sets, etc., and can often be exponential in these parameters. Goal here is to design a learning rule that's linear. Reference an example and log-linear learning.
-        \item Resilience to adversaries. Suppose an adversary is able to manipulate information available to small subsets of agents. Is it possible for limited info manipulation to cascade and create catastrophic performance failures? Goal is for it not to be.
-    \end{enumerate}
-\end{enumerate}
+Consider a multi-agent system consisting of agents, $N = \{1,2,\ldots,n\}$. We assume each agent $i\in N$ has a finite action set, $A_i$. The set of joint actions will be denoted by $\mathcal{A} = \prod_{i\in N} A_i$,  and a joint action will be written as $$a = (a_1,a_2,\ldots,a_n)\in\mathcal{A}.$$ We often use the shorthand notation $$(a_i,a_{-i}) := (a_1,a_2,\ldots,a_i,\ldots,a_n)\in\mathcal{A}$$ to represent a joint action when we are focusing on the action of agent $i\in N.$ 
 
 
-\section{Formal statement of contributions}
+Suppose we are given a global objective function, $W:\mathcal{A}\to \mathbb{R}$, which we seek to maximize. Our overarching goal is to assign each agent a {\it utility function} and {\it learning rule} which drives the system toward globally optimal behavior.
 
-Relate to the goals above. State each main theorem as a contribution here. First a reminder of the three main questions.
 
-\subsection{Fast convergence contributions}
+\noindent\emph{Agent utility functions}
 
-\subsection{CCE contributions}
+Each agent, $i\in N$ is assigned a utility function which takes the form $U_i: \mathcal{A}\to\mathbb{R}.$  When agents' information about others' actions is more limited, utilities can be designed accordingly, taking a form such as $U_i:\prod_{j\in N_i\cup \{i\}}A_j,$ where $N_i$ represents the set of agent $i$'s neighbors, as defined by some underlying communication graph. Commonly studied utility functions include marginal contribution \cite{Wolpert1999}, equal share \cite{blah}, and Shapley value \cite{blah} utilities. In this dissertation, we primarily use marginal contribution utilities, as defined below.\footnote{Utility design is a widely studied area in game theory \cite{blah}, and is not a topic of this thesis. We employ well-studied utility functions which are suitable for our distributed optimization purposes, and focus our study on agents' learning rules and communication structure.}
 
-\subsection{Adversarial vulnerability contributions}
+\begin{definition}
 
-\todo[inline]{Add large ``future work" section. There's a lot left to do!}
+\end{definition}
+
+
+%\begin{enumerate}
+%    \item the setting: a distributed control system. agents, actions, objective function
+%    \item Our approach: game theoretic control
+%    \begin{enumerate}
+%        \item Utility function that maps local information to a utility/payoff. Give a small preview of the types of utility function we use. Appropriate design varies depending on the application. My focus was on learning algorithms, so typically I assigned utilities that made analysis simple in order to gain intuition about the question I was trying to ask. Not sure whether to say this or how to convey it....
+%        \item Learning rule that dictates agents' decisions. Our focus is on probabilistic learning rules. Reference Markov chains section in the appendix. Discrete time, so this yields a sequence of joint actions $a(0),a(1),\ldots.$ Small discussion that these are random variables, perhaps. Include an example (LLL) and state that the majority of the dissertation will focus on LLL, with the exception of the CCE work.
+%    \end{enumerate}
+%    \item Goal (in general): design utilities and learning rules with desired performance
+%    \begin{enumerate}
+%        \item Desired long run performance. Given parameter $\varepsilon>0$, should be able to tune learning algorithm parameters to achieve:
+%        $$\lim_{t\to\infty}\mathbb{E}[ W(a(t)]\geq \max_{a\in\mathcal{A}}W(a) - \varepsilon$$
+%        \item Fast convergence rates. Given $\delta > \varepsilon$, desired
+%        $$\mathbb{E}[W(a(t))]\geq \max_{a\in\mathcal{A}}W(a) - \delta$$
+%        for all $t\geq T$, for some ``reasonable" convergence time $T$. Discussion here that $T$ typically depends on the number of agents, action sets, etc., and can often be exponential in these parameters. Goal here is to design a learning rule that's linear. Reference an example and log-linear learning.
+%        \item Resilience to adversaries. Suppose an adversary is able to manipulate information available to small subsets of agents. Is it possible for limited info manipulation to cascade and create catastrophic performance failures? Goal is for it not to be.
+%    \end{enumerate}
+%\end{enumerate}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%						Formal statement of contributions				%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%\section{Formal statement of contributions}
+%
+%Relate to the goals above. State each main theorem as a contribution here. First a reminder of the three main questions.
+%
+%\subsection{Fast convergence contributions}
+%
+%\subsection{CCE contributions}
+%
+%\subsection{Adversarial vulnerability contributions}
+%
+%\todo[inline]{Add large ``future work" section. There's a lot left to do!}
