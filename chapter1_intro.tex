@@ -48,7 +48,7 @@ This dissertation focuses on game theoretic methods of distributed control, whic
 
 Agents' control laws are a crucial component of any multi-agent system. They dictate how individual agents process locally available information to make decisions. Factors that determine the quality of a control law include informational dependencies, asymptotic performance guarantees, convergence rates, and resilience to adversarial influence.
 
-In a game theoretic control law, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function.} and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
+In a game theoretic control law, each agent is assigned a {\it utility function}\footnote{The terms ``utility" and ``payoff" will refer to individual agents' utility functions, whereas ``objective" or ``welfare" will refer to the system level objective function. Note that in the social sciences literature, ``welfare" often refers to the sum of agents' utilities; in this dissertation the term will be used more broadly. By design, maximization of the global objective function will often coincide with maximization of the sum of agents' utilities. } and a {\it learning rule}.\footnote{The terms ``learning rule," ``revision strategy," and ``decision making strategy" will all refer to individual agents' learning rules.} Significant research has been directed at deriving distributed utility functions and learning rules that possess desirable performance guarantees and enable agents to make decisions based on limited information.
 
 
 \noindent{\it \emph{Utility functions: what should agents optimize?} } 
@@ -58,11 +58,11 @@ An agent's local utility function dictates {\it what} it should seek to optimize
 However, interdependence in agents' utility functions adds complexity to the distributed optimization problem. Individual agents do not have full control over the functions they seek to optimize. This can often lead to the emergence of undesirable equilibria when agents simply respond optimally to others' actions. Example~\ref{e:interdependent utilities} demonstrates a simple situation where undesirable equilibria can emerge when agents simply choose the optimal action, conditioned on others' actions. The emergence of inefficient equilibria motivates the study of alternative decision making rules which can act as methods for selecting desired equilibria.
 
 \begin{example}\label{e:interdependent utilities}
-Suppose we have two agents, {\it agent 1} and {\it agent 2}. Each agent can perform one of two tasks, {\it task 1}, which has a value of 10, or {\it task 2}, which has a value of 1.  The two agents can observe each other's behavior, but cannot communicate to coordinate their actions. Suppose that the agents can accomplish either task by working together on it, but they cannot accomplish it if they miscoordinate. This scenario is depicted in Figure~\ref{t:simple coordination}.
+Suppose we have two agents, {\it agent 1} and {\it agent 2}. Each agent can perform one of two tasks, {\it task 1}, which has a value of 10, or {\it task 2}, which has a value of 1.  The two agents can observe each other's behavior, but cannot communicate to coordinate their actions. Suppose that the agents can accomplish either task by working together on it, but they cannot accomplish either if they miscoordinate. This scenario is depicted in Figure~\ref{t:simple coordination}.
 
-Because agents can observe each other's actions, they have sufficient information to evaluate the global objective function. Hence we can simply assign agents' utilities to equal the global objective. In general, this utility assignment is often impossible because agents do not have access to global information. However, even when agents' utilities are equal to the global objective, {\it inefficient Nash equilibria} can emerge.
+Because the agents can observe each other's actions, they have sufficient information to evaluate the global objective function. Hence we can simply assign agents' utilities to equal the global objective.\footnote{Assigning utilities equal to the global welfare is often impossible because agents may not have access to global information.} Even in this simple situation, where agents have global information and full knowledge of the system objective function, inefficient Nash equilibria can emerge.
 
-In this example, there are two Nash equilibria: one efficient equilibrium when the two agents coordinate on task 1, and another inefficient, or suboptimal, equilibrium when the two agents coordinate on task 2. Informally, in a Nash equilibrium, no agent can improve its utility via a unilateral change of action. When agents simply optimize their utilities given others' behavior, they may settle on either an inefficient or an efficient equilibrium. Furthermore, the performance loss associated with inefficient equilibria need not be bounded.
+Informally, in a Nash equilibrium, no agent can improve its utility via a unilateral change of action. In this example, there are two Nash equilibria: an {\it efficient}, or welfare maximizing, equilibrium when the two agents coordinate on task 1, and another {\it inefficient}, or suboptimal, equilibrium when the two agents coordinate on task 2. When agents simply optimize their utilities given others' behavior, they may settle on either an inefficient or an efficient equilibrium. Furthermore, the performance loss associated with inefficient equilibria, is not necessarily bounded. In this example, the difference in value between task 1 and task 2 could be very large, but collaboration on the less valuable task would remain a Nash equilibrium and a possible rest point of a simple utility maximization strategy.
 
 
 
@@ -178,19 +178,29 @@ Agents in a distributed system often interact and share information according to
 
 \section{Technical Preliminaries}
 
-Consider a multi-agent system consisting of agents, $N = \{1,2,\ldots,n\}$. We assume each agent $i\in N$ has a finite action set, $A_i$. The set of joint actions will be denoted by $\mathcal{A} = \prod_{i\in N} A_i$,  and a joint action will be written as $$a = (a_1,a_2,\ldots,a_n)\in\mathcal{A}.$$ We often use the shorthand notation $$(a_i,a_{-i}) := (a_1,a_2,\ldots,a_i,\ldots,a_n)\in\mathcal{A}$$ to represent a joint action when we are focusing on the action of agent $i\in N.$ 
+Consider a multi-agent system consisting of agents, $N = \{1,2,\ldots,n\}$. We assume each agent $i\in N$ has a finite action set, $A_i$. The set of joint actions will be denoted by $\mathcal{A} = \prod_{i\in N} A_i$,  and a joint action will be written as $$a = (a_1,a_2,\ldots,a_n)\in\mathcal{A},$$ or using the shorthand notation $$(a_i,a_{-i}) := (a_1,a_2,\ldots,a_i,\ldots,a_n)\in\mathcal{A}.$$ 
 
 
-Suppose we are given a global objective function, $W:\mathcal{A}\to \mathbb{R}$, which we seek to maximize. Our overarching goal is to assign each agent a {\it utility function} and {\it learning rule} which drives the system toward globally optimal behavior.
+Suppose we seek design agents local control laws in order to maximize the global objective function, $W:\mathcal{A}\to \mathbb{R}.$ Here, an agent's control law will be defined by a {\it utility function} and {\it learning rule}.
 
 
 \noindent\emph{Agent utility functions}
 
-Each agent, $i\in N$ is assigned a utility function of the form $U_i: \mathcal{A}\to\mathbb{R}.$  When agents' information about others' actions is more limited, utilities can be designed accordingly, taking a form such as $U_i:\prod_{j\in N_i\cup \{i\}}A_j,$ where $N_i$ represents the set of agent $i$'s neighbors, as defined by some underlying communication graph. Commonly studied utility functions include marginal contribution \cite{Wolpert1999}, equal share \cite{blah}, and Shapley value \cite{blah} utilities. In this dissertation, we primarily use marginal contribution utilities, as defined below.\footnote{Utility design is a widely studied area in game theory \cite{blah}, and is not a topic of this thesis. We employ well-studied utility functions which are suitable for our distributed optimization purposes, and focus our study on agents' learning rules and communication structure.}
 
-\begin{definition}
+Each agent, $i\in N$, is assigned a utility function, $U_i: \mathcal{A}\to\mathbb{R},$ which maps each joint action to a value in $\R.$  When agents' information about others' actions is more limited, utilities can be designed accordingly, e.g., taking the form $U_i:\prod_{j\in N_i\cup \{i\}}A_j\to \R,$ where $N_i$ represents the set of agent $i$'s neighbors, as defined by some underlying communication graph. Alternatively, agent utilities may also incorporate additional information about an underlying system state, e.g., $U_i:\mathcal{A}\times X\to \R$, where $X$ represents a set of possible states of the surrounding environment.
 
-\end{definition}
+
+Commonly studied utility functions include marginal contribution \cite{Wolpert1999}, equal share \cite{blah}, and Shapley value \cite{blah} utilities. In this dissertation, we focus primarily on marginal contribution utilities, as defined below.\footnote{Utility design is a widely studied area in game theory \cite{blah}, and is not a topic of this thesis. We employ well-studied utility functions which are suitable for our distributed optimization purposes, and focus our study on agents' learning rules and communication structure.}
+
+\begin{defn}
+Given system objective function, $W:\mathcal{A}\to\R$, an agent's {\it marginal contribution} corresponding to joint action $a = (a_i,a_{-i})\in \mathcal{A}$ is defined by:
+$${\rm MC}_i(a) = W(a) - W(\emptyset,a_{-i}),$$
+where $(\emptyset,a_{-i})$ represents the joint action where agent $i$ is removed from the system, and all other agents' actions are as in joint action $a.$
+\end{defn}
+
+
+
+By assigning agents' utilities equal to their marginal contributions to the system objective,
 
 
 %\begin{enumerate}
