@@ -60,7 +60,7 @@ However, interdependence in agents' utility functions adds complexity to the dis
 \begin{example}\label{e:interdependent utilities}
 Suppose we have two agents, {\it agent 1} and {\it agent 2}. Each agent can perform one of two tasks, {\it task 1}, which has a value of 10, or {\it task 2}, which has a value of 1.  The two agents can observe each other's behavior, but cannot communicate to coordinate their actions. Suppose that the agents can accomplish either task by working together on it, but they cannot accomplish either if they miscoordinate. This scenario is depicted in Figure~\ref{t:simple coordination}.
 
-Because the agents can observe each other's actions, they have sufficient information to evaluate the global objective function. Hence we can simply assign agents' utilities to equal the global objective.\footnote{Assigning utilities equal to the global welfare is often impossible because agents may not have access to global information.} Even in this simple situation, where agents have global information and full knowledge of the system objective function, inefficient Nash equilibria can emerge.
+Because the agents can observe each other's actions, they have sufficient information to evaluate the global objective function. Hence we can simply assign agents' utilities to equal the global objective.\footnote{Assigning utilities equal to the global welfare is often impossible when agents do not have access to global information about others' actions.} Even in this simple situation, where agents have global knowledge of the system objective function and their utilities are exactly equal, inefficient Nash equilibria can emerge.
 
 Informally, in a Nash equilibrium, no agent can improve its utility via a unilateral change of action. In this example, there are two Nash equilibria: an {\it efficient}, or welfare maximizing, equilibrium when the two agents coordinate on task 1, and another {\it inefficient}, or suboptimal, equilibrium when the two agents coordinate on task 2. When agents simply optimize their utilities given others' behavior, they may settle on either an inefficient or an efficient equilibrium. Furthermore, the performance loss associated with inefficient equilibria, is not necessarily bounded. In this example, the difference in value between task 1 and task 2 could be very large, but collaboration on the less valuable task would remain a Nash equilibrium and a possible rest point of a simple utility maximization strategy.
 
@@ -178,29 +178,97 @@ Agents in a distributed system often interact and share information according to
 
 \section{Technical Preliminaries}
 
-Consider a multi-agent system consisting of agents, $N = \{1,2,\ldots,n\}$. We assume each agent $i\in N$ has a finite action set, $A_i$. The set of joint actions will be denoted by $\mathcal{A} = \prod_{i\in N} A_i$,  and a joint action will be written as $$a = (a_1,a_2,\ldots,a_n)\in\mathcal{A},$$ or using the shorthand notation $$(a_i,a_{-i}) := (a_1,a_2,\ldots,a_i,\ldots,a_n)\in\mathcal{A}.$$ 
+In this section, we provide technical motivation for the study of game theoretic control algorithms, and we also establish the technical background and notation necessary to formally state the main contributions of this dissertation.
+
+Consider a multi-agent system consisting of agents, $N = \{1,2,\ldots,n\}$, where each agent $i\in N$ has a finite action set, $A_i$. The set of joint actions will be denoted by $\mathcal{A} = \prod_{i\in N} A_i$,  and a joint action will be written as $$a = (a_1,a_2,\ldots,a_n)\in\mathcal{A},$$ or using the shorthand notation $$(a_i,a_{-i}) := (a_1,a_2,\ldots,a_i,\ldots,a_n)\in\mathcal{A}.$$ 
 
 
-Suppose we seek design agents local control laws in order to maximize the global objective function, $W:\mathcal{A}\to \mathbb{R}.$ Here, an agent's control law will be defined by a {\it utility function} and {\it learning rule}.
+Suppose we aim to design agents' local control laws in order to maximize the global objective function, $W:\mathcal{A}\to \mathbb{R}.$ Here, an agent's control law will be defined by a {\it utility function} and {\it learning rule}.
 
 
-\noindent\emph{Agent utility functions}
+\subsection{Agent utility functions}
 
 
 Each agent, $i\in N$, is assigned a utility function, $U_i: \mathcal{A}\to\mathbb{R},$ which maps each joint action to a value in $\R.$  When agents' information about others' actions is more limited, utilities can be designed accordingly, e.g., taking the form $U_i:\prod_{j\in N_i\cup \{i\}}A_j\to \R,$ where $N_i$ represents the set of agent $i$'s neighbors, as defined by some underlying communication graph. Alternatively, agent utilities may also incorporate additional information about an underlying system state, e.g., $U_i:\mathcal{A}\times X\to \R$, where $X$ represents a set of possible states of the surrounding environment.
 
-
-Commonly studied utility functions include marginal contribution \cite{Wolpert1999}, equal share \cite{blah}, and Shapley value \cite{blah} utilities. In this dissertation, we focus primarily on marginal contribution utilities, as defined below.\footnote{Utility design is a widely studied area in game theory \cite{blah}, and is not a topic of this thesis. We employ well-studied utility functions which are suitable for our distributed optimization purposes, and focus our study on agents' learning rules and communication structure.}
+We have now formally defined all the elements of a game.
 
 \begin{defn}
-Given system objective function, $W:\mathcal{A}\to\R$, an agent's {\it marginal contribution} corresponding to joint action $a = (a_i,a_{-i})\in \mathcal{A}$ is defined by:
-$${\rm MC}_i(a) = W(a) - W(\emptyset,a_{-i}),$$
-where $(\emptyset,a_{-i})$ represents the joint action where agent $i$ is removed from the system, and all other agents' actions are as in joint action $a.$
+A {\it game} is a tuple $(N,\{A_i\}_{i\in N}, \{U_i\}_{i\in N})$ consisting of a set of agents, $N$, and their associated action sets, $\{A_i\}_{i\in N}$, and utility functions, $\{U_i\}_{i\in N}$.
+\end{defn}
+
+Prior to defining dynamics over a game, $G$, we often view the Nash equilibrium as a natural rest point, since it occurs when no agent can improve its utility by unilaterally changing its action.
+
+\begin{defn}
+For a game $G = \left(N,\{A_i\}_{i\in N},\{U_i\}_{i\in N}\right),$ action profile $a = (a_i,a_{-i})\in \mathcal{A}$ is a {\it Nash equilibrium} \cite{add citation} if it satisfies:
+$$U_i(a)\geq U_i(a_i^\prime,a_{-i}),\quad \forall i\in N, a_i^\prime\in A_i$$
 \end{defn}
 
 
+Commonly studied utility functions include marginal contribution \cite{Wolpert1999}, equal share \cite{blah}, and Shapley value \cite{blah} utilities. In this dissertation, we focus primarily on marginal contribution utilities, as defined below.\footnote{Utility design is a widely studied area in game theory \cite{blah}, and is not a topic of this thesis. We employ well-studied utility functions which are suitable for our distributed optimization purposes, and focus our study on agents' learning rules and communication structure.} 
 
-By assigning agents' utilities equal to their marginal contributions to the system objective,
+
+
+\begin{defn}
+An agent's {\it marginal contribution}\cite{Wolpert1999} to the system objective, $W:\mathcal{A}\to \R$, corresponding to joint action $a = (a_i,a_{-i})\in \mathcal{A}$ is defined by:
+$${\rm MC}_i(a) = W(a) - W(\emptyset,a_{-i}),$$
+where $(\emptyset,a_{-i})$ represents removing agent $i$ from the system, while keeping other agents fixed at actions $a_{-i}.$
+\end{defn}
+
+Assigning agents' utilities to be their marginal contribution to the system welfare ensures that the optimal allocation corresponds to a Nash equilibrium. Furthermore, this choice of utility function defines a potential game.
+
+\begin{defn}
+A game $(N,\{A_i\}_{i\in N}, \{U_i\}_{i\in N})$ is a {\it potential game}\cite{Monderer1996} if there exists a potential function, $\phi:\mathcal{A}\to \R$ satisfying
+$$\phi(a_i,a_{-i}) - \phi(a_i^\prime,a_{-i}) = U_i(a_i,a_{-i}) - U_i(a_i^\prime,a_{-i})$$
+for all $i\in N,$ all $(a_i,a_{-i})\in \mathcal{A},$ and all $a_i^\prime\in A_i.$
+\end{defn}
+
+In fact, assigning agents' utilities to be their marginal contribution to the system objective defines a potential game with $\phi(a) = W(a),\,\forall a\in \mathcal{A},$ i.e., the potential function is equal to the system welfare function. This is useful, because there exist well studied learning algorithms which converge to a potential function maximizer, e.g., log-linear learning \cite{Blume1993}, which we will discuss in detail in Section~\ref{s:learning rules}. 
+
+
+Finally, marginal contribution utilities can also reduce informational requirements in certain classes of distribution control problems, as we show in  Example~\ref{e:resource allocation}.
+
+\begin{example}
+Consider a {\it resource allocation} task, where we wish to allocate agents in $N = \{1,2,\ldots, n\}$ to a set of resources $R = \{r_1,r_2,\ldots,r_n\}$. Here, agent's action sets are a collection of subsets of $R$, i.e., $A_i\subseteq 2^R,$ so that an action $a_i\in A_i$ represents allocation of agent $i$ to subset $a_i\subseteq R.$
+
+In resource allocation problems, the global welfare depends on the welfare attained at each resource. Typically, resource allocation problems have a {\it separable welfare function}:
+$$W_{\rm global}(a) = \sum_{r\in R} W_r(\{a\}_r),\quad a\in\mathcal{A},$$
+where $W_r$ is the welfare function associated with resource $r\in R$, and $\{a\}_r$ represents the set of agents selecting resource $r$ in action profile $a$. 
+
+It is straightforward to show that, when the global welfare function is separable, an agent's marginal contribution can be written as
+$$MC_i(a_i,a_{-i}) = \sum_{r\in a_i}W_r\left(\{a\}_r\right) - W_r\left(\{a\}_r\setminus\{i\}\right).$$
+Hence, agent $i$ only needs information about other agents allocated to resources $r\in a_i\subseteq R$ to evaluate its marginal contribution.
+\end{example}
+
+
+\subsection{Learning rules}
+
+
+
+
+
+
+
+
+
+
+
+\begin{figure}
+\vspace{.15in}
+\begin{mdframed}
+\underline{\texbf{Notation Summary}}
+\begin{itemize}
+    \item $N = \{1,2,\ldots,n\}$ - set of agents
+    \item $A_i$ - agent $i$'s finite action set
+    \item $\mathcal{A}:=\prod_{i\in N} A_i$ - the joint action space
+    \item $a = (a_1,a_2,\ldots a_i,\ldots,a_n) = (a_i,a_{-i})\in\mathcal{A}$ - a joint action
+    \item $W:\mathcal{A}\to\R$ - the system objective function. Also referred to as the system welfare function.
+    \item $U_i:\mathcal{A}\to\R$ - agent $i$'s utility function
+    \item ${\rm MC}_i(a)$ - agent $i$'s marginal contribution to the system objective at joint action $a\in \mathcal{A}$
+\end{itemize}
+\end{mdframed}
+\end{figure}
+
 
 
 %\begin{enumerate}
