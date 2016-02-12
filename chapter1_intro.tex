@@ -261,10 +261,25 @@ Given a game $G = \left(N,\{A_i\}_{i\in N},\{U_i\}_{i\in N}\right)$, and an init
 \end{enumerate}
 \end{defn}
 
-In potential games, the best response learning rule converges to a Nash equilibrium of the game. However, this Nash equilibrium need not be efficient. For example, recall the game defined in Example~\ref{e:interdependent utilities}, with the agent utility functions below.
+In potential games, the best response learning rule converges to a Nash equilibrium of the game. However, this Nash equilibrium need not be efficient. For example, recall the game defined in Example~\ref{e:interdependent utilities}, with the system welfare and agent utility functions below.
 
+\begin{figure}
 \begin{center}
 \begin{tabular}{rr|c|c|}
+\multicolumn{1}{c}{}&\multicolumn{3}{c}{\textbf{\underline{System objective}}}\\
+\multicolumn{2}{r}{}&\multicolumn{2}{c}{\textbf{agent 2}}\\
+\multicolumn{2}{r}{}
+ &  \multicolumn{1}{c}{task 1}
+ & \multicolumn{1}{c}{task 2} \\
+\cline{3-4}
+\multirow{2}{*}{\textbf{agent 1}}
+&task 1 & 10 & 0 \\
+\cline{3-4}
+&task 2 & 0 & 1 \\
+\cline{3-4}
+\end{tabular}\quad\quad\quad
+\begin{tabular}{rr|c|c|}
+\multicolumn{1}{c}{}&\multicolumn{3}{c}{\textbf{\underline{Agent utilities}}}\\
 \multicolumn{2}{r}{}&\multicolumn{2}{c}{\textbf{agent 2}}\\
 \multicolumn{2}{r}{}
  &  \multicolumn{1}{c}{task 1}
@@ -282,12 +297,28 @@ In potential games, the best response learning rule converges to a Nash equilibr
 
 In this example, the best response process will converge to one of the two Nash equilibria shaded in grey, depending on the initial joint action, $a(0),$ and on which agent is selected to update at each time. Hence, there is no guarantee that the best response process will select a welfare-optimizing Nash equilibrium.
 
-Mathematically, the best response process defines a Markov chain over the joint action space. The Markov chain associated with the best response learning rule for the example above is:
+Mathematically, the best response process defines a Markov chain over the joint action space. The Markov chain associated with the best response learning rule for the example above is shown in Figure~\ref{f:BR_MarkovChain}. This Markov chain has two stationary distributions,
+%$$\pi_1 = \begin{bmatrix} 1&0&0&0 \end{bmatrix},
+%\quad
+%\text{and}
+%\quad 
+%\pi_2 = \begin{bmatrix} 0&0&0&1\end{bmatrix}$$
+%corresponding to states $$\begin{bmatrix}
+%\text{task 1, task 1}&
+%\text{task 1, task 2}&
+%\text{task 2, task 1}&
+%\text{task 2, task 2}
+%\end{bmatrix}.$$
+With respect to the global objective function, $\pi_1$ is optimal, whereas $\pi_2$ is suboptimal. 
 
-\todo[inline]{add figure here}
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[scale=0.35, clip, trim=15mm 15mm 15mm 15mm]{BR_MarkovChain}
+%    \caption{Underlying Markov chain corresponding to the best response process over the game in Example~\ref{e:interdependent utilities}}
+%    \label{f:BR_MarkovChain}
+%\end{figure}
 
-
-Log-linear learning belongs to the class of noisy best response learning rules: an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally.
+Log-linear learning belongs to the class of perturbed best response learning rules: here, an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally. As we will show, log-linear learning acts as an equilibrium selection method, with respect to the associated unperturbed best response process.
 
 \begin{defn}
 Given a game $G = \left(N,\{A_i\}_{i\in N}, \{U_i\}_{i\in N}\right)$, and an initial joint action $a(0)\in\mathcal{A},$ the {\it log-linear learning rule} proceeds by repeating the following steps at each time $t\in \N:$
