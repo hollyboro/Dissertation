@@ -243,6 +243,65 @@ Hence, agent $i$ only needs information about other agents allocated to resource
 
 \subsection{Learning rules}
 
+Agents' learning rules are the second component of a game theoretic control law. Learning rules dictate how agents process information in order to optimize their utility functions. Formally, the game $G$ is repeated over time, producing a sequence of joint actions, $a(0), a(1),a(2),\ldots.$ At each time $t\in\N$, some subset of agents, $S\subseteq N$ has the opportunity to revise their actions independently according to a learning rule of the form:
+$$a_i(t) = \Pi_i(\{a(\tau)\}_{\tau=0,1,\ldots,t-1};U_i(\cdot)$$
+which may depend on the history of agents' joint actions, and on the form of agent $i$'s utility function. The precise form of a learning rule can vary, depending on the information available to agent $i$ at time $t$. For example, a learning rule may instead be based on a finite history of joint actions, or on estimated (rather than exact) information.
+
+For concreteness, we now provide two well studied learning rules: the {\it best response learning rule} and the {\it log-linear learning rule}.
+
+\begin{defn}
+Given a game $G = \left(N,\{A_i\}_{i\in N},\{U_i\}_{i\in N}\right)$, and an initial joint action $a(0)\in \mathcal{A},$ the {\it best response learning rule} proceeds by repeating the following steps at each time $t\in \N$:
+\begin{enumerate}
+    \item Select an agent $i\in N$ uniformly at random.\footnote{Although selecting an agent uniformly at random is a centralized task, it is possible to define a fully decentralized learning rule in which agents update their actions in continuous time according to arrival times associated with independent Poisson processes. In Chapter~\ref{ch2} we formally define such a learning rule, but here we restrict ourselves to discrete-time learning rules for simplicity.}
+    \item Agent $i$ selects a ``best response" action, i.e., agent $i$ selects action
+    $$a_i\in \argmax_{a_i^\prime\in A_i}U_i(a_i^\prime,a_{-i}),$$
+    which maximizes its utility, given all other agents' current actions.
+    \item The ensuing joint action at time $t+1$ is 
+    $$a(t+1) = (a_i,a_{-i}(t)),$$ i.e., agent $i$ plays its best response action, and all other agents repeat their previous actions.
+\end{enumerate}
+\end{defn}
+
+In potential games, the best response learning rule converges to a Nash equilibrium of the game. However, this Nash equilibrium need not be efficient. For example, recall the game defined in Example~\ref{e:interdependent utilities}, with the agent utility functions below.
+
+\begin{center}
+\begin{tabular}{rr|c|c|}
+\multicolumn{2}{r}{}&\multicolumn{2}{c}{\textbf{agent 2}}\\
+\multicolumn{2}{r}{}
+ &  \multicolumn{1}{c}{task 1}
+ & \multicolumn{1}{c}{task 2} \\
+\cline{3-4}
+\multirow{2}{*}{\textbf{agent 1}}
+&task 1 & \cellcolor[gray]{0.8}10,10 & 0,0 \\
+\cline{3-4}
+&task 2 & 0,0 & \cellcolor[gray]{0.8}1,1 \\
+\cline{3-4}
+\end{tabular}
+\end{center}
+
+\medskip
+
+In this example, the best response process will converge to one of the two Nash equilibria shaded in grey, depending on the initial joint action, $a(0),$ and on which agent is selected to update at each time. Hence, there is no guarantee that the best response process will select a welfare-optimizing Nash equilibrium.
+
+Mathematically, the best response process defines a Markov chain over the joint action space. The Markov chain associated with the best response learning rule for the example above is:
+
+\todo[inline]{add figure here}
+
+
+Log-linear learning belongs to the class of noisy best response learning rules: an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally.
+
+\begin{defn}
+Given a game $G = \left(N,\{A_i\}_{i\in N}, \{U_i\}_{i\in N}\right)$, and an initial joint action $a(0)\in\mathcal{A},$ the {\it log-linear learning rule} proceeds by repeating the following steps at each time $t\in \N:$
+\begin{enumerate}
+    \item Select an agent $i\in N$ uniformly at random.
+    \item Agent $i$ selects an action probabilistically, according to:
+    $$\Pr[a_i(t+1) = a_i] = {\exp\left(\beta U_i(a_i,a_{-i}(t)\right)\over
+    \sum_{a_i^\prime\in A_i} \exp\left(\beta U_i(a_i^\prime,a_{-i}(t)\right)}$$ where $\beta$ is a design parameter.
+    \item The ensuing joint action at time $t+1$ is $$a(t+1) = \left(a_i(t+1),a_{-i}(t)\right).$$
+\end{enumerate}
+
+\end{defn}
+
+In log-linear learning, as parameter $\beta\to\infty$, an updating agent chooses a utility maximizing action with higher probability. As $\beta\to 0,$ an updating agent chooses uniformly at random. 
 
 
 
@@ -250,13 +309,11 @@ Hence, agent $i$ only needs information about other agents allocated to resource
 
 
 
-
-
-
+\todo[inline]{find a good place for the notation summary}
 \begin{figure}
 \vspace{.15in}
 \begin{mdframed}
-\underline{\texbf{Notation Summary}}
+\underline{\textbf{Notation and Terminology}}
 \begin{itemize}
     \item $N = \{1,2,\ldots,n\}$ - set of agents
     \item $A_i$ - agent $i$'s finite action set
@@ -265,6 +322,8 @@ Hence, agent $i$ only needs information about other agents allocated to resource
     \item $W:\mathcal{A}\to\R$ - the system objective function. Also referred to as the system welfare function.
     \item $U_i:\mathcal{A}\to\R$ - agent $i$'s utility function
     \item ${\rm MC}_i(a)$ - agent $i$'s marginal contribution to the system objective at joint action $a\in \mathcal{A}$
+    \item Best response learning rule - a decision making rule in which the updating agent selects a utility maximizing action, given other agents' current actions
+    \item Log-linear learning rule - a decision making rule in which the updating agent selects a utility maximizing action with high probability, and selects a suboptimal action with a probability that decreases exponentially with respect to the associated payoff loss.
 \end{itemize}
 \end{mdframed}
 \end{figure}
