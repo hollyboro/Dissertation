@@ -305,10 +305,7 @@ $$\pi_1 = \begin{bmatrix} 1&0&0&0 \end{bmatrix},
 \text{and}
 \quad 
 \pi_2 = \begin{bmatrix} 0&0&0&1\end{bmatrix},$$
-where the four possible joint actions are ordered as: (task 1, task 1), 
-(task 1, task 2),
-(task 2, task 1),
-(task 2, task 2).
+where the four joint actions are in the order shown in Figure~\ref{f:BR_MarkovChain}.
 With respect to the global objective function, $\pi_1$ is optimal, whereas $\pi_2$ is suboptimal. 
 
 \begin{figure}
@@ -318,7 +315,7 @@ With respect to the global objective function, $\pi_1$ is optimal, whereas $\pi_
     \label{f:BR_MarkovChain}
 \end{figure}
 
-Log-linear learning belongs to the class of perturbed best response learning rules: here, an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally. As we will show, log-linear learning acts as an equilibrium selection method, with respect to the associated unperturbed best response process.
+Log-linear learning belongs to the class of perturbed best response learning rules: here, an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally. As we will show, log-linear learning acts as a method for selecting one of the (possibly many) stationary distributions of a best response process.
 
 \begin{defn}
 Given a game $G = \left(N,\{A_i\}_{i\in N}, \{U_i\}_{i\in N}\right)$, and an initial joint action $a(0)\in\mathcal{A},$ the {\it log-linear learning rule} proceeds by repeating the following steps at each time $t\in \N:$
