@@ -263,7 +263,7 @@ Given a game $G = \left(N,\{A_i\}_{i\in N},\{U_i\}_{i\in N}\right)$, and an init
 
 In potential games, the best response learning rule converges to a Nash equilibrium of the game. However, this Nash equilibrium need not be efficient. For example, recall the game defined in Example~\ref{e:interdependent utilities}, with the system welfare and agent utility functions below.
 
-\begin{figure}
+%\begin{figure}
 \begin{center}
 \begin{tabular}{rr|c|c|}
 \multicolumn{1}{c}{}&\multicolumn{3}{c}{\textbf{\underline{System objective}}}\\
@@ -292,7 +292,7 @@ In potential games, the best response learning rule converges to a Nash equilibr
 \cline{3-4}
 \end{tabular}
 \end{center}
-
+%\end{figure}
 \medskip
 
 In this example, the best response process will converge to one of the two Nash equilibria shaded in grey, depending on the initial joint action, $a(0),$ and on which agent is selected to update at each time. Hence, there is no guarantee that the best response process will select a welfare-optimizing Nash equilibrium.
@@ -343,7 +343,7 @@ In log-linear learning, as parameter $\beta\to\infty$, an updating agent chooses
 \todo[inline]{find a good place for the notation summary}
 \begin{figure}
 \vspace{.15in}
-%\begin{mdframed}
+\begin{mdframed}
 \underline{\textbf{Notation and Terminology}}
 \begin{itemize}
     \item $N = \{1,2,\ldots,n\}$ - set of agents
@@ -356,7 +356,7 @@ In log-linear learning, as parameter $\beta\to\infty$, an updating agent chooses
     \item Best response learning rule - a decision making rule in which the updating agent selects a utility maximizing action, given other agents' current actions
     \item Log-linear learning rule - a decision making rule in which the updating agent selects a utility maximizing action with high probability, and selects a suboptimal action with a probability that decreases exponentially with respect to the associated payoff loss.
 \end{itemize}
-%\end{mdframed}
+\end{mdframed}
 \end{figure}
 
 
