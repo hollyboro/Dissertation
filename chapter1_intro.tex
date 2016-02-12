@@ -295,28 +295,28 @@ In potential games, the best response learning rule converges to a Nash equilibr
 %\end{figure}
 \medskip
 
-In this example, the best response process will converge to one of the two Nash equilibria shaded in grey, depending on the initial joint action, $a(0),$ and on which agent is selected to update at each time. Hence, there is no guarantee that the best response process will select a welfare-optimizing Nash equilibrium.
+Indeed, this example is a potential game agent utilities defined by their marginal contribution to the system welfare, and potential function equal to the system objective. Here, the best response process will converge to one of the two Nash equilibria shaded in grey, depending on the initial joint action, $a(0),$ and on which agent is selected to update at each time. Hence, there is no guarantee that the best response process will select a welfare-optimizing Nash equilibrium.
+
+
 
 Mathematically, the best response process defines a Markov chain over the joint action space. The Markov chain associated with the best response learning rule for the example above is shown in Figure~\ref{f:BR_MarkovChain}. This Markov chain has two stationary distributions,
-%$$\pi_1 = \begin{bmatrix} 1&0&0&0 \end{bmatrix},
-%\quad
-%\text{and}
-%\quad 
-%\pi_2 = \begin{bmatrix} 0&0&0&1\end{bmatrix}$$
-%corresponding to states $$\begin{bmatrix}
-%\text{task 1, task 1}&
-%\text{task 1, task 2}&
-%\text{task 2, task 1}&
-%\text{task 2, task 2}
-%\end{bmatrix}.$$
+$$\pi_1 = \begin{bmatrix} 1&0&0&0 \end{bmatrix},
+\quad
+\text{and}
+\quad 
+\pi_2 = \begin{bmatrix} 0&0&0&1\end{bmatrix},$$
+where the four possible joint actions are ordered as: (task 1, task 1), 
+(task 1, task 2),
+(task 2, task 1),
+(task 2, task 2).
 With respect to the global objective function, $\pi_1$ is optimal, whereas $\pi_2$ is suboptimal. 
 
-%\begin{figure}[H]
-%    \centering
-%    \includegraphics[scale=0.35, clip, trim=15mm 15mm 15mm 15mm]{BR_MarkovChain}
-%    \caption{Underlying Markov chain corresponding to the best response process over the game in Example~\ref{e:interdependent utilities}}
-%    \label{f:BR_MarkovChain}
-%\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.35, clip, trim=15mm 15mm 15mm 15mm]{BR_MarkovChain}
+    \caption{Underlying Markov chain corresponding to the best response process over the game in Example~\ref{e:interdependent utilities}}
+    \label{f:BR_MarkovChain}
+\end{figure}
 
 Log-linear learning belongs to the class of perturbed best response learning rules: here, an updating agent selects a best response action the majority of the time, but occasionally selects suboptimally. As we will show, log-linear learning acts as an equilibrium selection method, with respect to the associated unperturbed best response process.
 
