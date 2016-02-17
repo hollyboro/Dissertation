@@ -81,7 +81,7 @@ Joint action $\vec{x}$ is strictly stochastically stable under log-linear learni
 
 
 
-Consider the situation where agents in $N$ interact according to the graphical game $G$, and an adversary seeks to  convert as many agents in $N$ to play action $y$ as possible.\footnote{In this paper we consider a single adversary which may influence multiple agents. Our models can be extended to multiple adversaries whose objectives are either aligned or conflicting.} 
+Consider the situation where agents in $N$ interact according to the graphical game $G$, and an adversary seeks to  convert as many agents in $N$ to play action $y$ as possible.\footnote{In this chapter we consider a single adversary which may influence multiple agents. Our models can be extended to multiple adversaries whose objectives are either aligned or conflicting.} 
 At each time, $t\in \N$ the adversary attempts to influence a set of agents $S(t)\subseteq N$ by posing as a friendly agent who always plays action $y$. Agents' utilities, $\tilde{U}:\mathcal{A}\times 2^N\to\R$, are now a function of adversarial and friendly behavior, defined by:
 \begin{equation}\label{e:new utility}
 \tilde{U_i}((a_i,a_{-i}),S) = %U_i(a_i,a_{-i}) + \mathds{1}_{i\in S, a_i = y}
@@ -124,13 +124,15 @@ Here, we present a detailed version of the results summarized above.
 A graphical coordination game $G$ is universally resilient to an adversary if $\vec{x}$ is strictly stochastically stable for all possible influenced sets $S(t)$, $t\in N$ and adversarial capability, $k\leq n.$ The following theorem provides sufficient conditions that ensure $G$ is universally resilient. For sets $S,T\subseteq N$, define
 $$d(S,T) := |\{\{i,j\}\in E\st i\in S, j\in T\}|.$$
 
-\begin{Theorem}\label{t:A stable all}
-Let $\mathcal{G} = (N,E)$, and suppose an adversary influences some set $S(t)$ with $|S(t)| = k$ at each $t\in\N.$ If
-\begin{equation}\label{e:YoungBound}
-\alpha > {|T| - d(T,N\setminus T)\over d(T,N)},\quad\forall T\subseteq N
-\end{equation}
-Then $\vec{x}$ is strictly stochastically stable. In particular, if $|S(t)| = N$ for all $t\in \N$, \eqref{e:YoungBound} is also a necessary condition for strict stochastic stability of $\vec{x}$. 
-\end{Theorem}
+\thirdtheorem 
+
+%\begin{Theorem}\label{t:A stable all}
+%Let $\mathcal{G} = (N,E)$, and suppose an adversary influences some set $S(t)$ with $|S(t)| = k$ at each $t\in\N.$ If
+%\begin{equation}\label{e:YoungBound}
+%\alpha > {|T| - d(T,N\setminus T)\over d(T,N)},\quad\forall T\subseteq N
+%\end{equation}
+%Then $\vec{x}$ is strictly stochastically stable. In particular, if $|S(t)| = N$ for all $t\in \N$, \eqref{e:YoungBound} is also a necessary condition for strict stochastic stability of $\vec{x}$. 
+%\end{Theorem}
 
 \smallskip
 

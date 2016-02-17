@@ -4,7 +4,7 @@
 \usepackage{graphicx}		% to insert figures
 \usepackage{hyperref}		% PDF hyperreferences??
 \usepackage[usenames,dvipsnames]{xcolor}
-\usepackage{fancyhdr,amssymb,amsmath, graphicx, placeins, listings,float,enumerate,epstopdf,color,cite,amsthm,wrapfig, cite, dsfont, enumitem, multirow, rotating,subfloat, subfigure, mdframed}
+\usepackage{fancyhdr,amssymb,amsmath, graphicx, placeins, listings,float,enumerate,epstopdf,color,cite,amsthm,wrapfig, cite, dsfont, enumitem, multirow, rotating,subfloat, subfigure, mdframed, thmtools, thm-restate}
 \usepackage{colortbl}
 \usepackage[font={small}]{caption}
 \usepackage{todonotes} %can add option to disable
@@ -27,7 +27,10 @@
 	{Jason Marden}			%  #2 {name}
 
 \reader{Prof.~Eric Frew}		%  2nd person to sign thesis
-\readerThree{\textcolor{red}{add other readers}}		%  3rd person to sign thesis
+\readerThree{Prof.~Dale Lawrence}
+\readerFour{Prof.~Lijun Chen}
+\readerFive{Prof.~David Leslie}
+%\readerThree{\textcolor{red}{add other readers}}		%  3rd person to sign thesis
 
 \abstract{  \OnePageChapter	% because it is very short
 
@@ -77,15 +80,13 @@
 
 
 
-\listoftodos
+%\listoftodos
 
 
 
 
 \graphicspath{{figs/}}
 
-
-\todo[inline]{Scan for phrases like "this paper" and reword}
 
 \input chapter1_intro.tex
 \input chapter2_semiAnon.tex
@@ -94,7 +95,7 @@
 \input chapter5_conclusion.tex
 
 %\todo[inline]{fix bibliography formatting}
-\todo[inline]{fix appendix titles for adversarial work to include theorem names}
+%\todo[inline]{fix appendix titles for adversarial work to include theorem names}
 %\todo[inline]{Add short introductions to each chapter, and combine longer intros to make the dissertation introduction}
 
 %%%%%%%%%   then the Bibliography, if any   %%%%%%%%%

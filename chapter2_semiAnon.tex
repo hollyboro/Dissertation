@@ -1,7 +1,7 @@
 %\chapter{Fast Convergence in Semi-Anonymous Potential Games}\label{ch2}
 %\label{semiAnon chap}
 
-%\noindent\textbf{\emph{When is fast convergence to a near optimal solution possible?}}
+%\noindent\textbf{{\it When is fast convergence to a near optimal solution possible?}}
 \Chapter{Fast Convergence in Semi-Anonymous Potential Games: When is fast convergence to a near optimal solution possible?}\label{ch2}
 
 %Game theoretic learning algorithms have gained traction as a design tool for distributed control systems \cite{Marden2008,Zhu2009,Goto2010,Staudigl2012,Fox2010}.  Here, a static game is repeated over time, and agents revise their strategies based on their objective functions and on observations of other agents' behavior.  Emergent collective behavior for such revision strategies has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
@@ -10,9 +10,9 @@
 
 Emergent collective behavior for game theoretic learning rules has been studied extensively in the literature, e.g., fictitious play \cite{fp1,fp2,jsfp}, regret matching \cite{Hart2000}, and log-linear learning \cite{Alos-Ferrer2010, Blume1993, Shah2010}.  Although many of these learning rules have desirable asymptotic guarantees, their convergence times either remain uncharacterized or are prohibitively long \cite{Ellison2000, Kandori1993,Shah2010,Hart2010}. Characterizing convergence rates is key to determining whether a distributed algorithm is desirable for system control.
 
-In many multi-agent systems, the agent objective functions can be designed to align with the system-level objective function, yielding  a \emph{potential game} \cite{Monderer1996} whose potential function is precisely the system objective function.  Here, the optimal collective behavior of a multi-agent system corresponds to the Nash equilibrium that optimizes the potential function. Hence, learning algorithms which converge to this efficient Nash equilibrium have proven useful for distributed control.
+In many multi-agent systems, the agent objective functions can be designed to align with the system-level objective function, yielding  a {\it potential game} \cite{Monderer1996} whose potential function is precisely the system objective function.  Here, the optimal collective behavior of a multi-agent system corresponds to the Nash equilibrium that optimizes the potential function. Hence, learning algorithms which converge to this efficient Nash equilibrium have proven useful for distributed control.
 
-\emph{Log-linear learning} is one algorithm that accomplishes this task \cite{Blume1993}. Log-linear learning is a  {perturbed} best reply process where agents predominantly select the optimal action given their beliefs about other agents' behavior; however, the agents occasionally make mistakes, selecting suboptimal actions with a probability that decays exponentially with respect to the associated payoff loss.  
+{\it Log-linear learning} is one algorithm that accomplishes this task \cite{Blume1993}. Log-linear learning is a  {perturbed} best reply process where agents predominantly select the optimal action given their beliefs about other agents' behavior; however, the agents occasionally make mistakes, selecting suboptimal actions with a probability that decays exponentially with respect to the associated payoff loss.  
 As noise levels approach zero, the resulting process has a unique stationary distribution with full support on the efficient Nash equilibria.  By designing agents' objective functions appropriately, log-linear learning can be used to define distributed control laws which converge to optimal steady-state behavior in the long run.%with desirable asymptotic guarantees.  
 
 
@@ -24,15 +24,15 @@ We focus on identifying whether the positive convergence rate results above exte
 
 \vspace{.1cm}
 %
-\noindent -- We formally define a subclass of potential games, called \emph{semi-anonymous potential games}, which are parameterized by populations of agents where each agent's objective function can be evaluated using only information regarding the agent's own decision and the aggregate behavior within each population.  Agents within a given population have identical action sets, and their objective functions share the same structural form.  The congestion games studied in \cite{Shah2010} could be viewed as a semi-anonymous potential game with only one population.\footnote{Semi-anonymous potential games can be viewed as a cross between a potential game and a finite population game \cite{Blume1996}.}
+\noindent -- We formally define a subclass of potential games, called {\it semi-anonymous potential games}, which are parameterized by populations of agents where each agent's objective function can be evaluated using only information regarding the agent's own decision and the aggregate behavior within each population.  Agents within a given population have identical action sets, and their objective functions share the same structural form.  The congestion games studied in \cite{Shah2010} could be viewed as a semi-anonymous potential game with only one population.\footnote{Semi-anonymous potential games can be viewed as a cross between a potential game and a finite population game \cite{Blume1996}.}
 
 \vspace{.1cm}
 %
-\noindent -- We introduce a variant of log-learning learning that extends the algorithm in \cite{Shah2010}.  In Theorem~\ref{t:main theorem 1}, we prove that the convergence time of this algorithm grows roughly linearly in the number of agents for a fixed number of populations.  This analysis explicitly highlights the potential impact of system-wide heterogeneity, i.e., agents with different action sets or objective functions, on the convergence rates.  Furthermore, in Example~\ref{e:grow with n} we demonstrate how a given resource allocation problem can be modeled as a semi-anonymous potential game.  
+\noindent -- We introduce a variant of log-learning learning that extends the algorithm in \cite{Shah2010}.  In Theorem~\ref{t:main theorem 1 ch2}, we prove that the convergence time of this algorithm grows roughly linearly in the number of agents for a fixed number of populations.  This analysis explicitly highlights the potential impact of system-wide heterogeneity, i.e., agents with different action sets or objective functions, on the convergence rates.  Furthermore, in Example~\ref{e:grow with n} we demonstrate how a given resource allocation problem can be modeled as a semi-anonymous potential game.  
 
 \vspace{.1cm}
 %
-\noindent -- We study the convergence times associated with our modified log-linear learning algorithm when the agents continually enter and exit the game.  In Theorem~\ref{t:main theorem 2}, we prove that the convergence time of this algorithm remains roughly linear in the number of agents provided that the agents exit and enter the game at a sufficiently slow rate. 
+\noindent -- We study the convergence times associated with our modified log-linear learning algorithm when the agents continually enter and exit the game.  In Theorem~\ref{t:main theorem 2 ch2}, we prove that the convergence time of this algorithm remains roughly linear in the number of agents provided that the agents exit and enter the game at a sufficiently slow rate. 
 
 The forthcoming analysis is similar in structure to the analysis presented in \cite{Shah2010}.  We highlight the explicit differences between the two proof approaches throughout, and directly reference lemmas within \cite{Shah2010} when appropriate.  The central challenge in adapting and extending the proof in \cite{Shah2010} to the setting of semi-anonymous potential games is dealing with the growth of the underlying state space.  Note that the state space in \cite{Shah2010} is characterized by the aggregate behavior of a single population while the state space in our setting is characterized by the Cartesian product of the aggregate behavior associated with several populations.  The challenge arises from the fact that the employed techniques for analyzing the mixing times of this process, i.e., Sobolev constants, rely heavily on the structure of this underlying state space.  
 
@@ -129,7 +129,7 @@ In contrast, the two population scenario above has many Nash equilibria, two of 
 
 \section{Main Results}
 
-Example~\ref{e:exIntro} invites the question: can a small amount of heterogeneity break down the fast convergence results of \cite{Shah2010}? In this section, we present a variant of log-linear learning \cite{Blume1993} that extends the algorithm for single populations in \cite{Shah2010}.  In Theorem~\ref{t:main theorem 1} we prove that for any semi-anonymous potential game our algorithm ensures (i) the potential associated with asymptotic behavior is close to the maximum and (ii) the convergence time grows roughly linearly in the number of agents for a fixed number of populations.  In Theorem~\ref{t:main theorem 2} we show that these guarantees still hold when agents are permitted to enter and exit the game.  An algorithm which converges quickly to the potential function maximizer is useful for multi-agent systems because agent objective functions can often be designed so that the potential function is identical to the system objective function as in Example~\ref{e:exIntro}.
+Example~\ref{e:exIntro} invites the question: can a small amount of heterogeneity break down the fast convergence results of \cite{Shah2010}? In this section, we present a variant of log-linear learning \cite{Blume1993} that extends the algorithm for single populations in \cite{Shah2010}.  In Theorem~\ref{t:main theorem 1 ch2} we prove that for any semi-anonymous potential game our algorithm ensures (i) the potential associated with asymptotic behavior is close to the maximum and (ii) the convergence time grows roughly linearly in the number of agents for a fixed number of populations.  In Theorem~\ref{t:main theorem 2 ch2} we show that these guarantees still hold when agents are permitted to enter and exit the game.  An algorithm which converges quickly to the potential function maximizer is useful for multi-agent systems because agent objective functions can often be designed so that the potential function is identical to the system objective function as in Example~\ref{e:exIntro}.
 
 \subsection{Modified Log-Linear Learning}\label{s:alg description}
 The following modification of the log-linear learning algorithm extends the algorithm in \cite{Shah2010}.
@@ -153,43 +153,45 @@ To achieve an expected update rate at least as fast as the standard log-linear l
 
 \subsection{Semi-Anonymous Potential Games}\label{s:main theorem 1}
 
-Theorem~\ref{t:main theorem 1} bounds the convergence time for modified log-linear learning in a semi-anonymous potential game and extends the results of \cite{Shah2010} to semi-anonymous potential games. For notational simplicity, define $s:= |\cup_{j= 1}^m \overline{\mathcal{A}}_j|.$  
+Theorem~\ref{t:main theorem 1 ch2} bounds the convergence time for modified log-linear learning in a semi-anonymous potential game and extends the results of \cite{Shah2010} to semi-anonymous potential games. For notational simplicity, define $s:= |\cup_{j= 1}^m \overline{\mathcal{A}}_j|.$  
 
-\begin{Theorem}\label{t:main theorem 1}
-Let $G = (N,\{\mathcal{A}_i\},\{U_i\})$ be a semi-anonymous potential game with aggregate state space $X$ and potential function $\P:X\to [0,1].$ Suppose agents play according to the modified log-linear learning algorithm described above, and the following conditions are met:         
+\firsttheorem*
 
-\noindent (i)  The potential function is $\lambda$-Lipschitz, i.e., there exists $\lambda \geq 0$ such that
-\begin{equation*}
-|\P(x) - \P(y)|\leq\lambda\|x-y\|_1,\quad \forall x,y\in  X.
-\end{equation*}
+%\begin{comment}\begin{Theorem}\label{t:main theorem 1 ch1}
+%Let $G = (N,\{\mathcal{A}_i\},\{U_i\})$ be a semi-anonymous potential game with aggregate state space $X$ and potential function $\P:X\to [0,1].$ Suppose agents play according to the modified log-linear learning algorithm described above, and the following conditions are met:         
 
-\noindent(ii) The number of players within each population is sufficiently large:
-$$\sum_{i=1}^m |N_i|^2\geq \sum_{i=1}^m |\bar{\aee}_i| - m.$$  
+%\noindent (i)  The potential function is $\lambda$-Lipschitz, i.e., there exists $\lambda \geq 0$ such that
+%\begin{equation*}
+%|\P(x) - \P(y)|\leq\lambda\|x-y\|_1,\quad \forall x,y\in  X.
+%\end{equation*}
 
-\noindent For any fixed $\eps\in (0,1)$, if $\beta$ is sufficiently large, i.e., 
-%
-\begin{equation}\label{e:beta lb}
-\beta\geq\max\left\{{4m(s-1)\over\eps}\log 2ms,{4m(s-1)\over\eps}\log{8ms \lambda\over\eps}\right\},
-\end{equation}
-%
-then
-%
-\begin{equation}\label{e:expected val}
-\E[\P(a(t)|_{X})]\geq\max_{x\in X}\P(x)-\eps
-\end{equation}
-%
-for all
-%
-\small
-\begin{align}
-t&\geq \frac{2^{2ms}c_1 e^{3\beta}m(m(s-1))!^2 n}{4\alpha}\Biggl(\log\log (n+1)^{ms - m} +\log\beta+ 2\log{1\over\eps}\Biggr)\label{e:time requirement}
-\end{align}
-\normalsize
-where $c_1$ is a constant that depends only on $s$.  
-%
-\end{Theorem}
+%\noindent(ii) The number of players within each population is %sufficiently large:
+%$$\sum_{i=1}^m |N_i|^2\geq \sum_{i=1}^m |\bar{\aee}_i| - m.$$  
 
-We prove Theorem~\ref{t:main theorem 1} in Appendix~\ref{a:theorem 1 proof}.  This theorem explicitly highlights the role of system heterogeneity, i.e., $m>1$ distinct populations, on convergence times of the process.  For the case when $m=1$, Theorem~\ref{t:main theorem 1} recovers the results of \cite{Shah2010}.  Observe that for a fixed number of populations, the convergence time grows as $n\log\log n$.  Furthermore, note that a small amount of system heterogeneity does not have a catastrophic impact on worst-case convergence times as suggested by Example~\ref{e:exIntro}.
+%\noindent For any fixed $\eps\in (0,1)$, if $\beta$ is sufficiently large, i.e., 
+%
+%\begin{equation}\label{e:beta lb}
+%\beta\geq\max\left\{{4m(s-1)\over\eps}\log 2ms,{4m(s-1)\over\eps}\log{8ms \lambda\over\eps}\right\},
+%\end{equation}
+%
+%then
+%
+%\begin{equation}\label{e:expected val}
+%\E[\P(a(t)|_{X})]\geq\max_{x\in X}\P(x)-\eps
+%\end{equation}
+%
+%for all
+%
+%\small
+%\begin{align}
+%t&\geq \frac{2^{2ms}c_1 e^{3\beta}m(m(s-1))!^2 n}{4\alpha}\Biggl(\log\log (n+1)^{ms - m} +\log\beta+ 2\log{1\over\eps}\Biggr)\label{e:time requirement}
+%\end{align}
+%\normalsize
+%where $c_1$ is a constant that depends only on $s$.  
+%
+%\end{Theorem}
+
+We prove Theorem~\ref{t:main theorem 1 ch2} in Appendix~\ref{a:theorem 1 proof}.  This theorem explicitly highlights the role of system heterogeneity, i.e., $m>1$ distinct populations, on convergence times of the process.  For the case when $m=1$, Theorem~\ref{t:main theorem 1 ch2} recovers the results of \cite{Shah2010}.  Observe that for a fixed number of populations, the convergence time grows as $n\log\log n$.  Furthermore, note that a small amount of system heterogeneity does not have a catastrophic impact on worst-case convergence times as suggested by Example~\ref{e:exIntro}.
 
 It is important to note that our bound is exponential in the number of populations and in the total number of actions. Therefore our results do not guarantee fast convergence with respect to these parameters. However, our convergence rate bounds may be conservative in this regard. Furthermore, as we will show in Section~\ref{s:examples}, a significantly smaller value of $\beta$ may often be chosen in order to further speed convergence while still retaining the asymptotic properties guaranteed in \eqref{e:expected val}. 
 
@@ -198,14 +200,14 @@ It is important to note that our bound is exponential in the number of populatio
 
 In this section, we consider a trajectory of semi-anonymous potential games to model the scenario where agents enter and exit the system over time,
 $$\mathcal{G} = \{G^t\}_{t\geq 0} =  \{N^t,\{\mathcal{A}_i^t\}_{i\in N^t},\{U_i^t\}_{i\in N^t}\}_{t\geq 0}$$
-where, for all $t\in \R^+$, the game $G^t$ is a semi-anonymous potential game, and the set of \emph{active} players, $N^t$, is a finite subset of $\N.$  We refer to each agent $i\in \N\setminus N^t$ as \emph{inactive}; an inactive agent has action set $\mathcal{A}_i^t = \emptyset$ at time $t$. Define $\X :=\cup_{t\in \R^+}X^t$, where $X^t$ is the finite aggregate state space corresponding to game $G^t.$
+where, for all $t\in \R^+$, the game $G^t$ is a semi-anonymous potential game, and the set of {\it active} players, $N^t$, is a finite subset of $\N.$  We refer to each agent $i\in \N\setminus N^t$ as {\it inactive}; an inactive agent has action set $\mathcal{A}_i^t = \emptyset$ at time $t$. Define $\X :=\cup_{t\in \R^+}X^t$, where $X^t$ is the finite aggregate state space corresponding to game $G^t.$
 At time $t$, denote the partitioning of players per Definition~\ref{d:semi-anon potential}  by $\mathcal{N}^t = \{N_1^t,N_2^t,\ldots,N_m^t\}$. We require that there is a fixed number of populations, $m$, for all time, and that the $j$-th population's action set is constant, i.e., $\forall j\in \{1,2,\ldots,m\},\;\forall t_1, t_2 \in \R^+$, $\bar{\mathcal{A}}^{t_1}_j = \bar{\mathcal{A}}^{t_2}_j.$ We write the fixed action set for players in the $j$-th population as  $\bar{\mathcal{A}}_j$. 
 
 
 %----------------------------- Main Theorem -----------------------------%
-\begin{Theorem}\label{t:main theorem 2}
+\begin{Theorem}\label{t:main theorem 2 ch2}
 Let $\mathcal{G}$ be a trajectory of semi-anonymous potential games with state space $\X$ and time-invariant potential function $\P:\X\to [0,1]$.
-Suppose agents play according to the modified log-linear learning algorithm and Conditions (i) and (ii) of Theorem~\ref{t:main theorem 1} are satisfied. Fix $\eps\in (0,1)$, assume the parameter $\beta$ satisfies (\ref{e:beta lb}) and the following additional conditions are met:
+Suppose agents play according to the modified log-linear learning algorithm and Conditions (i) and (ii) of Theorem~\ref{t:main theorem 1 ch2} are satisfied. Fix $\eps\in (0,1)$, assume the parameter $\beta$ satisfies (\ref{e:beta lb}) and the following additional conditions are met:
 
 \noindent(iii) for all $t\in \R^+,$ the number of players satisfies: 
 \begin{equation}\label{e:num players}
@@ -246,7 +248,7 @@ t\geq |N^0| e^{3\beta}c_0\left({(ms-m)!\log(|N^0|+2)+\beta\over\eps^2}\right).
 \end{equation}
 \end{Theorem}
 
-Theorem~\ref{t:main theorem 2} states that, if player entry and exit rates are sufficiently slow as in Condition~(v), then the convergence time of our algorithm is roughly linear in the number of players. However, the established bound grows quickly with the number of populations. Note that selection of parameter $\beta$ impacts convergence time, as reflected in \eqref{e:t ub}: larger $\beta$ tends to slow convergence. However, the minimum $\beta$ necessary to achieve an expected potential near the maximum, as in \eqref{e:expot}, is independent of the number of players, as given in (\ref{e:beta lb}). The proof of Theorem~\ref{t:main theorem 2} follows a similar structure to the proof of Theorem 4 in \cite{Shah2010} and is hence omitted for brevity. The significant technical differences arise due to differences in the size of the state space when $m>1$. These differences give rise to Condition (iv) in our theorem. % proved in Appendix~\ref{a:theorem 2 proof}.
+Theorem~\ref{t:main theorem 2 ch2} states that, if player entry and exit rates are sufficiently slow as in Condition~(v), then the convergence time of our algorithm is roughly linear in the number of players. However, the established bound grows quickly with the number of populations. Note that selection of parameter $\beta$ impacts convergence time, as reflected in \eqref{e:t ub}: larger $\beta$ tends to slow convergence. However, the minimum $\beta$ necessary to achieve an expected potential near the maximum, as in \eqref{e:expot}, is independent of the number of players, as given in (\ref{e:beta lb}). The proof of Theorem~\ref{t:main theorem 2 ch2} follows a similar structure to the proof of Theorem 4 in \cite{Shah2010} and is hence omitted for brevity. The significant technical differences arise due to differences in the size of the state space when $m>1$. These differences give rise to Condition (iv) in our theorem. % proved in Appendix~\ref{a:theorem 2 proof}.
 
 
 
@@ -270,7 +272,7 @@ W(x) = W_{r_1}(nx_1^1) + W_{r_2}(n(x_2^1+x_2^2)) + W_{r_3}(nx_3^2).
 Player utilities are their marginal contribution to the total welfare, $W$, as in \eqref{e:MC util}.
 
 
-In Example~\ref{e:compare to SS}, we directly the compute convergence times as in Theorem~\ref{t:main theorem 1}: 
+In Example~\ref{e:compare to SS}, we directly the compute convergence times as in Theorem~\ref{t:main theorem 1 ch2}: 
 \begin{equation}\label{e:example conv time}
 \min\{t\st\E_{P^t(y,\cdot)}W(x)\geq \max_{x\in X} W(x) - \eps,\,\forall y\in X\},
 \end{equation}
@@ -299,7 +301,7 @@ Our goal in this example is to achieve an expected total welfare that is within 
 We fix the number of players in populations $N_1$ and $N_2$ at $n_1 = n_2 = 7,$ and vary the number of players in population $n_3$ to examine the sensitivity of each algorithm's convergence rate to the size of $N_3$.
 
 In our variant of log linear learning, increasing the size of population $N_3$ does not change the probability that a player from population $N_1$ or $N_2$ will update next.
-However, for standard log-linear learning and for the variant in \cite{Shah2010}, increasing the size of population $N_3$ significantly decreases the probability that players from $N_1$ or $N_2$ who are currently choosing resource $r_2$ will be selected for update.\footnote{Recall that in our log-linear learning variant and the one introduced in \cite{Shah2010}, an updating player chooses a new action according to \eqref{e:logit response}; the algorithms differ only in agents' update rates. In our algorithm, an agent $i$ in population $N_j$'s update rate is $\alpha n\mathop{/}z_i^j(t),$ where $z_i^j(t)$ is the number of agents from population $j$ playing the same action as agent $i$ at time $t.$ In the algorithm in \cite{Shah2010}, agent $i$'s update rate is $\alpha n\mathop{/}\tilde{z}_i(t),$ where $\tilde{z}_i(t)$ is the \emph{total} number of agents playing the same action as agent $i$.}
+However, for standard log-linear learning and for the variant in \cite{Shah2010}, increasing the size of population $N_3$ significantly decreases the probability that players from $N_1$ or $N_2$ who are currently choosing resource $r_2$ will be selected for update.\footnote{Recall that in our log-linear learning variant and the one introduced in \cite{Shah2010}, an updating player chooses a new action according to \eqref{e:logit response}; the algorithms differ only in agents' update rates. In our algorithm, an agent $i$ in population $N_j$'s update rate is $\alpha n\mathop{/}z_i^j(t),$ where $z_i^j(t)$ is the number of agents from population $j$ playing the same action as agent $i$ at time $t.$ In the algorithm in \cite{Shah2010}, agent $i$'s update rate is $\alpha n\mathop{/}\tilde{z}_i(t),$ where $\tilde{z}_i(t)$ is the {\it total} number of agents playing the same action as agent $i$.}
 
 We select $\beta$ in all cases so that, as $t\to\infty$, the expected welfare associated with the resulting stationary distribution is within 98\% of its maximum. Then we examine the time it takes to come within $\eps = 0.05$ of this expected welfare. We multiply convergence times by the number of players, $n$, to analyze the expected number of updates required to reach the desired welfare. These numbers represent the convergence times when the expected total number of updates per unit time is held constant as $n$ increases. Table~\ref{t:comparison table} depicts $\beta$ values and expected numbers of updates.
 
@@ -354,7 +356,7 @@ The final column shows the expected number of updates to achieve the desired nea
 
 
 We are able to determine convergence times in Example~\ref{e:compare to SS} using each algorithm's probability transition matrix, $P$, because the state space is relatively small. Here, we directly compute the distance of distribution $\mu(t) = \mu(0)P^t$ to the stationary distributions, $\pi^{\rm LLL}$ and $\pi^{\rm MLLL}$ for the selected values of $\beta,$ where $P$ and $\pi$.  
-Examples~\ref{e:grow with n} and \ref{e:SensorTarget}, however, have significantly larger state spaces, making similar computations with the probability transition matrix unrealistic. Thus, instead of computing convergence times as in \eqref{e:example conv time} we repeatedly simulate our algorithm from a worst case initial state and approximate convergence times based on average behavior. This method does not directly give the convergence time of Theorem~\ref{t:main theorem 1}, but the average performance over a sufficiently large number of simulations is expected to reflect expected behavior predicted by the probability transition matrix.
+Examples~\ref{e:grow with n} and \ref{e:SensorTarget}, however, have significantly larger state spaces, making similar computations with the probability transition matrix unrealistic. Thus, instead of computing convergence times as in \eqref{e:example conv time} we repeatedly simulate our algorithm from a worst case initial state and approximate convergence times based on average behavior. This method does not directly give the convergence time of Theorem~\ref{t:main theorem 1 ch2}, but the average performance over a sufficiently large number of simulations is expected to reflect expected behavior predicted by the probability transition matrix.
 
 
 \begin{example}\label{e:grow with n}
@@ -372,7 +374,7 @@ Here, the global welfare optimizing allocation is $a_i = r_2$ for all $i\in N$, 
 We simulated our algorithm with $\alpha = 1\mathop{/}4$ starting from the inefficient Nash equilibrium, $x^{\rm ne}$.  Here, $\beta$ is chosen to yield an expected steady state welfare equal to 90\% of the maximum. We examine the time it takes the average welfare to come within $\eps = 0.05$ of this expected welfare.
 
 Simulation results are shown in Figure \ref{f:convTimes} averaged over 2000 simulations with $n$ ranging from 4 to 100.  Average convergence times are bounded below by $2n\log\log n$ for all values of $n$, and are bounded above by $4n \log\log n$ when $n>30$.
-These results support  Theorem~\ref{t:main theorem 1}.
+These results support  Theorem~\ref{t:main theorem 1 ch2}.
 
 
 \begin{figure}[ht]
@@ -397,7 +399,7 @@ x^2\mathop{/}n^2 &\text{if } j=k,
 \end{equation}
 and suppose agents' utilities are given by their marginal contribution to the total welfare, as in \eqref{e:MC util}. We allow $k$ to vary between 5 and 15, and $n$ to vary between 4 and 50. 
 
-The welfare maximizing configuration is for all agents to choose resource $r_k$; however, when all agents in populations $N_1$ and $N_2$ choose resources $r_j$ and $r_{\ell}$ respectively, with $j,\ell\neq k,$ this represents an inefficient Nash equilibrium. Along any path from this type of inefficient Nash equilibrium to the optimal configuration, when $n\geq 4,$ at least $\lceil (n+4)/8\rceil$ agents must make a utility-decreasing decision to move to resource $r_k$. Moreover, the additional resources are all alternative suboptimal choices each agent could make when revising its action; these alternate choices further slow convergence times. Figure~\ref{f:LargeActionSets} shows the average time it takes to reach a configuration whose welfare is 90\% of the maximum, starting from an inefficient Nash equilibrium where all agents in $N_1$ choose resource $r_1$ and all agents in $N_2$ choose resource $r_{2k-1}.$ Parameter $\beta$ is selected so that the expected welfare is at least 90\% of the maximum in the limit as $t\to \infty.$ For each value of $k$, convergence times remain approximately linear in the number of agents, supporting Theorem~\ref{t:main theorem 1}.\footnote{In this example, convergence times appear super-linear in the size of populations' action sets. Note that the bound in \eqref{e:time requirement} is exponential in the the sum of the sizes of each population's action set.  Fast convergence with respect to parameter $s$ warrants future investigation; in particular, convergence rates for our log-linear learning variant may be significantly faster than suggested in \eqref{e:time requirement} under certain mild restrictions on resource welfare functions (e.g., submodularity) or for alternate log-linear learning variants (e.g., binary log-linear learning \cite{Arslan2007, Marden2007a}).}
+The welfare maximizing configuration is for all agents to choose resource $r_k$; however, when all agents in populations $N_1$ and $N_2$ choose resources $r_j$ and $r_{\ell}$ respectively, with $j,\ell\neq k,$ this represents an inefficient Nash equilibrium. Along any path from this type of inefficient Nash equilibrium to the optimal configuration, when $n\geq 4,$ at least $\lceil (n+4)/8\rceil$ agents must make a utility-decreasing decision to move to resource $r_k$. Moreover, the additional resources are all alternative suboptimal choices each agent could make when revising its action; these alternate choices further slow convergence times. Figure~\ref{f:LargeActionSets} shows the average time it takes to reach a configuration whose welfare is 90\% of the maximum, starting from an inefficient Nash equilibrium where all agents in $N_1$ choose resource $r_1$ and all agents in $N_2$ choose resource $r_{2k-1}.$ Parameter $\beta$ is selected so that the expected welfare is at least 90\% of the maximum in the limit as $t\to \infty.$ For each value of $k$, convergence times remain approximately linear in the number of agents, supporting Theorem~\ref{t:main theorem 1 ch2}.\footnote{In this example, convergence times appear super-linear in the size of populations' action sets. Note that the bound in \eqref{e:time requirement} is exponential in the the sum of the sizes of each population's action set.  Fast convergence with respect to parameter $s$ warrants future investigation; in particular, convergence rates for our log-linear learning variant may be significantly faster than suggested in \eqref{e:time requirement} under certain mild restrictions on resource welfare functions (e.g., submodularity) or for alternate log-linear learning variants (e.g., binary log-linear learning \cite{Arslan2007, Marden2007a}).}
 
 \begin{figure}[ht]
   \centering
