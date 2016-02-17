@@ -2,7 +2,7 @@
 
 \section{Fast Convergence in Semi-Anonymous Potential Games: Background and Proofs}
 
-We begin with a problem formulation and notation summary for semi-anonymous potential games, and then proceed with a proof of Theorem~\ref{t:main theorem 1}. Next, we provide a problem formulation and summary for time-varying semi-anonymous potential games, followed by a proof of Theorem~\ref{t:main theorem 2}.
+We begin with a problem formulation and notation summary for semi-anonymous potential games, and then proceed with a proof of Theorem~\ref{t:main theorem 1 ch2}. Next, we provide a problem formulation and summary for time-varying semi-anonymous potential games, followed by a proof of Theorem~\ref{t:main theorem 2 ch2}.
 
 \subsection{Semi-Anonymous Potential Games}\label{a:M defn}
 The following Markov chain, $M$, over state space $\sX$ is the kernel of the continuous time modified log-linear learning process for stationary semi anonymous potential games.  Define $n_j := |N_j|$ to be the size of population $j$, define $s_j:= |\bar{\mathcal{A}}_j|$, and let $\sigma := \sum_{j = 1}^m s_j.$ Let $e_j^k \in \R^{s_j}$ be the $k$th standard basis vector of length $s_j$ for $k\in \{1,\ldots,s_j\}$.      Finally, let $$x = (\bx_j,\x_-j) = (\bx_1,\bx_2,\ldots,\bx_m)\in \sX,$$
@@ -57,10 +57,10 @@ Let $G = \{N,\{A_i\},\{U_i\}\}$ be a stationary semi-anonymous potential game. T
 
 
 %-------------------------------Theorem 1 Proof-------------------------------%
-\subsection{Proof of Theorem~\ref{t:main theorem 1}}\label{a:theorem 1 proof}
+\subsection{Proof of Theorem~\ref{t:main theorem 1 ch2}}\label{a:theorem 1 proof}
 
 
-We require two supporting lemmas to prove Theorem \ref{t:main theorem 1}.  The first  
+We require two supporting lemmas to prove Theorem \ref{t:main theorem 1 ch1}.  The first  
 establishes the stationary distribution for modified log-linear learning as a function of $\beta$ and characterizes how large $\beta$ must be so the expected value of the potential function is within $\eps/2$ of maximum.  The second upper bounds the mixing time to within $\eps/2$ of the stationary distribution for the modified log-linear learning process.  
 
 
@@ -72,7 +72,7 @@ the stationary distribution for modified log-linear learning is
 \begin{equation}\label{e:stationary distribution}
 \pi_{x}\propto e^{\beta\P(x)}, \quad x\in  \sX
 \end{equation}
-Moreover, if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb}, then \begin{equation}\label{e:expPot}
+Moreover, if condition (i) of Theorem~\ref{t:main theorem 1 ch1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb}, then \begin{equation}\label{e:expPot}
 \E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.
 \end{equation}
 \end{lemma}
@@ -136,7 +136,7 @@ as desired.\hfill\qed
 
 
 \begin{lemma}\label{l:mixing time} 
-For the Markov chain defined by modified log-linear learning with kernel $M$ and stationary distribution $\pi$, if the number of players within each population satisfies condition (ii) of Theorem~\ref{t:main theorem 1}, and $t$ is sufficiently large as in \eqref{e:time requirement}, then
+For the Markov chain defined by modified log-linear learning with kernel $M$ and stationary distribution $\pi$, if the number of players within each population satisfies condition (ii) of Theorem~\ref{t:main theorem 1 ch1}, and $t$ is sufficiently large as in \eqref{e:time requirement}, then
 \begin{equation}\label{e:distToS}\| \mu(t) - \pi\|_{TV}\leq \eps/2.\end{equation}
 \end{lemma}
 
@@ -353,16 +353,16 @@ From here, Lemma~\ref{l:mixing time} follows by applying Equation \eqref{e:mix t
 
 
 Combining Lemmas~\ref{l:stationary distribution} and \ref{l:mixing time} results in a bound on the time it takes for the expected potential to be within $\eps$ of the maximum, provided $\beta$ is sufficiently large.
-The lemmas and method of proof for Theorem \ref{t:main theorem 1} follow the structure of the supporting lemmas and proof for Theorem 3 in \cite{Shah2010}. The main differences have arisen due to the facts that i) our analysis considers the multi-population case, so the size of our state space cannot be reduced as significantly as in the single population case of \cite{Shah2010}, and ii) update rates in our algorithm depend on behavior within each agent's own population, instead of on global behavior.
+The lemmas and method of proof for Theorem \ref{t:main theorem 1 ch2} follow the structure of the supporting lemmas and proof for Theorem 3 in \cite{Shah2010}. The main differences have arisen due to the facts that i) our analysis considers the multi-population case, so the size of our state space cannot be reduced as significantly as in the single population case of \cite{Shah2010}, and ii) update rates in our algorithm depend on behavior within each agent's own population, instead of on global behavior.
 
 \smallskip
 
-\noindent\emph{Proof of Theorem~\ref{t:main theorem 1}}:\\
+\noindent\emph{Proof of Theorem~\ref{t:main theorem 1 ch2}}:\\
 From Lemma \ref{l:stationary distribution},
-if condition (i) of Theorem~\ref{t:main theorem 1} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb},
+if condition (i) of Theorem~\ref{t:main theorem 1 ch2} is satisfied and $\beta$ is sufficiently large as in \eqref{e:beta lb},
 then 
 $\E_\pi[\P(x)]\geq\max_{x\in \sX}\P(x)-\eps/2.$ 
-From Lemma \ref{l:mixing time}, if condition (ii) of Theorem~\ref{t:main theorem 1} is satisfied, and $t$ is sufficiently large as in \eqref{e:time requirement},
+From Lemma \ref{l:mixing time}, if condition (ii) of Theorem~\ref{t:main theorem 1 ch2} is satisfied, and $t$ is sufficiently large as in \eqref{e:time requirement},
 then 
 $\|\mu(t) - \pi\|_{TV}\leq \eps/2.$
 Then
@@ -379,7 +379,7 @@ where (a) follows from \eqref{e:expPot}, \eqref{e:distToS}, and the fact that $\
 
 To analyze the dynamics associated with modified log-linear learning, we must analyze the behavior of the time-varying Markov chain, $M_t$, which corresponds to the time varying game $G^t = (N^t,\{A_i^t\},\{U_i^t\}\}$ for any $t\in \R^+.$ Let $n(t):= |N^t|$ and $n_j^t := |N_j^t|.$ The stationary distribution corresponding to $M_t$ will be denoted by $\pi(t).$ Here, the state space varies with time; denote the aggregate state space corresponding to $G^t$ by $\sX^t$, and define $\X:=\cup_{t\in \R^+} X^t.$ 
 
-A few additional definitions and notation will be useful in proving Theorem~\ref{t:main theorem 2}. 
+A few additional definitions and notation will be useful in proving Theorem~\ref{t:main theorem 2 ch2}. 
 We begin by identifying the times at which changes in the state space $X^t$ may occur, i.e., a player becomes active or inactive. As in \cite{Shah2010}, consider the sequence of times
  $t_0<t_1<\cdots$
  where $N_i(t) = N_i(t^\prime)$ for all $t,t^\prime\in [t_\l,t_{\l+1}),\, i\in \{1,2,\ldots,m\}$ and 
@@ -443,16 +443,16 @@ Note that, in general, $\hat{\pi}(t_{\l})\neq \pi(t_{\l+1})$, i.e., the projecte
 
 
 
-\subsection{Proof of Theorem~\ref{t:main theorem 2}}\label{a:theorem 2 proof}
+\subsection{Proof of Theorem~\ref{t:main theorem 2 ch2}}\label{a:theorem 2 proof}
 
 %A brief review of relevant Markov chain theory is provided in Appendix~\ref{s:Mchain prelims}.
-To prove Theorem~\ref{t:main theorem 2}, we analyze the limiting behavior of the time-varying Markov chain, $M_t,$ which governs the modified log-linear learning process. We use Lemma~\ref{l:stationary distribution} from Appendix~\ref{a:theorem 1 proof} and Lemma~\ref{l:usp lemma1} stated below.  
+To prove Theorem~\ref{t:main theorem 2 ch2}, we analyze the limiting behavior of the time-varying Markov chain, $M_t,$ which governs the modified log-linear learning process. We use Lemma~\ref{l:stationary distribution} from Appendix~\ref{a:theorem 1 proof} and Lemma~\ref{l:usp lemma1} stated below.  
 %We require two supporting lemmas. Lemma~\ref{l:stationary distribution} is taken from \cite{Borowski2013} and establishes the stationary distribution for modified log-linear learning in a semi-anonymous potential game with a fixed number of players. It also establishes conditions which ensure that the expected value of the potential under the stationary distribution is within $\eps/2$ of its maximum. 
 %Note that Lemma~\ref{l:stationary distribution} only applies when the set of active players is fixed and finite, i.e., the game $G$ is stationary. 
 Lemma~\ref{l:usp lemma1} is analogous to Lemma~\ref{l:mixing time} for stationary semi-anonymous potential games, and establishes conditions under which the distribution $\mu(t)$ is within $\eps\mathop{/}2$ of the stationary distribution. 
 
 \begin{lemma}\label{l:usp lemma1}
-For the trajectory of semi-anonymous potential games, $\mathcal{G} = \{G^t\}_{t\geq \R^+}$, if Conditions (i) - (iv) of Theorem~\ref{t:main theorem 2} are met, then 
+For the trajectory of semi-anonymous potential games, $\mathcal{G} = \{G^t\}_{t\geq \R^+}$, if Conditions (i) - (iv) of Theorem~\ref{t:main theorem 2 ch2} are met, then 
 \begin{equation}
 \|\mu(t) - \pi(t)\|_{TV} \leq \eps\mathop{/}2
 \end{equation}
@@ -555,8 +555,8 @@ The remainder of the proof of Lemma~\ref{l:usp lemma1} in a similar fashion as i
 
 
 
-\noindent\emph{Proof of Theorem~\ref{t:main theorem 2}:}\\
-Using Lemmas~\ref{l:stationary distribution} and \ref{l:usp lemma1}, the proof of Theorem~\ref{t:main theorem 2} follows in exactly the same manner as the proof of Theorem~\ref{t:main theorem 1}.\qed
+\noindent\emph{Proof of Theorem~\ref{t:main theorem 2 ch2}:}\\
+Using Lemmas~\ref{l:stationary distribution} and \ref{l:usp lemma1}, the proof of Theorem~\ref{t:main theorem 2 ch2} follows in exactly the same manner as the proof of Theorem~\ref{t:main theorem 1 ch2}.\qed
 
 
 
