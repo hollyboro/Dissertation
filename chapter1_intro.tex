@@ -96,7 +96,7 @@ Informally, in a Nash equilibrium, no agent can improve its utility via a unilat
 \cline{3-4}
 \end{tabular}
 \end{center}
-\caption{A simple coordination task, with the system objective function on the left, and a possible choice of agent utilities on the right. Here, the goal is to design agents' utilities so that they coordinate to accomplish a task. Task 1 is more desirable than task 2. The shaded boxes represent Nash equilibria: neither agent can improve its utility via a unilateral change of action. Coordination on task 2 does not maximize the overall objective or agents' utilities, and is known as an {\it inefficient Nash equilibrium.} One objective in designing effective agent learning rules is to select Nash equilibrium which also maximizes the objective, namely coordination on task 1.}
+\caption{A simple coordination task, with the system objective function on the left, and a possible choice of agent utilities on the right. Here, the goal is to design agents' utilities so that they coordinate to accomplish a task. Task 1 is more important than task 2. The shaded boxes represent Nash equilibria: neither agent can improve its utility via a unilateral change of action. Coordination on task 2 does not maximize the overall objective or agents' utilities, and is known as an {\it inefficient Nash equilibrium.} One objective in designing effective agent learning rules is to select a Nash equilibrium which also maximizes the objective, namely coordination on task 1.}
 \label{t:simple coordination}
 \end{figure}
 
@@ -421,7 +421,7 @@ The operator $\cdot|_X$ captures each population's aggregate behavior in an acti
 \normalsize
 \end{defn}
 
-We now state Theorem~\ref{t:main theorem 1 ch2}, which is the main contribution of Chapter~\ref{ch2}.
+Recall that assigning agents' utilities to be their marginal contribution to the system objective defines a potential game with $\phi(a) = W(a),\,\forall a\in \mathcal{A},$ i.e., the potential function is equal to the system objective function. Hence, we are often interested in studying algorithms which maximize the system potential. We now state Theorem~\ref{t:main theorem 1 ch2}, which is the main contribution of Chapter~\ref{ch2}.
 
 \begin{restatable}{Theorem}{firsttheorem}\label{t:main theorem 1 ch2}
 Let $G = (N,\{\mathcal{A}_i\},\{U_i\})$ be a semi-anonymous potential game with aggregate state space $X$ and potential function $\P:X\to [0,1].$ Suppose agents play according to a mild variant of log-linear learning, to be defined formally in Chapter~\ref{ch2}. Suppose further that the following conditions are met:         
@@ -492,7 +492,7 @@ We formally develop a learning algorithm in Chapter~\ref{ch3} which converges (i
 
 
 \begin{defn}
-A game $G$ with agents $N = \{1,2,\ldots,n\}$ is said to be \emph{interdependent} if, for every $a\in\mathcal{A}$ and every proper subset of agents $J\subset N$, there exists an agent $i\notin J$ and a choice of actions $a_J^\prime\in\prod_{j\in J} \mathcal{A}_j$ such that $U_i(a_J^\prime,a_{-J})\neq U_i(a_J,a_{-J}).$
+A game $G$ with agents $N = \{1,2,\ldots,n\}$ is said to be {\it interdependent} if, for every $a\in\mathcal{A}$ and every proper subset of agents $J\subset N$, there exists an agent $i\notin J$ and a choice of actions $a_J^\prime\in\prod_{j\in J} \mathcal{A}_j$ such that $U_i(a_J^\prime,a_{-J})\neq U_i(a_J,a_{-J}).$
 \end{defn}
 
 Roughly speaking, the definition of interdependence states that it is not possibly to partition the group of agents into two sets whose actions do not impact one another's payoffs.
@@ -533,7 +533,7 @@ $2\times 2$ coordination game, $g$, with utilities $u(a_i,a_j),$ $a_i,a_j\in\{x,
 where $\alpha > 0$ defines the relative quality of conventions $(x,x)$ over $(y,y)$.  Both agents prefer to agree on a convention, i.e., $(x,x)$ or $(y,y)$, than disagree, i.e., $(x,y)$ or $(y,x)$, with a preference to agreeing on $(x,x)$.  
 The goal of deriving local agent dynamics which lead to the efficient Nash equilibrium $(x,x)$ is challenging because of the existence of the inefficient Nash equilibrium $(y,y)$.  Deviating from $(y,y)$ for an individual agent is accompanied by an immediate payoff loss of $1$ to $0$; hence, myopic agents may be reluctant to deviate, stabilizing the inefficient equilibrium $(y,y)$.
 
-This two player coordination game can be extended to an $n$-player \emph{graphical coordination game}\cite{Kearns2001,Young2011, Montanari2010}, where the interactions between the agents $N=\{1, 2, \dots, n\}$ is described by an underlying graph $\mathcal{G} = (N,E)$ where $E \subseteq N\times N$ denotes the interdependence of agents' objectives.  More formally, an agent's total payoff is the sum of payoffs it receives in the two player games played with its neighbors ${\cal N}_i = \{j \in N : (i,j) \in E\}$, i.e., for a joint decision $a = (a_1, \dots, a_n) \in \{x,y\}^n$, the utility of agent $i$ is
+This two player coordination game can be extended to an $n$-player {\it graphical coordination game}\cite{Kearns2001,Young2011, Montanari2010}, where the interactions between the agents $N=\{1, 2, \dots, n\}$ is described by an underlying graph $\mathcal{G} = (N,E)$ where $E \subseteq N\times N$ denotes the interdependence of agents' objectives.  More formally, an agent's total payoff is the sum of payoffs it receives in the two player games played with its neighbors ${\cal N}_i = \{j \in N : (i,j) \in E\}$, i.e., for a joint decision $a = (a_1, \dots, a_n) \in \{x,y\}^n$, the utility of agent $i$ is
 %
 \begin{equation}\label{e:original utility}
 %
@@ -543,7 +543,7 @@ U_i(a_1, \dots, a_n) = \sum_{j \in {\cal N}_i} u(a_i, a_j).
 
 Log-linear learning \cite{Blume1993, Shah2010} is one distributed decision making rule that selects the efficient equilibrium, $\vec{x}$, in the graphical coordination game described above. Although agents predominantly maximize their utilities under log-linear learning, selection of the efficient equilibrium is achieved by allowing agents to choose suboptimally with some small probability that decreases exponentially with respect to the associated payoff loss. 
 
-We study the potential for adversarial manipulation in the context of the above graphical coordination games. Here, we model the adversary as additional nodes/edges in our graph, where the action selected by these adversaries (which we fix as the inferior convention $y$) impacts the utility of the neighboring agents and thereby influences the agents' decision-making rule as specified by log-linear learning.  We focus on three different models of adversary behavior, referred to as \emph{fixed, intelligent}; \emph{mobile, random}; and \emph{mobile, intelligent}.
+We study the potential for adversarial manipulation in the context of the above graphical coordination games. Here, we model the adversary as additional nodes/edges in our graph, where the action selected by these adversaries (which we fix as the inferior convention $y$) impacts the utility of the neighboring agents and thereby influences the agents' decision-making rule as specified by log-linear learning.  We focus on three different models of adversary behavior, referred to as {\it fixed, intelligent}; {\it mobile, random}; and {\it mobile, intelligent}.
 %
 \begin{itemize}
 %

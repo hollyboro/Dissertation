@@ -34,22 +34,31 @@
 
 \abstract{  \OnePageChapter	% because it is very short
 
-	\textcolor{red}{Often the abstract will be long enough to require
-	more than one page, in which case the macro
-	``$\backslash$OnePageChapter'' should {\it not}
-	be used.}
-
-	\textcolor{red}{But this one isn't, so it should.}
+Large scale systems consisting of many interacting subsystems are often controlled in a distributed fashion due to inherent limitations in computation, communication, or sensing. Here, individual agents must make decisions based on local, often incomplete information. This dissertation focuses on understanding performance tradeoffs in distributed control systems, specificially focusing on game theoretic frameworks for assigning agent control laws. Performance of a distributed control law is determined by (1) the degree with which is meets a stated objective, (2) the amount of time it takes to converge, (3) agents' informational requirements, and (4) vulnerability to adversarial manipulation. The three main research questions addressed in this work are:
+\begin{itemize}
+    \item {\it When is fast convergence to near-optimal behavior possible in a distributed system?}\\
+    We design a control law which converges to a near-optimal configuration in a time that is near-linear in the number of agents. This worst case convergence time is an improvement over existing algorithms whose worst-case convergence times are exponential in the number of agents.
+    \item {\it Can agents in a distributed system learn near-optimal correlated behavior despite severely limited information about one another's behavior?}\\
+    We design a distributed control law that imposes limited informational requirements for individual agents, yet converges to near-optimal correlated behavior.
+    \item {\it How does the structure of agent interaction impact a distributed control system's vulnerability to adversarial manipulation?}\\
+    We derive a graph theoretical condition that ensures resilience to adversarial manipulation, and we examine the conditions under which an adversarial can manipulate collective behavior in a distributed control system, simply by influencing small subsets of agents.
+\end{itemize}
 	}
 
 \dedication[Dedication]{	% NEVER use \OnePageChapter here.
-	\textcolor{red}{To all of the fluffy kitties.}
+	To my family: Maripat, Richard, and Sara.
 	}
 
 \acknowledgements{	\OnePageChapter	% *MUST* BE ONLY ONE PAGE!
-	\textcolor{red}{Here's where you acknowledge folks who helped.
-	But keep it short, i.e., no more than one page,
-	as required by the Grad School Specifications.}
+	Thanks to all those who helped with the technical content of this dissertation and also helped me keep my sanity during the years of my PhD! 
+	
+	Special thanks to Jason Marden, who was not only a great advisor, but a wonderful mentor and friend throughout the process. Thanks also to my second advisor, Eric Frew, who was extremely supportive in helping me chase my academic interests. Thank you to Behrouz Touri, a great teacher and friend.
+	
+	Thanks to my lab-mates and good friends over the years, Philip Brown, Yassmin Shalaby, Matthew Phillips, Andreas Wachter, Yilan Chen, Maciej Stachura, Tony Carfang, Jason Durrie, Neeti Wagle, Will Silva.
+	
+	Thank you to all my mountain biking and adventure buddies who helped me enjoy my time in the beautiful mountains of Colorado. Special thanks to my Daan Stevenson who helped me keep life in perspective. Thank you to Shaine Smith for all the great MTB rides. 
+	
+	Thank you especially to my family: my parents Maripat and Richard, and my sister Sara. You are not only my family, but my most valuable friends in life.
 	}
 	
 	
