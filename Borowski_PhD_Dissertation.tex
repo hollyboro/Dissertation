@@ -27,21 +27,21 @@
 	{Jason Marden}			%  #2 {name}
 
 \reader{Prof.~Eric Frew}		%  2nd person to sign thesis
-\readerThree{Prof.~Dale Lawrence}
-\readerFour{Prof.~Lijun Chen}
-\readerFive{Prof.~David Leslie}
+%\readerThree{Prof.~Dale Lawrence}
+%\readerFour{Prof.~Lijun Chen}
+%\readerFive{Prof.~David Leslie}
 %\readerThree{\textcolor{red}{add other readers}}		%  3rd person to sign thesis
 
 \abstract{  \OnePageChapter	% because it is very short
 
-Large scale systems consisting of many interacting subsystems are often controlled in a distributed fashion due to inherent limitations in computation, communication, or sensing. Here, individual agents must make decisions based on local, often incomplete information. This dissertation focuses on understanding performance tradeoffs in distributed control systems, specificially focusing on game theoretic frameworks for assigning agent control laws. Performance of a distributed control law is determined by (1) the degree with which is meets a stated objective, (2) the amount of time it takes to converge, (3) agents' informational requirements, and (4) vulnerability to adversarial manipulation. The three main research questions addressed in this work are:
+Large scale systems consisting of many interacting subsystems are often controlled in a distributed fashion due to inherent limitations in computation, communication, or sensing. Here, individual agents must make decisions based on local, often incomplete information. This dissertation focuses on understanding performance tradeoffs in distributed control systems, specifically focusing on using a game theoretic framework to assign agent control laws. Performance of a distributed control law is determined by (1) the degree with which it meets a stated objective, (2) the amount of time it takes to converge, (3) agents' informational requirements, and (4) vulnerability to adversarial manipulation. The three main research questions addressed in this work are:
 \begin{itemize}
     \item {\it When is fast convergence to near-optimal behavior possible in a distributed system?}\\
     We design a control law which converges to a near-optimal configuration in a time that is near-linear in the number of agents. This worst case convergence time is an improvement over existing algorithms whose worst-case convergence times are exponential in the number of agents.
     \item {\it Can agents in a distributed system learn near-optimal correlated behavior despite severely limited information about one another's behavior?}\\
-    We design a distributed control law that imposes limited informational requirements for individual agents, yet converges to near-optimal correlated behavior.
+    We design a distributed control law that imposes limited informational requirements for individual agents and converges to near-optimal correlated behavior.
     \item {\it How does the structure of agent interaction impact a distributed control system's vulnerability to adversarial manipulation?}\\
-    We derive a graph theoretical condition that ensures resilience to adversarial manipulation, and we examine the conditions under which an adversarial can manipulate collective behavior in a distributed control system, simply by influencing small subsets of agents.
+    We derive a graph theoretical condition that ensures resilience to adversarial manipulation, and we examine the conditions under which an adversary can manipulate collective behavior in a distributed control system, simply by influencing small subsets of agents.
 \end{itemize}
 	}
 
